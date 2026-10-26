@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071014">
+  <meta name="description" content="Actividades interactivas offline sobre Ophiocordyceps unilateralis: ciclo de vida, decisiones sexuales y asexuales, manipulación conductual y disección funcional. Biología, grado 8°.">
+  <title>Ophiocordyceps · Ciclo, decisiones y disección · Grado 8°</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21V8"></path>
+          <path d="M12 12c0-3.5-2.5-5-4.5-5S4 9 4 11.5 6.5 15 8.5 15H12"></path>
+          <path d="M12 15c2.5 0 4.5-1.5 4.5-4S14 7 12 7"></path>
+          <path d="M8 21h8"></path>
+        </svg>
+      </span>
+      <div>
+        <p class="brand-eyebrow">Biología · Grado 8° · Actividades offline</p>
+        <h1 class="brand-title"><em>Ophiocordyceps unilateralis</em></h1>
+        <p class="brand-sub">Sexual vs. asexual · Decisiones · Ciclo de vida · Disección funcional</p>
+      </div>
+    </div>
+
+    <div class="header-tools">
+      <button class="profile-chip" id="profileChip" type="button" title="Editar nombre e identificación">
+        <span class="profile-avatar" aria-hidden="true">👤</span>
+        <span class="profile-copy">
+          <span class="profile-name" id="profileDisplayName">Sin identificar</span>
+          <span class="profile-id" id="profileDisplayId">Escribe tu nombre e identificación</span>
+        </span>
+        <span class="profile-edit">Editar</span>
+      </button>
+
+      <div class="session-timer" title="Tiempo transcurrido en esta sesión">
+        <span aria-hidden="true">⏱</span>
+        <span id="elapsedTime">00:00</span>
+      </div>
+
+      <button class="icon-btn" id="soundBtn" type="button" aria-pressed="true" title="Activar o desactivar sonidos">🔊</button>
+      <button class="btn btn-ghost" id="downloadBtn" type="button">📄 Informe</button>
+      <button class="btn btn-ghost" id="resetBtn" type="button">↺ Reiniciar</button>
+    </div>
+  </header>
+
+  <nav class="activity-nav" id="activityNav" aria-label="Secciones de la unidad">
+    <button class="tab-btn is-active" type="button" data-view="actividad1" aria-pressed="true">
+      <span class="tab-num">1</span>
+      <span class="tab-label">Ciclo y genética</span>
+      <span class="tab-status" id="tab1Status">0 / 13</span>
+    </button>
+    <button class="tab-btn" type="button" data-view="decisiones" aria-pressed="false">
+      <span class="tab-num">2</span>
+      <span class="tab-label">Decisiones reproductivas</span>
+      <span class="tab-status" id="tabDecisionStatus">0 / 6</span>
+    </button>
+    <button class="tab-btn" type="button" data-view="actividad2" aria-pressed="false">
+      <span class="tab-num">3</span>
+      <span class="tab-label">Disección funcional</span>
+      <span class="tab-status" id="tab2Status">0 / 4</span>
+    </button>
+    <button class="tab-btn" type="button" data-view="glosario" aria-pressed="false">
+      <span class="tab-num">4</span>
+      <span class="tab-label">Glosario y fuentes</span>
+      <span class="tab-status" id="tab3Status">30 términos</span>
+    </button>
+  </nav>
+
+  <main id="contenido">
+    <!-- ============================== ACTIVIDAD 1 ============================== -->
+    <section class="view is-active" id="view-actividad1" aria-labelledby="a1Title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Actividad 1 · Ruta de 13 preguntas</p>
+          <h2 id="a1Title">El ciclo de vida y la reproducción</h2>
+          <p class="lead">Responde una pregunta a la vez, elige una opción y justifica tu elección. Cada respuesta se comprueba al instante y, al terminar la pregunta 13, la actividad se cierra con tu puntaje y un resumen descargable.</p>
+        </div>
+        <div class="chip-row">
+          <span class="chip" id="a1ScoreChip">Aciertos: 0</span>
+          <span class="chip" id="a1AnsweredChip">Respondidas: 0 / 13</span>
+          <span class="chip" id="a1JustifyChip">Justificaciones: 0 / 12</span>
+        </div>
+      </div>
+
+      <div class="a1-grid" id="a1Workspace">
+        <section class="panel question-panel" aria-labelledby="qTitle">
+          <div class="panel-top">
+            <span class="pill pill-topic" id="qTopic">Micología básica</span>
+            <span class="question-counter" id="qCounter">Pregunta 1 de 13</span>
+          </div>
+
+          <div class="progress-track" id="qProgress" role="progressbar" aria-label="Progreso de la actividad 1" aria-valuemin="0" aria-valuemax="13" aria-valuenow="0">
+            <span class="progress-fill" id="qProgressFill"></span>
+          </div>
+
+          <h3 class="question-title" id="qTitle">Cargando pregunta…</h3>
+          <p class="scenario" id="qScenario"></p>
+
+          <div class="options" id="optionsList" role="group" aria-label="Opciones de respuesta"></div>
+
+          <div class="open-answer justify-answer" id="justifyAnswer" hidden>
+            <label for="justifyText">Justifica tu elección <span class="required-mark" aria-hidden="true">*</span></label>
+            <textarea id="justifyText" rows="3" maxlength="500" spellcheck="true" placeholder="Explica por qué elegiste esa opción e incluye una idea científica que la apoye."></textarea>
+            <div class="open-meta">
+              <span id="justifyCounter">0 / 40 caracteres mínimos</span>
+              <span id="justifyHint">Escribe al menos una oración completa.</span>
+            </div>
+          </div>
+
+          <div class="open-answer" id="openAnswer" hidden>
+            <label for="openText">Tu argumentación científica</label>
+            <textarea id="openText" rows="6" maxlength="1200" spellcheck="true" placeholder="Escribe al menos dos ideas completas. Relaciona meiosis, variabilidad, selección natural y ambiente."></textarea>
+            <div class="open-meta">
+              <span id="openCounter">0 / 180 caracteres mínimos</span>
+              <span id="openKeywords">Integra al menos 2 conceptos clave</span>
+            </div>
+            <div class="concept-chips" id="conceptChips" aria-label="Conceptos clave que puedes usar"></div>
+          </div>
+
+          <div class="feedback" id="qFeedback" hidden aria-live="polite"></div>
+
+          <div class="question-actions">
+            <button class="btn btn-primary" id="checkBtn" type="button" disabled>Comprobar respuesta</button>
+            <button class="btn btn-secondary" id="nextBtn" type="button" hidden>Siguiente pregunta →</button>
+          </div>
+        </section>
+
+        <aside class="panel visual-panel" aria-labelledby="visualTitle">
+          <div class="panel-top">
+            <h3 id="visualTitle">El ciclo en imágenes</h3>
+            <span class="pill">5 estadios</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="bioCanvas" width="700" height="400" aria-label="Ilustración animada del ciclo de vida de Ophiocordyceps: espora, hifa, micelio, estroma con peritecios y dispersión."></canvas>
+          </div>
+          <p class="canvas-caption" id="canvasCaption"></p>
+          <div class="stepper" id="stageStepper" aria-label="Estadios del ciclo"></div>
+          <div class="hint-card" id="hintCard">
+            <span class="hint-label">Pista científica</span>
+            <p id="hintText">Observa la estructura y piensa en su función.</p>
+          </div>
+        </aside>
+      </div>
+
+      <section class="panel result-panel" id="activity1Result" hidden aria-live="polite">
+        <div id="resultContent"></div>
+        <div class="result-actions">
+          <button class="btn btn-primary" id="goA2Btn" type="button">Continuar a la Actividad 2 →</button>
+          <!-- El botón abre la simulación de decisiones. -->
+
+          <button class="btn btn-secondary" id="downloadResultBtn" type="button">📥 Descargar informe</button>
+          <button class="btn btn-ghost" id="reviewBtn" type="button">Revisar mis respuestas</button>
+        </div>
+        <div class="review-list" id="reviewList" hidden></div>
+      </section>
+    </section>
+
+    <!-- ============================== ACTIVIDAD 2 · DECISIONES ============================== -->
+    <section class="view" id="view-decisiones" aria-labelledby="decTitle" hidden>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Actividad 2 · Simulación de decisiones</p>
+          <h2 id="decTitle">¿Sexual o asexual? La ruta del hongo</h2>
+          <p class="lead">Lee cada escenario, elige una estrategia reproductiva y justifícala con conceptos científicos. Tus seis decisiones construirán una ruta: al final sabrás si tu hongo priorizó la reproducción sexual, la asexual o una combinación.</p>
+        </div>
+        <div class="chip-row">
+          <span class="chip" id="decisionProgressChip">0 / 6 decisiones</span>
+          <span class="chip chip-muted" id="decisionPathChip">Ruta en construcción</span>
+        </div>
+      </div>
+
+      <div class="decision-grid" id="decisionWorkspace">
+        <section class="panel decision-panel" aria-labelledby="decisionTitle">
+          <div class="panel-top">
+            <span class="pill pill-topic" id="decisionScenarioTag">Escenario 1</span>
+            <span class="question-counter" id="decisionCounter">0 de 6 completados</span>
+          </div>
+
+          <div class="progress-track" role="progressbar" aria-label="Progreso de la actividad 2" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="decisionProgress">
+            <span class="progress-fill" id="decisionProgressFill"></span>
+          </div>
+
+          <h3 class="question-title" id="decisionTitle">Cargando escenario…</h3>
+          <p class="scenario" id="decisionScenario"></p>
+
+          <div class="options" id="decisionOptions" role="group" aria-label="Estrategias reproductivas"></div>
+
+          <div class="open-answer justify-answer" id="decisionJustifyBox">
+            <label for="decisionJustify">Justifica tu decisión <span class="required-mark" aria-hidden="true">*</span></label>
+            <textarea id="decisionJustify" rows="3" maxlength="500" spellcheck="true" placeholder="Explica por qué esa estrategia es la más adecuada. Relaciona mitosis, meiosis, variabilidad, ambiente o dispersión."></textarea>
+            <div class="open-meta">
+              <span id="decisionJustifyCounter">0 / 50 caracteres mínimos</span>
+              <span id="decisionJustifyHint">Incluye al menos una idea científica.</span>
+            </div>
+            <div class="concept-chips" id="decisionHintChips" aria-label="Conceptos que puedes usar"></div>
+          </div>
+
+          <div class="feedback" id="decisionFeedback" hidden aria-live="polite"></div>
+
+          <div class="question-actions">
+            <button class="btn btn-primary" id="confirmDecisionBtn" type="button" disabled>Confirmar decisión</button>
+            <button class="btn btn-secondary" id="nextDecisionBtn" type="button" hidden>Siguiente escenario →</button>
+          </div>
+        </section>
+
+        <aside class="panel route-panel" aria-labelledby="routeTitle">
+          <div class="panel-top">
+            <h3 id="routeTitle">Tu ruta reproductiva</h3>
+            <span class="pill">En vivo</span>
+          </div>
+          <p class="hint">Cada elección suma a una de las dos estrategias. La ruta final se calcula con tus seis decisiones.</p>
+
+          <div class="route-tally">
+            <div class="route-tally-card is-asexual">
+              <span>Asexual</span>
+              <strong id="routeAsexualCount">0</strong>
+              <small>Conidios · mitosis</small>
+            </div>
+            <div class="route-tally-card is-sexual">
+              <span>Sexual</span>
+              <strong id="routeSexualCount">0</strong>
+              <small>Ascosporas · meiosis</small>
+            </div>
+          </div>
+
+          <div class="route-track" aria-hidden="true">
+            <span class="is-sexual" id="routeSexualFill"></span>
+            <span class="is-asexual" id="routeAsexualFill"></span>
+          </div>
+          <p class="route-status" id="routeStatus">Aún no hay decisiones. Elige una estrategia y justifícala.</p>
+
+          <div class="panel-top route-history-top">
+            <h4>Decisiones tomadas</h4>
+            <span class="pill" id="routeHistoryCount">0 / 6</span>
+          </div>
+          <ol class="route-history" id="routeHistory">
+            <li class="route-empty">Tus elecciones aparecerán aquí.</li>
+          </ol>
+        </aside>
+      </div>
+
+      <section class="panel result-panel" id="decisionResult" hidden aria-live="polite">
+        <div id="decisionResultContent"></div>
+        <div class="result-actions">
+          <button class="btn btn-primary" id="goA3Btn" type="button">Continuar a la Actividad 3 →</button>
+          <button class="btn btn-secondary" id="downloadDecisionBtn" type="button">📥 Descargar informe</button>
+          <button class="btn btn-ghost" id="restartDecisionBtn" type="button">Repetir decisiones</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- ============================== ACTIVIDAD 3 · DISECCIÓN ============================== -->
+    <section class="view" id="view-actividad2" aria-labelledby="a2Title" hidden>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Actividad 3 · Disección guiada</p>
+          <h2 id="a2Title">¿Por qué existe cada estructura?</h2>
+          <p class="lead">Selecciona una estructura de la fotografía, identifica su función y relaciónala con la fase del ciclo. Debes completar las cuatro estructuras para cerrar la actividad.</p>
+        </div>
+        <div class="chip-row">
+          <span class="chip" id="a2ProgressChip">0 / 4 estructuras</span>
+          <span class="chip chip-muted">Sin texto libre: solo observación y decisión</span>
+        </div>
+      </div>
+
+      <div class="a2-grid">
+        <section class="panel photo-panel" aria-labelledby="photoTitle">
+          <div class="panel-top">
+            <h3 id="photoTitle">Hormiga parasitada</h3>
+            <span class="pill">Toca los números</span>
+          </div>
+          <p class="hint">Selecciona un número sobre la fotografía o una tarjeta de la derecha. El punto elegido se resalta.</p>
+
+          <div class="photo-frame" id="photoFrame">
+            <img src="assets/hormiga_parasitada.jpg" alt="Hormiga carpintera parasitada por Ophiocordyceps: el estroma sale de su cabeza y se observan estructuras fúngicas." width="721" height="1280">
+            <button class="marker marker-1" type="button" data-structure="estroma" aria-label="Estructura 1: estroma">1</button>
+            <button class="marker marker-2" type="button" data-structure="peritecio" aria-label="Estructura 2: peritecios">2</button>
+            <button class="marker marker-3" type="button" data-structure="micelio" aria-label="Estructura 3: micelio">3</button>
+            <button class="marker marker-4" type="button" data-structure="conidio" aria-label="Estructura 4: conidios">4</button>
+          </div>
+
+          <p class="credit" id="photoCredit"></p>
+
+          <details class="schematic">
+            <summary>Esquema de apoyo</summary>
+            <svg viewBox="0 0 400 300" role="img" aria-label="Esquema simplificado de la hormiga parasitada: estroma, peritecios, micelio y conidios.">
+              <rect x="0" y="16" width="400" height="22" rx="9" fill="#064e3b"></rect>
+              <text x="14" y="31" fill="#6ee7b7" font-size="10" font-family="system-ui, sans-serif">HOJA</text>
+
+              <ellipse cx="168" cy="96" rx="24" ry="16" fill="#292524" stroke="#57534e"></ellipse>
+              <ellipse cx="206" cy="118" rx="20" ry="13" fill="#292524"></ellipse>
+              <ellipse cx="248" cy="140" rx="32" ry="20" fill="#292524"></ellipse>
+              <text x="104" y="178" fill="#a8a29e" font-size="10" font-family="system-ui, sans-serif">hormiga (hospedero)</text>
+
+              <path d="M168 82 Q146 138 140 212" stroke="#d97706" stroke-width="8" fill="none" stroke-linecap="round"></path>
+              <ellipse cx="138" cy="190" rx="15" ry="25" fill="#b45309"></ellipse>
+              <g fill="#fef3c7">
+                <circle cx="132" cy="176" r="2.2"></circle>
+                <circle cx="141" cy="184" r="2.2"></circle>
+                <circle cx="134" cy="194" r="2.2"></circle>
+              </g>
+
+              <path d="M206 118 Q226 132 244 144" stroke="#34d399" stroke-width="2.5" fill="none" stroke-dasharray="5 3"></path>
+
+              <g fill="#93c5fd">
+                <circle cx="292" cy="218" r="2.2"></circle>
+                <circle cx="305" cy="210" r="2.2"></circle>
+                <circle cx="312" cy="226" r="2.2"></circle>
+              </g>
+
+              <g font-size="10" font-family="system-ui, sans-serif">
+                <text x="150" y="200" fill="#fcd34d">1 Estroma</text>
+                <text x="150" y="216" fill="#fef3c7">2 Peritecios</text>
+                <text x="252" y="122" fill="#6ee7b7">3 Micelio</text>
+                <text x="252" y="246" fill="#93c5fd">4 Conidios</text>
+              </g>
+            </svg>
+          </details>
+        </section>
+
+        <section class="panel dissection-panel" aria-labelledby="dissectionTitle">
+          <div class="panel-top">
+            <h3 id="dissectionTitle">Ficha de disección</h3>
+            <span class="question-counter" id="a2Counter">0 de 4 completadas</span>
+          </div>
+
+          <div class="progress-track" role="progressbar" aria-label="Progreso de la actividad 3" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="a2Progress">
+            <span class="progress-fill" id="a2ProgressFill"></span>
+          </div>
+
+          <div class="structure-tabs" id="structureTabs" aria-label="Estructuras para diseccionar"></div>
+
+          <div class="empty-state" id="structureEmpty">
+            <span class="empty-icon" aria-hidden="true">🔬</span>
+            <p>Elige una estructura para comenzar. Cada ficha tiene dos decisiones: la función y la fase del ciclo.</p>
+          </div>
+
+          <div id="structureWorkspace" hidden>
+            <div class="structure-heading">
+              <span class="structure-number" id="structureNumber">1</span>
+              <div>
+                <h3 id="structureName"></h3>
+                <p id="structureDesc"></p>
+              </div>
+            </div>
+
+            <div class="guided-step">
+              <h4>1. ¿Qué función cumple?</h4>
+              <div class="options options-compact" id="functionOptions" role="group" aria-label="Función de la estructura"></div>
+            </div>
+
+            <div class="guided-step">
+              <h4>2. ¿Con qué proceso se relaciona?</h4>
+              <div class="options options-compact" id="phaseOptions" role="group" aria-label="Fase del ciclo relacionada"></div>
+            </div>
+
+            <div class="feedback" id="structureFeedback" hidden aria-live="polite"></div>
+
+            <div class="question-actions">
+              <button class="btn btn-primary" id="checkStructureBtn" type="button" disabled>Comprobar estructura</button>
+              <button class="btn btn-secondary" id="nextStructureBtn" type="button" hidden>Siguiente estructura →</button>
+            </div>
+          </div>
+
+          <section class="result-panel result-panel-inner" id="activity2Result" hidden aria-live="polite">
+            <div id="a2ResultContent"></div>
+            <div class="result-actions">
+              <button class="btn btn-primary" id="downloadA2Btn" type="button">📥 Descargar informe final</button>
+              <button class="btn btn-ghost" id="backA1Btn" type="button">Volver a las decisiones</button>
+            </div>
+          </section>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============================== GLOSARIO ============================== -->
+    <section class="view" id="view-glosario" aria-labelledby="glossaryTitle" hidden>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Actividad 4 · Consulta</p>
+          <h2 id="glossaryTitle">Glosario científico y fuentes</h2>
+          <p class="lead">Treinta términos para leer, comparar y usar en tus justificaciones. Busca una palabra o filtra por categoría.</p>
+        </div>
+        <span class="chip" id="glossaryCount">30 términos</span>
+      </div>
+
+      <div class="glossary-tools">
+        <label class="search-box" for="glossarySearch">
+          <span aria-hidden="true">🔎</span>
+          <input id="glossarySearch" type="search" placeholder="Buscar término o definición…" autocomplete="off">
+        </label>
+        <div class="filter-chips" id="glossaryFilters" aria-label="Filtrar por categoría"></div>
+      </div>
+
+      <div class="glossary-grid" id="glossaryGrid"></div>
+
+      <div class="extra-grid">
+        <section class="panel" aria-labelledby="principlesTitle">
+          <div class="panel-top">
+            <h3 id="principlesTitle">Marco científico</h3>
+            <span class="pill">Ideas fuerza</span>
+          </div>
+          <ul class="principles-list" id="principlesList"></ul>
+        </section>
+
+        <section class="panel" aria-labelledby="mythsTitle">
+          <div class="panel-top">
+            <h3 id="mythsTitle">Mito vs. realidad</h3>
+            <span class="pill">Pensamiento crítico</span>
+          </div>
+          <div class="myths-list" id="mythsList"></div>
+        </section>
+      </div>
+
+      <section class="panel sources" aria-labelledby="sourcesTitle">
+        <div class="panel-top">
+          <h3 id="sourcesTitle">Fuentes y lecturas recomendadas</h3>
+          <span class="pill">Evidencia</span>
+        </div>
+        <ol class="sources-list" id="sourcesList"></ol>
+        <p class="note">Las referencias se incluyen para el docente y para quienes quieran profundizar. Las actividades son una síntesis educativa: no sustituyen la lectura de los artículos originales.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><strong>Ophiocordyceps unilateralis</strong> · Actividades de biología para grado 8°. Funciona sin internet: HTML, CSS, JavaScript e imagen local.</p>
+  </footer>
+
+  <!-- ============================== MODAL DE IDENTIFICACIÓN ============================== -->
+  <div class="modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle" hidden>
+    <div class="modal-card">
+      <div class="modal-brand">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21V8"></path>
+            <path d="M12 12c0-3.5-2.5-5-4.5-5S4 9 4 11.5 6.5 15 8.5 15H12"></path>
+            <path d="M12 15c2.5 0 4.5-1.5 4.5-4S14 7 12 7"></path>
+            <path d="M8 21h8"></path>
+          </svg>
+        </span>
+        <span>Laboratorio virtual · Grado 8°</span>
+      </div>
+
+      <h2 id="profileTitle">Identifícate para comenzar</h2>
+      <p class="modal-lead">Tu nombre y tu número de identificación aparecerán en el informe de la actividad. Los datos se guardan solo en este navegador y no se envían a internet.</p>
+
+      <form id="profileForm" novalidate>
+        <label class="field">
+          <span>Nombre completo <b aria-hidden="true">*</b></span>
+          <input id="profileName" name="name" type="text" autocomplete="name" maxlength="80" placeholder="Ej.: Ana María Rodríguez" required>
+        </label>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>Número de identificación <b aria-hidden="true">*</b></span>
+            <input id="profileId" name="identification" type="text" inputmode="text" autocomplete="off" maxlength="30" placeholder="Ej.: 1045123789" required>
+          </label>
+          <label class="field">
+            <span>Curso</span>
+            <input id="profileCourse" name="course" type="text" maxlength="20" placeholder="Ej.: 8°B" value="8°">
+          </label>
+        </div>
+
+        <p class="form-error" id="profileError" role="alert" hidden></p>
+        <p class="privacy">🔒 Sin cuentas, sin publicidad y sin conexión. Puedes cambiar estos datos con el botón <strong>Editar</strong> de la cabecera.</p>
+
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="profileCancel" type="button" hidden>Cancelar</button>
+          <button class="btn btn-primary" id="profileSubmit" type="submit">Comenzar actividad →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/canvas.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
