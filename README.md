@@ -2,6 +2,12 @@
 
 Versión modular y offline de la actividad sobre el ciclo de vida, la reproducción, la manipulación conductual del hospedero y la disección funcional de *Ophiocordyceps unilateralis*.
 
+## Versión en línea
+
+Página publicada con GitHub Pages:
+
+**https://estinexo.github.io/juego-cordyceps-grado8/**
+
 ## Cómo abrir
 
 1. Descomprime la carpeta completa (si recibiste un `.zip`).
