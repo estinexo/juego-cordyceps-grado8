@@ -44,13 +44,9 @@ function doPost(e) {
 
     var data = JSON.parse(e.postData.contents);
     var sheet = getSheet_();
+    var fila = data.id ? filaDeId_(sheet, data.id) : 0;
 
-    // Reintentos del navegador: no duplicar la misma entrega.
-    if (data.id && yaExiste_(sheet, data.id)) {
-      return json_({ ok: true, duplicado: true });
-    }
-
-    sheet.appendRow([
+    var valores = [[
       data.id || '',
       new Date(),
       data.nombre || '',
@@ -66,8 +62,16 @@ function doPost(e) {
       data.respuestas_json || '',
       data.informe_txt || '',
       data.version || ''
-    ]);
+    ]];
 
+    if (fila > 0) {
+      // El mismo estudiante volvió a descargar: se actualiza su fila con el
+      // informe más reciente, sin duplicar el registro.
+      sheet.getRange(fila, 1, 1, HEADERS.length).setValues(valores);
+      return json_({ ok: true, actualizado: true });
+    }
+
+    sheet.getRange(sheet.getLastRow() + 1, 1, 1, HEADERS.length).setValues(valores);
     return json_({ ok: true });
   } catch (error) {
     return json_({ ok: false, error: String(error) });
@@ -117,16 +121,20 @@ function getSheet_() {
   return sheet;
 }
 
-function yaExiste_(sheet, id) {
+/**
+ * Devuelve el número de fila donde está ese ID, o 0 si no existe.
+ * Se revisan las últimas 1000 entregas para no recorrer toda la hoja.
+ */
+function filaDeId_(sheet, id) {
   var ultima = sheet.getLastRow();
-  if (ultima < 2) return false;
+  if (ultima < 2) return 0;
 
-  var desde = Math.max(2, ultima - 499);
+  var desde = Math.max(2, ultima - 999);
   var ids = sheet.getRange(desde, 1, ultima - desde + 1, 1).getValues();
   for (var i = 0; i < ids.length; i += 1) {
-    if (String(ids[i][0]) === String(id)) return true;
+    if (String(ids[i][0]) === String(id)) return desde + i;
   }
-  return false;
+  return 0;
 }
 
 function json_(objeto) {

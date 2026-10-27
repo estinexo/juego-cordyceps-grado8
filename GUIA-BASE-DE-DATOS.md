@@ -44,7 +44,7 @@ Abre `js/entrega.js` y edita la primera constante:
 var ENDPOINT = 'https://script.google.com/macros/s/AKfycb.../exec';
 ```
 
-Guarda, haz `commit` y `push`. Recuerda subir el número de versión en `index.html` (`?v=20261027-7` → `?v=20261027-8`) para que los navegadores no usen la copia anterior.
+Guarda, haz `commit` y `push`. Recuerda subir el número al final de cada `?v=` en `index.html` (por ejemplo `20261027-8` → `20261027-9`) para que los navegadores no usen la copia anterior.
 
 ## 5. Prueba
 
@@ -63,11 +63,11 @@ También puedes abrir la URL `/exec` en el navegador: debe responder
 
 ## Qué se guarda
 
-Una fila por informe, con estas columnas:
+**Una fila por estudiante**, con estas columnas. Si el estudiante descarga el informe varias veces, su fila se actualiza con la última versión (no se duplica):
 
 | Columna | Contenido |
 |---|---|
-| ID | Identificador único (evita duplicados si se reintenta) |
+| ID | Identificador de la sesión del estudiante; permite actualizar su fila sin duplicarla |
 | Recibido | Fecha y hora del servidor |
 | Nombre completo, Curso | Datos del estudiante |
 | Puntaje, Porcentaje | Actividad 1 |
@@ -124,6 +124,9 @@ Revisa que la implementación diga *Cualquier persona* y que hayas pegado la URL
 
 **Sale "El registro en línea aún no está configurado".**
 `ENDPOINT` sigue vacío o la página está en caché. Fuerza la recarga con `Ctrl + F5` y verifica el `?v=` de `js/entrega.js`.
+
+**Un estudiante aparece una sola vez aunque descargó dos veces.**
+Es lo esperado: la segunda descarga actualiza su fila. Si quieres conservar los intentos, avísame y cambio el registro para que agregue una fila por entrega.
 
 **Sale el aviso naranja de "en espera".**
 No hay conexión o el script está caído. El reintento es automático; también puedes abrir la página con red y esperar unos segundos.

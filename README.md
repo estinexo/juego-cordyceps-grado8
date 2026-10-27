@@ -84,8 +84,9 @@ El juego puede enviar una copia de cada informe a una hoja de Google Sheets, que
 Para activarlo sigue **[GUIA-BASE-DE-DATOS.md](GUIA-BASE-DE-DATOS.md)**. Cuando está configurado:
 
 - Cada descarga agrega una fila con nombre, curso, puntaje, ruta reproductiva, respuestas en JSON y el informe completo.
+- Si el estudiante vuelve a descargar el informe, **su fila se actualiza** con la versión más reciente en lugar de duplicarse (una fila por estudiante y sesión).
 - Si el estudiante no tiene conexión, el registro queda en una cola local y se reenvía solo al reconectar o al volver a abrir la página. El `.txt` se descarga igual.
-- El servidor descarta duplicados por identificador, así que un reintento no repite la fila.
+- El servidor identifica al estudiante por sesión: si vuelve a descargar, actualiza su fila en vez de repetirla. Un reintento tras un fallo de red tampoco duplica.
 
 ## Privacidad y uso
 

@@ -41,7 +41,10 @@
     a2Celebrated: false,
     startedAt: Date.now(),
     timerId: null,
-    visualStage: 0
+    visualStage: 0,
+    /* Identificador de esta sesión: todas las descargas del mismo estudiante
+       actualizan una sola fila en el registro del docente. */
+    entregaId: null
   };
 
   const els = {};
@@ -79,6 +82,13 @@
       .replace(/[^a-z0-9]+/g, '_')
       .replace(/^_+|_+$/g, '')
       .slice(0, 48) || 'estudiante';
+  }
+
+  function nuevaEntregaId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+      return window.crypto.randomUUID();
+    }
+    return 's' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
   }
 
   function formatDuration(totalSeconds) {
@@ -125,6 +135,7 @@
 
   function init() {
     cacheElements();
+    state.entregaId = nuevaEntregaId();
     loadProfile();
     bindEvents();
     renderStaticContent();
@@ -353,7 +364,11 @@
       return;
     }
 
+    const previousProfile = state.profile;
     state.profile = { name: name, course: course };
+    if (!previousProfile || previousProfile.name !== name || previousProfile.course !== course) {
+      state.entregaId = nuevaEntregaId();
+    }
     saveProfile();
     els.profileError.hidden = true;
     els.profileError.textContent = '';
@@ -1708,7 +1723,8 @@
     const correct = correctCount();
 
     api.registrar({
-      version: '20261027-7',
+      id: state.entregaId || undefined,
+      version: '20261027-8',
       nombre: state.profile ? state.profile.name : '',
       curso: state.profile ? state.profile.course : '',
       puntaje: correct + '/' + TOTAL_A1,
@@ -1765,6 +1781,7 @@
     state.a2Completed = new Set();
     state.a2Attempts = {};
     state.a2Celebrated = false;
+    state.entregaId = nuevaEntregaId();
 
     els.a1Workspace.hidden = false;
     els.activity1Result.hidden = true;

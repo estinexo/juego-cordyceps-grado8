@@ -144,6 +144,8 @@
       navegador: navigator.userAgent
     }, datos || {});
 
+    if (!registro.id) registro.id = nuevoId();
+
     registro.informe_txt = recortar(registro.informe_txt, MAX_TEXTO);
     registro.respuestas_json = recortar(registro.respuestas_json, MAX_TEXTO);
 
