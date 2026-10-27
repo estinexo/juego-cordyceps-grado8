@@ -1691,8 +1691,55 @@
       return;
     }
     const filename = 'Informe_Cordyceps_' + slug(state.profile.name) + '_' + slug(state.profile.course) + '.txt';
-    downloadText(filename, buildReport());
+    const report = buildReport();
+    downloadText(filename, report);
     window.CordycepsAudio.click();
+    registrarEntrega(report);
+  }
+
+  /* --------------------------- Entrega al docente --------------------------- */
+  /* El .txt se descarga siempre. Además, si la base de datos está configurada,
+     se envía una copia para que las respuestas queden registradas. */
+  function registrarEntrega(report) {
+    const api = window.CordycepsEntrega;
+    if (!api) return;
+
+    const decisionRoute = getDecisionRoute();
+    const correct = correctCount();
+
+    api.registrar({
+      version: '20261027-7',
+      nombre: state.profile ? state.profile.name : '',
+      curso: state.profile ? state.profile.course : '',
+      puntaje: correct + '/' + TOTAL_A1,
+      porcentaje: Math.round(correct / TOTAL_A1 * 100),
+      justificaciones: justifiedCount() + '/' + TOTAL_MC,
+      ruta: decisionRoute.route,
+      conidios: decisionRoute.asexual,
+      ascosporas: decisionRoute.sexual,
+      estructuras: state.a2Completed.size + '/' + TOTAL_A2,
+      duracion: formatDuration(Math.floor((Date.now() - state.startedAt) / 1000)),
+      respuestas_json: JSON.stringify({
+        actividad1: state.answers,
+        rutas: state.decisionAnswers,
+        diseccion: state.a2Answers,
+        estado: {
+          a1Finalizada: state.a1Finished,
+          rutasFinalizadas: state.decisionFinished
+        }
+      }),
+      informe_txt: report
+    }).then(function (resultado) {
+      if (resultado.estado === 'enviado') {
+        api.avisar('Informe descargado y registrado para el docente.', 'ok');
+      } else if (resultado.estado === 'en_cola') {
+        api.avisar('Informe descargado. Sin conexión: ' + resultado.pendientes +
+          (resultado.pendientes === 1 ? ' informe queda' : ' informes quedan') +
+          ' en espera y se enviará al reconectar.', 'warn');
+      } else {
+        api.avisar('Informe descargado. El registro en línea aún no está configurado.', 'info');
+      }
+    });
   }
 
   /* ---------------------------------- Reset ---------------------------------- */

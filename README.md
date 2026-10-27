@@ -32,8 +32,10 @@ Si ves una versión anterior del juego, recarga la página con `Ctrl + F5` (o `C
 | `css/styles.css` | Diseño responsive, modo oscuro, impresión y accesibilidad visual. |
 | `js/data.js` | 12 preguntas, 6 escenarios de rutas reproductivas, disección guiada, 33 términos del glosario, mitos y fuentes. |
 | `js/app.js` | Lógica de respuestas, justificaciones, ruta reproductiva, puntajes, informe y navegación. |
+| `js/entrega.js` | Envío opcional del informe a una hoja de cálculo (Google Sheets) y cola de reintento sin conexión. |
 | `js/canvas.js` | Animación de las cinco etapas del ciclo. |
 | `js/audio.js` | Sonidos de retroalimentación generados con Web Audio. |
+| `apps-script/Codigo.gs` | Código para la hoja de cálculo que recibe los informes (opcional). |
 | `assets/cordyceps_militaris.jpg` | Fotografía de *Cordyceps militaris* sobre una pupa parasitada (CC BY 3.0). |
 
 ## Actividades
@@ -71,14 +73,25 @@ Al comenzar, el estudiante registra:
 - Nombre completo.
 - Curso.
 
-Estos datos se guardan únicamente en el `localStorage` del navegador y aparecen en el informe `.txt`, junto con las respuestas, las justificaciones, la ruta registrada, el puntaje y el tiempo de sesión. El informe se descarga desde los botones **Informe** o **Descargar informe**.
+Estos datos se guardan en el `localStorage` del navegador y aparecen en el informe `.txt`, junto con las respuestas, las justificaciones, la ruta registrada, el puntaje y el tiempo de sesión. El informe se descarga desde los botones **Informe** o **Descargar informe**.
 
 El botón **Reiniciar** borra las respuestas de las actividades, pero conserva el nombre y el curso.
 
+### Registro de informes en una hoja de cálculo (opcional)
+
+El juego puede enviar una copia de cada informe a una hoja de Google Sheets, que actúa como base de datos del curso. Viene **desactivado**: mientras la constante `ENDPOINT` de `js/entrega.js` esté vacía, la página funciona sin internet y no envía nada.
+
+Para activarlo sigue **[GUIA-BASE-DE-DATOS.md](GUIA-BASE-DE-DATOS.md)**. Cuando está configurado:
+
+- Cada descarga agrega una fila con nombre, curso, puntaje, ruta reproductiva, respuestas en JSON y el informe completo.
+- Si el estudiante no tiene conexión, el registro queda en una cola local y se reenvía solo al reconectar o al volver a abrir la página. El `.txt` se descarga igual.
+- El servidor descarta duplicados por identificador, así que un reintento no repite la fila.
+
 ## Privacidad y uso
 
-- No hay cuentas, publicidad, analítica ni peticiones a internet.
-- No se envían datos a ningún servidor.
+- No hay cuentas, publicidad ni analítica.
+- Sin configurar el registro, no se envían datos a ningún servidor.
+- Si el docente activa el registro, los informes (con nombre y curso) se envían a la hoja de cálculo del curso. Al ser datos de menores, conviene informar a las familias y usar solo el nombre o un código según las normas del colegio.
 - La fotografía es de Wikimedia Commons y se usa con fines educativos bajo licencia CC BY 3.0.
 
 ## Créditos
