@@ -29,11 +29,11 @@
     </div>
 
     <div class="header-tools">
-      <button class="profile-chip" id="profileChip" type="button" title="Editar nombre e identificación">
+      <button class="profile-chip" id="profileChip" type="button" title="Editar nombre y curso">
         <span class="profile-avatar" aria-hidden="true">👤</span>
         <span class="profile-copy">
           <span class="profile-name" id="profileDisplayName">Sin identificar</span>
-          <span class="profile-id" id="profileDisplayId">Escribe tu nombre e identificación</span>
+          <span class="profile-meta" id="profileDisplayMeta">Escribe tu nombre y curso</span>
         </span>
         <span class="profile-edit">Editar</span>
       </button>
@@ -433,7 +433,7 @@
     <p><strong>Ophiocordyceps unilateralis</strong> · Actividades de biología para grado 8°. Funciona sin internet: HTML, CSS, JavaScript e imagen local.</p>
   </footer>
 
-  <!-- ============================== MODAL DE IDENTIFICACIÓN ============================== -->
+  <!-- ============================== MODAL DE DATOS ============================== -->
   <div class="modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle" hidden>
     <div class="modal-card">
       <div class="modal-brand">
@@ -448,8 +448,8 @@
         <span>Laboratorio virtual · Grado 8°</span>
       </div>
 
-      <h2 id="profileTitle">Identifícate para comenzar</h2>
-      <p class="modal-lead">Tu nombre y tu número de identificación aparecerán en el informe de la actividad. Los datos se guardan solo en este navegador y no se envían a internet.</p>
+      <h2 id="profileTitle">Escribe tus datos para comenzar</h2>
+      <p class="modal-lead">Tu nombre y curso aparecerán en el informe de la actividad. Los datos se guardan solo en este navegador y no se envían a internet.</p>
 
       <form id="profileForm" novalidate>
         <label class="field">
@@ -457,16 +457,10 @@
           <input id="profileName" name="name" type="text" autocomplete="name" maxlength="80" placeholder="Ej.: Ana María Rodríguez" required>
         </label>
 
-        <div class="form-grid">
-          <label class="field">
-            <span>Número de identificación <b aria-hidden="true">*</b></span>
-            <input id="profileId" name="identification" type="text" inputmode="text" autocomplete="off" maxlength="30" placeholder="Ej.: 1045123789" required>
-          </label>
-          <label class="field">
-            <span>Curso</span>
-            <input id="profileCourse" name="course" type="text" maxlength="20" placeholder="Ej.: 8°B" value="8°">
-          </label>
-        </div>
+        <label class="field">
+          <span>Curso</span>
+          <input id="profileCourse" name="course" type="text" maxlength="20" placeholder="Ej.: 8°B" value="8°">
+        </label>
 
         <p class="form-error" id="profileError" role="alert" hidden></p>
         <p class="privacy">🔒 Sin cuentas, sin publicidad y sin conexión. Puedes cambiar estos datos con el botón <strong>Editar</strong> de la cabecera.</p>

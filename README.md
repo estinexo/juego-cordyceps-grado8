@@ -26,7 +26,7 @@ Luego visita `http://localhost:8000`.
 
 | Archivo | Función |
 |---|---|
-| `index.html` | Estructura de la página: identificación, actividades y glosario. |
+| `index.html` | Estructura de la página: datos del estudiante, actividades y glosario. |
 | `css/styles.css` | Diseño responsive, modo oscuro, impresión y accesibilidad visual. |
 | `js/data.js` | 13 preguntas, 6 escenarios de decisión reproductiva, disección guiada, 30 términos del glosario, mitos y fuentes. |
 | `js/app.js` | Lógica de respuestas, justificaciones, ruta reproductiva, puntajes, informe y navegación. |
@@ -58,17 +58,16 @@ Luego visita `http://localhost:8000`.
 - 30 términos con buscador y filtros por categoría.
 - Marco científico, comparación entre mitos y realidad, y ocho fuentes de consulta.
 
-## Identificación e informe
+## Datos e informe
 
 Al comenzar, el estudiante registra:
 
 - Nombre completo.
-- Número de identificación.
 - Curso.
 
 Estos datos se guardan únicamente en el `localStorage` del navegador y aparecen en el informe `.txt`, junto con las respuestas, las justificaciones, la ruta reproductiva, el puntaje y el tiempo de sesión. El informe se descarga desde los botones **Informe** o **Descargar informe**.
 
-El botón **Reiniciar** borra las respuestas de las actividades, pero conserva el nombre y la identificación.
+El botón **Reiniciar** borra las respuestas de las actividades, pero conserva el nombre y el curso.
 
 ## Privacidad y uso
 

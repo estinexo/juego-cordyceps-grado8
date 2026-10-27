@@ -154,7 +154,6 @@
     els.profileModal = $('#profileModal');
     els.profileForm = $('#profileForm');
     els.profileName = $('#profileName');
-    els.profileId = $('#profileId');
     els.profileCourse = $('#profileCourse');
     els.profileError = $('#profileError');
     els.profileCancel = $('#profileCancel');
@@ -162,7 +161,7 @@
     els.profileTitle = $('#profileTitle');
     els.profileChip = $('#profileChip');
     els.profileDisplayName = $('#profileDisplayName');
-    els.profileDisplayId = $('#profileDisplayId');
+    els.profileDisplayMeta = $('#profileDisplayMeta');
     els.elapsedTime = $('#elapsedTime');
     els.soundBtn = $('#soundBtn');
     els.downloadBtn = $('#downloadBtn');
@@ -268,18 +267,21 @@
     els.sourcesList = $('#sourcesList');
   }
 
-  /* ------------------------------- Identificación ----------------------------- */
+  /* ---------------------------- Datos del estudiante -------------------------- */
   function loadProfile() {
     try {
       const raw = window.localStorage.getItem(PROFILE_KEY);
       if (!raw) return;
       const parsed = JSON.parse(raw);
-      if (parsed && typeof parsed.name === 'string' && typeof parsed.id === 'string') {
+      if (parsed && typeof parsed.name === 'string') {
         state.profile = {
           name: parsed.name.trim(),
-          id: parsed.id.trim(),
           course: (parsed.course || '8°').trim()
         };
+        // Elimina el número de identificación de perfiles guardados con versiones anteriores.
+        if (Object.prototype.hasOwnProperty.call(parsed, 'id')) {
+          saveProfile();
+        }
       }
     } catch (error) {
       state.profile = null;
@@ -297,11 +299,11 @@
   function updateProfileUI() {
     if (!state.profile) {
       els.profileDisplayName.textContent = 'Sin identificar';
-      els.profileDisplayId.textContent = 'Escribe tu nombre e identificación';
+      els.profileDisplayMeta.textContent = 'Escribe tu nombre y curso';
       return;
     }
     els.profileDisplayName.textContent = state.profile.name;
-    els.profileDisplayId.textContent = 'ID ' + state.profile.id + ' · ' + state.profile.course;
+    els.profileDisplayMeta.textContent = 'Curso ' + state.profile.course;
   }
 
   function openProfileModal(isEdit) {
@@ -312,16 +314,14 @@
 
     if (state.profile) {
       els.profileName.value = state.profile.name;
-      els.profileId.value = state.profile.id;
       els.profileCourse.value = state.profile.course;
       els.profileTitle.textContent = isEdit ? 'Edita tus datos' : 'Confirma tus datos';
       els.profileSubmit.textContent = 'Continuar actividad →';
       els.profileCancel.hidden = false;
     } else {
       els.profileName.value = '';
-      els.profileId.value = '';
       els.profileCourse.value = '8°';
-      els.profileTitle.textContent = 'Identifícate para comenzar';
+      els.profileTitle.textContent = 'Escribe tus datos para comenzar';
       els.profileSubmit.textContent = 'Comenzar actividad →';
       els.profileCancel.hidden = true;
     }
@@ -341,14 +341,11 @@
   function handleProfileSubmit(event) {
     event.preventDefault();
     const name = els.profileName.value.trim().replace(/\s+/g, ' ');
-    const id = els.profileId.value.trim();
     const course = els.profileCourse.value.trim() || '8°';
 
     let error = '';
     if (name.length < 4 || !/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(name)) {
       error = 'Escribe tu nombre completo (mínimo 4 caracteres y al menos una letra).';
-    } else if (id.length < 4) {
-      error = 'Escribe tu número de identificación (mínimo 4 caracteres).';
     } else if (course.length < 1) {
       error = 'Escribe el curso (por ejemplo, 8°B).';
     }
@@ -356,11 +353,11 @@
     if (error) {
       els.profileError.textContent = error;
       els.profileError.hidden = false;
-      (name.length < 4 ? els.profileName : els.profileId).focus();
+      (name.length < 4 ? els.profileName : els.profileCourse).focus();
       return;
     }
 
-    state.profile = { name: name, id: id, course: course };
+    state.profile = { name: name, course: course };
     saveProfile();
     updateProfileUI();
     els.profileModal.hidden = true;
@@ -1564,7 +1561,6 @@
     text += 'Biología · Grado 8° · Ciclo sexual y asexual\n';
     text += line + '\n\n';
     text += pad('NOMBRE COMPLETO', 24) + ': ' + (state.profile ? state.profile.name : 'Sin identificar') + '\n';
-    text += pad('IDENTIFICACIÓN', 24) + ': ' + (state.profile ? state.profile.id : 'Sin identificar') + '\n';
     text += pad('CURSO', 24) + ': ' + (state.profile ? state.profile.course : 'Sin curso') + '\n';
     text += pad('FECHA Y HORA', 24) + ': ' + dateText + '\n';
     text += pad('TIEMPO DE SESIÓN', 24) + ': ' + elapsed + '\n';
@@ -1713,14 +1709,14 @@
       openProfileModal(false);
       return;
     }
-    const filename = 'Informe_Ophiocordyceps_' + slug(state.profile.name) + '_' + slug(state.profile.id) + '.txt';
+    const filename = 'Informe_Ophiocordyceps_' + slug(state.profile.name) + '_' + slug(state.profile.course) + '.txt';
     downloadText(filename, buildReport());
     window.CordycepsAudio.click();
   }
 
   /* ---------------------------------- Reset ---------------------------------- */
   function resetAll() {
-    const confirmed = window.confirm('¿Reiniciar las actividades? Se borrarán tus respuestas, pero conservarás tu nombre e identificación.');
+    const confirmed = window.confirm('¿Reiniciar las actividades? Se borrarán tus respuestas, pero conservarás tu nombre y curso.');
     if (!confirmed) return;
 
     state.a1Index = 0;
