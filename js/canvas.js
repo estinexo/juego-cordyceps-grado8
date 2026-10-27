@@ -271,7 +271,7 @@
     }
     ctx.restore();
 
-    label('Tubo germinativo', sx + 20, sy + 66, '#6ee7b7');
+    label('Tubo germinativo', sx + 40, sy + 66, '#6ee7b7');
     label('Apresorio + enzimas (quitinasa / proteasa)', sx + 88, surfaceY + 104, '#fcd34d');
     label('La hifa perfora la cutícula', 24, h - 22, '#78716c');
   }
@@ -294,7 +294,7 @@
     ctx.stroke();
 
     label('Micelio: red de hifas', w * 0.14, h * 0.24, '#6ee7b7');
-    label('Coloniza tejidos y absorbe nutrientes', w * 0.14, h * 0.24 + 19, '#94a3b8');
+    label('Coloniza tejidos y absorbe nutrientes', w * 0.14, h * 0.24 + 19, '#cbd5e1');
     label('INTERIOR DE LA PUPA', 20, h - 18, '#78716c');
   }
 
@@ -323,7 +323,7 @@
 
     label('Estroma (cuerpo fructífero)', w * 0.12, groundY - 182, '#fdba74');
     label('Peritecios (puntos)', w * 0.96, groundY - 146, '#fde68a', 'right');
-    label('La altura ayuda a dispersar las ascosporas', 20, h - 16, '#78716c');
+    label('La altura ayuda a dispersar las ascosporas', 20, h - 16, '#a8a29e');
   }
 
   function drawDispersal() {
@@ -357,7 +357,7 @@
 
     drawSporeShape(w * 0.78, h * 0.28, 9, '#f59e0b');
     label('Eyección activa de ascosporas', w * 0.42, groundY - 46, '#fcd34d');
-    label('El viento las transporta a nuevas pupas', w * 0.42, groundY - 27, '#94a3b8');
+    label('El viento las transporta a nuevas pupas', w * 0.42, groundY - 27, '#cbd5e1');
     label('NUEVOS HOSPEDEROS · NUEVO CICLO', 20, h - 16, '#78716c');
   }
 
