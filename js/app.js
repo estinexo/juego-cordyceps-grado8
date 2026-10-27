@@ -197,8 +197,6 @@
     els.nextBtn = $('#nextBtn');
     els.canvasCaption = $('#canvasCaption');
     els.stageStepper = $('#stageStepper');
-    els.hintCard = $('#hintCard');
-    els.hintText = $('#hintText');
     els.activity1Result = $('#activity1Result');
     els.resultContent = $('#resultContent');
     els.goA2Btn = $('#goA2Btn');
@@ -517,10 +515,6 @@
 
     updateStageDisplay(question.stage);
     updateA1Chips();
-
-    const label = $('.hint-label', els.hintCard);
-    label.textContent = answer ? 'Idea clave' : 'Pista científica';
-    els.hintText.textContent = answer ? question.keyIdea : question.hint;
 
     els.optionsList.innerHTML = '';
     els.qFeedback.hidden = true;
@@ -897,7 +891,7 @@
     els.reviewList.innerHTML = items.join('');
   }
 
-  /* ---------------------- Actividad 2 · Decisiones reproductivas -------------- */
+  /* ---------------------- Actividad 2 · Rutas reproductivas ------------------ */
   function currentDecision() {
     return D.REPRODUCTION_DECISIONS.scenarios[state.decisionIndex];
   }
@@ -907,7 +901,7 @@
   }
 
   function decisionTypeLabel(type) {
-    return type === 'sexual' ? 'Sexual' : 'Asexual';
+    return type === 'sexual' ? 'Ascosporas' : 'Conidios';
   }
 
   function getDecisionRoute() {
@@ -933,8 +927,8 @@
   }
 
   function routeLabel(route) {
-    if (route === 'sexual') return 'Ruta sexual';
-    if (route === 'asexual') return 'Ruta asexual';
+    if (route === 'sexual') return 'Ruta con ascosporas';
+    if (route === 'asexual') return 'Ruta con conidios';
     if (route === 'mixta') return 'Ruta alternante';
     return 'Ruta en construcción';
   }
@@ -943,8 +937,8 @@
     const answered = decisionAnsweredCount();
     const route = getDecisionRoute();
 
-    els.decisionProgressChip.textContent = answered + ' / ' + TOTAL_DEC + ' decisiones';
-    els.decisionCounter.textContent = answered + ' de ' + TOTAL_DEC + ' completados';
+    els.decisionProgressChip.textContent = answered + ' / ' + TOTAL_DEC + ' escenarios';
+    els.decisionCounter.textContent = answered + ' de ' + TOTAL_DEC + ' analizados';
     els.decisionProgressFill.style.width = (answered / TOTAL_DEC * 100) + '%';
     els.decisionProgress.setAttribute('aria-valuenow', String(answered));
     els.decisionProgress.setAttribute('aria-valuemax', String(TOTAL_DEC));
@@ -977,19 +971,19 @@
     els.routeHistoryCount.textContent = answered + ' / ' + TOTAL_DEC;
 
     if (!answered) {
-      els.routeStatus.textContent = 'Aún no hay decisiones. Elige una estrategia y justifícala.';
+      els.routeStatus.textContent = 'Aún no hay escenarios analizados. Elige una ruta y justifícala.';
     } else if (state.decisionFinished) {
-      els.routeStatus.textContent = 'Ruta final: ' + routeLabel(currentRoute.route).toLowerCase() +
-        ' (' + currentRoute.sexual + ' sexuales · ' + currentRoute.asexual + ' asexuales).';
+      els.routeStatus.textContent = 'Ruta registrada: ' + routeLabel(currentRoute.route).toLowerCase() +
+        ' (' + currentRoute.asexual + ' conidios · ' + currentRoute.sexual + ' ascosporas).';
     } else if (currentRoute.sexual === currentRoute.asexual) {
-      els.routeStatus.textContent = 'Empate parcial: ' + currentRoute.sexual + ' sexuales y ' +
-        currentRoute.asexual + ' asexuales. Aún quedan escenarios.';
+      els.routeStatus.textContent = 'Conteo parcial: ' + currentRoute.asexual + ' conidios y ' +
+        currentRoute.sexual + ' ascosporas. Aún quedan escenarios.';
     } else if (currentRoute.sexual > currentRoute.asexual) {
-      els.routeStatus.textContent = 'Ventaja parcial sexual: ' + currentRoute.sexual + ' frente a ' +
-        currentRoute.asexual + '. Aún quedan escenarios.';
+      els.routeStatus.textContent = 'Conteo parcial: ' + currentRoute.sexual + ' ascosporas y ' +
+        currentRoute.asexual + ' conidios. Aún quedan escenarios.';
     } else {
-      els.routeStatus.textContent = 'Ventaja parcial asexual: ' + currentRoute.asexual + ' frente a ' +
-        currentRoute.sexual + '. Aún quedan escenarios.';
+      els.routeStatus.textContent = 'Conteo parcial: ' + currentRoute.asexual + ' conidios y ' +
+        currentRoute.sexual + ' ascosporas. Aún quedan escenarios.';
     }
 
     const history = D.REPRODUCTION_DECISIONS.scenarios.map(function (scenario, index) {
@@ -1015,7 +1009,7 @@
     const selectedId = answer ? answer.optionId : state.decisionSelected;
 
     els.decisionScenarioTag.textContent = 'Escenario ' + (state.decisionIndex + 1);
-    els.decisionCounter.textContent = decisionAnsweredCount() + ' de ' + TOTAL_DEC + ' completados';
+    els.decisionCounter.textContent = decisionAnsweredCount() + ' de ' + TOTAL_DEC + ' analizados';
     els.decisionTitle.textContent = scenario.title;
     els.decisionScenario.textContent = scenario.scenario;
 
@@ -1027,15 +1021,12 @@
       button.dataset.optionId = option.id;
       button.setAttribute('aria-pressed', selectedId === option.id ? 'true' : 'false');
       button.innerHTML = '<span class="option-letter">' + option.id + '</span>' +
-        '<span class="option-text"><span class="decision-type is-' + option.type + '">' +
-        decisionTypeLabel(option.type) + '</span>' + escapeHtml(option.text) + '</span>';
+        '<span class="option-text">' + escapeHtml(option.text) + '</span>';
 
       if (answer) {
         button.disabled = true;
-        if (option.correct) {
-          button.classList.add('is-correct');
-        } else if (answer.optionId === option.id) {
-          button.classList.add('is-wrong');
+        if (answer.optionId === option.id) {
+          button.classList.add('is-chosen');
         } else {
           button.classList.add('is-dim');
         }
@@ -1132,12 +1123,11 @@
     });
     if (!chosen) return;
 
-    setFeedback(els.decisionFeedback, chosen.correct ? 'correct' : 'wrong',
-      chosen.correct ? '✅ Decisión coherente con el escenario' : '🔎 Decisión posible, pero menos ajustada',
+    setFeedback(els.decisionFeedback, 'info', 'Ruta registrada',
       '<p><strong>Elegiste:</strong> ' + escapeHtml(chosen.text) + '</p>' +
       '<p>' + escapeHtml(chosen.feedback) + '</p>',
       '<div class="feedback-extra"><strong>Tu justificación:</strong> ' + escapeHtml(answer.text) +
-      '<br><br><strong>Por qué:</strong> ' + escapeHtml(scenario.explanation) + '</div>');
+      '<br><br><strong>Lectura del escenario:</strong> ' + escapeHtml(scenario.explanation) + '</div>');
   }
 
   function confirmDecision() {
@@ -1147,9 +1137,9 @@
 
     const text = els.decisionJustify.value.trim();
     if (text.length < MIN_DECISION_JUSTIFY) {
-      setFeedback(els.decisionFeedback, 'info', '✍️ Falta justificar la decisión',
+      setFeedback(els.decisionFeedback, 'info', '✍️ Falta justificar la ruta',
         '<p>Escribe al menos ' + MIN_DECISION_JUSTIFY +
-        ' caracteres. Explica por qué esa estrategia es adecuada en este escenario e incluye una idea científica.</p>');
+        ' caracteres. Explica qué procesos y estructuras caracterizan la ruta que elegiste e incluye una idea científica.</p>');
       els.decisionJustify.focus();
       return;
     }
@@ -1162,18 +1152,13 @@
     state.decisionAnswers[scenario.id] = {
       optionId: chosen.id,
       type: chosen.type,
-      correct: !!chosen.correct,
       text: text
     };
     state.decisionDraft[scenario.id] = text;
 
     renderDecisionScenario(false);
     updateDecisionProgress();
-    if (chosen.correct) {
-      window.CordycepsAudio.correct();
-    } else {
-      window.CordycepsAudio.wrong();
-    }
+    window.CordycepsAudio.click();
     focusDecisionFeedback();
   }
 
@@ -1200,16 +1185,11 @@
     updateDecisionProgress();
 
     const route = getDecisionRoute();
-    const aligned = Object.keys(state.decisionAnswers).filter(function (key) {
-      return state.decisionAnswers[key].correct;
-    }).length;
-    const dominant = route.route === 'sexual' ? route.sexual : route.asexual;
-    const dominantLabel = route.route === 'sexual' ? 'decisiones sexuales' : 'decisiones asexuales';
-    let routeMessage = 'En esta simulación, tus decisiones combinaron ambas estrategias. Esa flexibilidad puede ser útil cuando el ambiente cambia.';
+    let routeMessage = 'Tus respuestas combinaron las dos rutas. En el ciclo del hongo ambas existen y pueden alternarse según las condiciones.';
     if (route.route === 'sexual') {
-      routeMessage = 'En esta simulación, tus decisiones priorizaron la reproducción sexual: más variabilidad y más costo. Esa apuesta puede ayudar cuando el hospedero o el ambiente cambian.';
+      routeMessage = 'Tus respuestas se inclinaron por la ruta de las ascosporas: meiosis, recombinación y más variabilidad, con menor número de descendientes.';
     } else if (route.route === 'asexual') {
-      routeMessage = 'En esta simulación, tus decisiones priorizaron la reproducción asexual: rapidez y clones, pero menos variabilidad. Esa apuesta funciona mejor cuando el ambiente es estable y los hospederos son abundantes.';
+      routeMessage = 'Tus respuestas se inclinaron por la ruta de los conidios: mitosis, clones y colonización rápida, con menor variabilidad.';
     }
 
     const list = D.REPRODUCTION_DECISIONS.scenarios.map(function (scenario, index) {
@@ -1219,7 +1199,7 @@
         return option.id === answer.optionId;
       });
       return '<li><strong>' + (index + 1) + '. ' + escapeHtml(scenario.title) + ':</strong> ' +
-        '<span class="decision-type is-' + answer.type + '">' + decisionTypeLabel(answer.type) + '</span>' +
+        '<span class="decision-type is-' + answer.type + '">' + decisionTypeLabel(answer.type) + '</span> ' +
         escapeHtml(chosen ? chosen.text : '') +
         '<br><em>Justificación:</em> ' + escapeHtml(answer.text) + '</li>';
     }).join('');
@@ -1227,18 +1207,18 @@
     els.decisionResultContent.innerHTML =
       '<div class="result-hero">' +
         '<span class="result-badge" aria-hidden="true">✓</span>' +
-        '<div><h3>Actividad 2 finalizada</h3><p>Tu ruta reproductiva: <strong>' +
+        '<div><h3>Actividad 2 finalizada</h3><p>Ruta registrada: <strong>' +
           routeLabel(route.route) + '</strong>.</p></div>' +
-        '<div class="result-score"><strong>' + dominant + ' / ' + TOTAL_DEC + '</strong><span>' +
-          dominantLabel + '</span></div>' +
+        '<div class="result-score"><strong>' + route.total + ' / ' + TOTAL_DEC + '</strong><span>' +
+          'escenarios analizados</span></div>' +
       '</div>' +
       '<div class="result-grid">' +
-        '<div class="result-stat"><span>Ruta resultante</span><strong>' + routeLabel(route.route) + '</strong></div>' +
-        '<div class="result-stat"><span>Decisiones tomadas</span><strong>' + route.total + ' de ' + TOTAL_DEC + '</strong></div>' +
-        '<div class="result-stat"><span>Ajuste al escenario</span><strong>' + aligned + ' de ' + TOTAL_DEC + '</strong></div>' +
+        '<div class="result-stat"><span>Ruta registrada</span><strong>' + routeLabel(route.route) + '</strong></div>' +
+        '<div class="result-stat"><span>Conidios (mitosis)</span><strong>' + route.asexual + ' de ' + TOTAL_DEC + '</strong></div>' +
+        '<div class="result-stat"><span>Ascosporas (meiosis)</span><strong>' + route.sexual + ' de ' + TOTAL_DEC + '</strong></div>' +
       '</div>' +
       '<p class="result-note">' + escapeHtml(routeMessage) +
-        ' El ajuste al escenario no es una nota: es una pista para comparar tus decisiones con la estrategia que mejor encaja en cada ambiente.</p>' +
+        ' Esta actividad no califica una ruta como correcta: busca explicar qué procesos y estructuras caracterizan cada una.</p>' +
       '<ul class="result-list">' + list + '</ul>';
 
     window.CordycepsAudio.complete();
@@ -1363,12 +1343,12 @@
   function buildGuidedOptions(container, options, selectedId, disabled, field, structureId) {
     container.innerHTML = '';
 
-    options.forEach(function (option) {
+    options.forEach(function (option, index) {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'option';
       button.setAttribute('aria-pressed', selectedId === option.id ? 'true' : 'false');
-      button.innerHTML = '<span class="option-letter">' + option.id.toUpperCase() + '</span>' +
+      button.innerHTML = '<span class="option-letter">' + String.fromCharCode(65 + index) + '</span>' +
         '<span class="option-text">' + escapeHtml(option.text) + '</span>';
 
       if (disabled) {
@@ -1437,9 +1417,9 @@
       detail += '<p><strong>Fase:</strong> ' + escapeHtml(chosenPhase.feedback) + '</p>';
     }
 
-    setFeedback(els.structureFeedback, 'wrong', '🔎 Revisa una de las dos decisiones',
+    setFeedback(els.structureFeedback, 'wrong', '🔎 Revisa una de las dos elecciones',
       detail,
-      '<div class="feedback-extra">Vuelve a intentarlo. Puedes cambiar solo la decisión que no corresponde.</div>');
+      '<div class="feedback-extra">Vuelve a intentarlo. Puedes cambiar solo la elección que no corresponde.</div>');
     window.CordycepsAudio.wrong();
   }
 
@@ -1490,7 +1470,7 @@
       '</div>' +
       '<div class="result-grid">' +
         '<div class="result-stat"><span>Estructuras</span><strong>' + TOTAL_A2 + ' de ' + TOTAL_A2 + '</strong></div>' +
-        '<div class="result-stat"><span>Decisiones</span><strong>Función + fase</strong></div>' +
+        '<div class="result-stat"><span>Elecciones</span><strong>Función + fase</strong></div>' +
         '<div class="result-stat"><span>Informe</span><strong>Listo para descargar</strong></div>' +
       '</div>' +
       '<p class="result-note">La forma de cada estructura se explica por su función: el estroma eleva, los peritecios protegen la meiosis, el micelio coloniza y absorbe, y los conidios dispersan clones. Puedes repasar cualquier estructura con las tarjetas de arriba.</p>' +
@@ -1560,7 +1540,7 @@
 
     let text = line + '\n';
     text += 'INFORME DE LABORATORIO · OPHIOCORDYCEPS UNILATERALIS\n';
-    text += 'Biología · Grado 8° · Ciclo sexual y asexual\n';
+    text += 'Biología · Grado 8° · Familia Cordycipitaceae (clasificación tradicional; Ophiocordycipitaceae actual)\n';
     text += line + '\n\n';
     text += pad('NOMBRE COMPLETO', 24) + ': ' + (state.profile ? state.profile.name : 'Sin identificar') + '\n';
     text += pad('CURSO', 24) + ': ' + (state.profile ? state.profile.course : 'Sin curso') + '\n';
@@ -1570,8 +1550,8 @@
     text += pad('ESTADO ACTIVIDAD 1', 24) + ': ' + (state.a1Finished ? 'FINALIZADA' : 'EN PROGRESO') + '\n';
     text += pad('PUNTAJE ACTIVIDAD 1', 24) + ': ' + correct + ' / ' + TOTAL_A1 + ' (' + percent + '%)\n';
     text += pad('JUSTIFICACIONES', 24) + ': ' + justifiedCount() + ' / ' + TOTAL_MC + '\n';
-    text += pad('ESTADO ACTIVIDAD 2', 24) + ': ' + decisionAnsweredCount() + ' / ' + TOTAL_DEC + ' decisiones\n';
-    text += pad('RUTA REPRODUCTIVA', 24) + ': ' + (decisionRoute.route === 'sin definir' ? 'sin definir' : routeLabel(decisionRoute.route)) + '\n';
+    text += pad('ESTADO ACTIVIDAD 2', 24) + ': ' + decisionAnsweredCount() + ' / ' + TOTAL_DEC + ' escenarios\n';
+    text += pad('RUTA REGISTRADA', 24) + ': ' + (decisionRoute.route === 'sin definir' ? 'sin definir' : routeLabel(decisionRoute.route)) + '\n';
     text += pad('ESTADO ACTIVIDAD 3', 24) + ': ' + state.a2Completed.size + ' / ' + TOTAL_A2 + ' estructuras\n\n';
 
     text += thin + '\n';
@@ -1613,13 +1593,13 @@
     });
 
     text += thin + '\n';
-    text += 'ACTIVIDAD 2 · DECISIONES REPRODUCTIVAS\n';
+    text += 'ACTIVIDAD 2 · RUTAS REPRODUCTIVAS\n';
     text += thin + '\n\n';
-    text += 'RUTA RESULTANTE: ' + (decisionRoute.route === 'sin definir'
+    text += 'RUTA REGISTRADA: ' + (decisionRoute.route === 'sin definir'
       ? 'SIN DEFINIR (actividad incompleta)'
       : routeLabel(decisionRoute.route).toUpperCase()) + '\n';
-    text += 'DECISIONES SEXUALES: ' + decisionRoute.sexual + ' / ' + TOTAL_DEC + '\n';
-    text += 'DECISIONES ASEXUALES: ' + decisionRoute.asexual + ' / ' + TOTAL_DEC + '\n\n';
+    text += 'CONIDIOS (MITOSIS): ' + decisionRoute.asexual + ' / ' + TOTAL_DEC + '\n';
+    text += 'ASCOSPORAS (MEIOSIS): ' + decisionRoute.sexual + ' / ' + TOTAL_DEC + '\n\n';
 
     D.REPRODUCTION_DECISIONS.scenarios.forEach(function (scenario, index) {
       const answer = state.decisionAnswers[scenario.id];
@@ -1629,10 +1609,9 @@
         const chosen = scenario.options.find(function (option) {
           return option.id === answer.optionId;
         });
-        text += 'ELECCIÓN: ' + (chosen ? chosen.text : '') + ' (' + decisionTypeLabel(answer.type) + ')\n';
+        text += 'RUTA ELEGIDA: ' + (chosen ? chosen.text : '') + ' (' + decisionTypeLabel(answer.type) + ')\n';
         text += 'JUSTIFICACIÓN DEL ESTUDIANTE:\n"' + answer.text + '"\n';
-        text += 'AJUSTE AL ESCENARIO: ' + (answer.correct ? 'coherente' : 'menos ajustada') + '\n';
-        text += 'EXPLICACIÓN: ' + scenario.explanation + '\n';
+        text += 'LECTURA DEL ESCENARIO: ' + scenario.explanation + '\n';
       } else {
         text += 'ESTADO: pendiente\n';
       }

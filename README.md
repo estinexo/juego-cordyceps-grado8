@@ -1,6 +1,6 @@
 # Ophiocordyceps unilateralis · Actividades de Biología (Grado 8°)
 
-Versión modular y offline de la actividad sobre el ciclo de vida, la reproducción, la manipulación conductual del hospedero y la disección funcional de *Ophiocordyceps unilateralis*.
+Versión modular y offline de la actividad sobre el ciclo de vida, las rutas reproductivas, la manipulación conductual del hospedero y la disección funcional de *Ophiocordyceps unilateralis* (familia Cordycipitaceae, clasificación tradicional; actualmente Ophiocordycipitaceae).
 
 ## Versión en línea
 
@@ -30,7 +30,7 @@ Si ves una versión anterior del juego, recarga la página con `Ctrl + F5` (o `C
 |---|---|
 | `index.html` | Estructura de la página: datos del estudiante, actividades y glosario. |
 | `css/styles.css` | Diseño responsive, modo oscuro, impresión y accesibilidad visual. |
-| `js/data.js` | 13 preguntas, 6 escenarios de decisión reproductiva, disección guiada, 30 términos del glosario, mitos y fuentes. |
+| `js/data.js` | 12 preguntas, 6 escenarios de rutas reproductivas, disección guiada, 32 términos del glosario, mitos y fuentes. |
 | `js/app.js` | Lógica de respuestas, justificaciones, ruta reproductiva, puntajes, informe y navegación. |
 | `js/canvas.js` | Animación de las cinco etapas del ciclo. |
 | `js/audio.js` | Sonidos de retroalimentación generados con Web Audio. |
@@ -39,25 +39,29 @@ Si ves una versión anterior del juego, recarga la página con `Ctrl + F5` (o `C
 ## Actividades
 
 ### Actividad 1 · Ciclo y genética
-- 13 preguntas con final definido: 12 de selección múltiple y 1 de argumentación abierta.
+- 12 preguntas con final definido: 11 de selección múltiple y 1 de argumentación abierta.
 - Cada pregunta de selección múltiple exige una justificación escrita antes de comprobar la respuesta.
 - Retroalimentación inmediata, puntaje en vivo, barra de progreso y contador de justificaciones.
-- Al responder la pregunta 13 se cierra la actividad con un resultado final, revisión de respuestas e informe descargable.
+- Al responder la pregunta 12 se cierra la actividad con un resultado final, revisión de respuestas e informe descargable.
+- Se retiró la pregunta 12 anterior (biopesticidas) y se mejoraron los contextos de hifa/micelio y mitosis/meiosis.
+- Las opciones correctas se distribuyen entre A, B, C y D para evitar que casi todas estén en A.
 
-### Actividad 2 · Decisiones reproductivas
-- Seis escenarios ecológicos para elegir entre reproducción sexual y asexual.
-- Cada decisión exige una justificación con conceptos científicos y recibe retroalimentación.
-- Las elecciones construyen una ruta reproductiva final: sexual, asexual o alternante (si hay empate).
-- El panel lateral muestra el conteo en vivo y el historial de decisiones.
-- El resultado también indica cuántas decisiones coincidieron con la estrategia recomendada para cada escenario; no es una nota, sino una pista de autoevaluación.
+### Actividad 2 · Rutas reproductivas
+- Seis escenarios ecológicos para analizar dos rutas: conidios por mitosis y ascosporas por meiosis.
+- Las opciones no muestran las etiquetas “sexual” o “asexual”: el estudiante debe inferir la ruta a partir de los procesos y las estructuras.
+- Cada elección exige una justificación con conceptos científicos y recibe retroalimentación descriptiva.
+- No se califica una ruta como la “mejor”: ambas forman parte del ciclo y dependen de las condiciones.
+- El panel lateral muestra el conteo en vivo y el historial de rutas elegidas.
 
 ### Actividad 3 · Disección funcional
 - Fotografía real con cuatro estructuras marcadas: estroma, peritecios, micelio y conidios.
-- Cada estructura exige dos decisiones: función y fase del ciclo.
+- Se corrigió la ubicación de los marcadores 1 y 2 para que coincidan con el estroma y los peritecios.
+- Los textos descriptivos ya no revelan la función ni la fase antes de responder.
+- Cada estructura exige dos elecciones: función y fase del ciclo.
 - Retroalimentación específica ante errores y cierre al completar las cuatro estructuras.
 
 ### Actividad 4 · Glosario y fuentes
-- 30 términos con buscador y filtros por categoría.
+- 32 términos con buscador y filtros por categoría, incluidas las familias Cordycipitaceae y Ophiocordycipitaceae.
 - Marco científico, comparación entre mitos y realidad, y ocho fuentes de consulta.
 
 ## Datos e informe
@@ -67,7 +71,7 @@ Al comenzar, el estudiante registra:
 - Nombre completo.
 - Curso.
 
-Estos datos se guardan únicamente en el `localStorage` del navegador y aparecen en el informe `.txt`, junto con las respuestas, las justificaciones, la ruta reproductiva, el puntaje y el tiempo de sesión. El informe se descarga desde los botones **Informe** o **Descargar informe**.
+Estos datos se guardan únicamente en el `localStorage` del navegador y aparecen en el informe `.txt`, junto con las respuestas, las justificaciones, la ruta registrada, el puntaje y el tiempo de sesión. El informe se descarga desde los botones **Informe** o **Descargar informe**.
 
 El botón **Reiniciar** borra las respuestas de las actividades, pero conserva el nombre y el curso.
 

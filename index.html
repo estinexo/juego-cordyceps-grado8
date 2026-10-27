@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#071014">
-  <meta name="description" content="Actividades interactivas offline sobre Ophiocordyceps unilateralis: ciclo de vida, decisiones sexuales y asexuales, manipulación conductual y disección funcional. Biología, grado 8°.">
-  <title>Ophiocordyceps · Ciclo, decisiones y disección · Grado 8°</title>
-  <link rel="stylesheet" href="css/styles.css?v=20261027-3">
+  <meta name="description" content="Actividades interactivas offline sobre Ophiocordyceps unilateralis: ciclo de vida, rutas reproductivas, manipulación conductual y disección funcional. Biología, grado 8°.">
+  <title>Ophiocordyceps · Ciclo, rutas y disección · Grado 8°</title>
+  <link rel="stylesheet" href="css/styles.css?v=20261027-5">
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -24,7 +24,7 @@
       <div>
         <p class="brand-eyebrow">Biología · Grado 8° · Actividades offline</p>
         <h1 class="brand-title"><em>Ophiocordyceps unilateralis</em></h1>
-        <p class="brand-sub">Sexual vs. asexual · Decisiones · Ciclo de vida · Disección funcional</p>
+        <p class="brand-sub">Familia Cordycipitaceae · Ciclo de vida · Rutas reproductivas · Disección funcional</p>
       </div>
     </div>
 
@@ -53,11 +53,11 @@
     <button class="tab-btn is-active" type="button" data-view="actividad1" aria-pressed="true">
       <span class="tab-num">1</span>
       <span class="tab-label">Ciclo y genética</span>
-      <span class="tab-status" id="tab1Status">0 / 13</span>
+      <span class="tab-status" id="tab1Status">0 / 12</span>
     </button>
     <button class="tab-btn" type="button" data-view="decisiones" aria-pressed="false">
       <span class="tab-num">2</span>
-      <span class="tab-label">Decisiones reproductivas</span>
+      <span class="tab-label">Rutas reproductivas</span>
       <span class="tab-status" id="tabDecisionStatus">0 / 6</span>
     </button>
     <button class="tab-btn" type="button" data-view="actividad2" aria-pressed="false">
@@ -68,7 +68,7 @@
     <button class="tab-btn" type="button" data-view="glosario" aria-pressed="false">
       <span class="tab-num">4</span>
       <span class="tab-label">Glosario y fuentes</span>
-      <span class="tab-status" id="tab3Status">30 términos</span>
+      <span class="tab-status" id="tab3Status">32 términos</span>
     </button>
   </nav>
 
@@ -77,14 +77,14 @@
     <section class="view is-active" id="view-actividad1" aria-labelledby="a1Title">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Actividad 1 · Ruta de 13 preguntas</p>
+          <p class="eyebrow">Actividad 1 · Ruta de 12 preguntas</p>
           <h2 id="a1Title">El ciclo de vida y la reproducción</h2>
-          <p class="lead">Responde una pregunta a la vez, elige una opción y justifica tu elección. Cada respuesta se comprueba al instante y, al terminar la pregunta 13, la actividad se cierra con tu puntaje y un resumen descargable.</p>
+          <p class="lead">Modelo: <em>Ophiocordyceps unilateralis</em>, familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae). Responde una pregunta a la vez, elige una opción y justifica tu elección. Cada respuesta se comprueba al instante y, al terminar la pregunta 12, la actividad se cierra con tu puntaje y un resumen descargable.</p>
         </div>
         <div class="chip-row">
           <span class="chip" id="a1ScoreChip">Aciertos: 0</span>
-          <span class="chip" id="a1AnsweredChip">Respondidas: 0 / 13</span>
-          <span class="chip" id="a1JustifyChip">Justificaciones: 0 / 12</span>
+          <span class="chip" id="a1AnsweredChip">Respondidas: 0 / 12</span>
+          <span class="chip" id="a1JustifyChip">Justificaciones: 0 / 11</span>
         </div>
       </div>
 
@@ -92,10 +92,10 @@
         <section class="panel question-panel" aria-labelledby="qTitle">
           <div class="panel-top">
             <span class="pill pill-topic" id="qTopic">Micología básica</span>
-            <span class="question-counter" id="qCounter">Pregunta 1 de 13</span>
+            <span class="question-counter" id="qCounter">Pregunta 1 de 12</span>
           </div>
 
-          <div class="progress-track" id="qProgress" role="progressbar" aria-label="Progreso de la actividad 1" aria-valuemin="0" aria-valuemax="13" aria-valuenow="0">
+          <div class="progress-track" id="qProgress" role="progressbar" aria-label="Progreso de la actividad 1" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0">
             <span class="progress-fill" id="qProgressFill"></span>
           </div>
 
@@ -141,10 +141,6 @@
           </div>
           <p class="canvas-caption" id="canvasCaption"></p>
           <div class="stepper" id="stageStepper" aria-label="Estadios del ciclo"></div>
-          <div class="hint-card" id="hintCard">
-            <span class="hint-label">Pista científica</span>
-            <p id="hintText">Observa la estructura y piensa en su función.</p>
-          </div>
         </aside>
       </div>
 
@@ -152,7 +148,7 @@
         <div id="resultContent"></div>
         <div class="result-actions">
           <button class="btn btn-primary" id="goA2Btn" type="button">Continuar a la Actividad 2 →</button>
-          <!-- El botón abre la simulación de decisiones. -->
+          <!-- El botón abre la actividad de rutas reproductivas. -->
 
           <button class="btn btn-secondary" id="downloadResultBtn" type="button">📥 Descargar informe</button>
           <button class="btn btn-ghost" id="reviewBtn" type="button">Revisar mis respuestas</button>
@@ -161,16 +157,16 @@
       </section>
     </section>
 
-    <!-- ============================== ACTIVIDAD 2 · DECISIONES ============================== -->
+    <!-- ============================== ACTIVIDAD 2 · RUTAS ============================== -->
     <section class="view" id="view-decisiones" aria-labelledby="decTitle" hidden>
       <div class="section-head">
         <div>
-          <p class="eyebrow">Actividad 2 · Simulación de decisiones</p>
-          <h2 id="decTitle">¿Sexual o asexual? La ruta del hongo</h2>
-          <p class="lead">Lee cada escenario, elige una estrategia reproductiva y justifícala con conceptos científicos. Tus seis decisiones construirán una ruta: al final sabrás si tu hongo priorizó la reproducción sexual, la asexual o una combinación.</p>
+          <p class="eyebrow">Actividad 2 · Rutas reproductivas</p>
+          <h2 id="decTitle">Dos rutas reproductivas del hongo</h2>
+          <p class="lead">Modelo: <em>Ophiocordyceps unilateralis</em>, familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae). El hongo no elige de forma consciente entre reproducción sexual y asexual: ambas rutas forman parte de su ciclo. Lee cada escenario, elige una ruta y justifica cómo se relaciona con la evidencia. No hay una estrategia mejor en abstracto.</p>
         </div>
         <div class="chip-row">
-          <span class="chip" id="decisionProgressChip">0 / 6 decisiones</span>
+          <span class="chip" id="decisionProgressChip">0 / 6 escenarios</span>
           <span class="chip chip-muted" id="decisionPathChip">Ruta en construcción</span>
         </div>
       </div>
@@ -179,7 +175,7 @@
         <section class="panel decision-panel" aria-labelledby="decisionTitle">
           <div class="panel-top">
             <span class="pill pill-topic" id="decisionScenarioTag">Escenario 1</span>
-            <span class="question-counter" id="decisionCounter">0 de 6 completados</span>
+            <span class="question-counter" id="decisionCounter">0 de 6 analizados</span>
           </div>
 
           <div class="progress-track" role="progressbar" aria-label="Progreso de la actividad 2" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="decisionProgress">
@@ -189,11 +185,11 @@
           <h3 class="question-title" id="decisionTitle">Cargando escenario…</h3>
           <p class="scenario" id="decisionScenario"></p>
 
-          <div class="options" id="decisionOptions" role="group" aria-label="Estrategias reproductivas"></div>
+          <div class="options" id="decisionOptions" role="group" aria-label="Rutas reproductivas"></div>
 
           <div class="open-answer justify-answer" id="decisionJustifyBox">
-            <label for="decisionJustify">Justifica tu decisión <span class="required-mark" aria-hidden="true">*</span></label>
-            <textarea id="decisionJustify" rows="3" maxlength="500" spellcheck="true" placeholder="Explica por qué esa estrategia es la más adecuada. Relaciona mitosis, meiosis, variabilidad, ambiente o dispersión."></textarea>
+            <label for="decisionJustify">Justifica tu elección <span class="required-mark" aria-hidden="true">*</span></label>
+            <textarea id="decisionJustify" rows="3" maxlength="500" spellcheck="true" placeholder="Explica qué procesos y estructuras caracterizan la ruta que elegiste. Relaciona mitosis, meiosis, variabilidad, ambiente o dispersión."></textarea>
             <div class="open-meta">
               <span id="decisionJustifyCounter">0 / 50 caracteres mínimos</span>
               <span id="decisionJustifyHint">Incluye al menos una idea científica.</span>
@@ -204,7 +200,7 @@
           <div class="feedback" id="decisionFeedback" hidden aria-live="polite"></div>
 
           <div class="question-actions">
-            <button class="btn btn-primary" id="confirmDecisionBtn" type="button" disabled>Confirmar decisión</button>
+            <button class="btn btn-primary" id="confirmDecisionBtn" type="button" disabled>Confirmar ruta</button>
             <button class="btn btn-secondary" id="nextDecisionBtn" type="button" hidden>Siguiente escenario →</button>
           </div>
         </section>
@@ -214,18 +210,18 @@
             <h3 id="routeTitle">Tu ruta reproductiva</h3>
             <span class="pill">En vivo</span>
           </div>
-          <p class="hint">Cada elección suma a una de las dos estrategias. La ruta final se calcula con tus seis decisiones.</p>
+          <p class="hint">Cada elección suma a una de las dos rutas. La ruta final se calcula con tus seis respuestas.</p>
 
           <div class="route-tally">
             <div class="route-tally-card is-asexual">
-              <span>Asexual</span>
+              <span>Conidios</span>
               <strong id="routeAsexualCount">0</strong>
-              <small>Conidios · mitosis</small>
+              <small>Mitosis · clones</small>
             </div>
             <div class="route-tally-card is-sexual">
-              <span>Sexual</span>
+              <span>Ascosporas</span>
               <strong id="routeSexualCount">0</strong>
-              <small>Ascosporas · meiosis</small>
+              <small>Meiosis · variabilidad</small>
             </div>
           </div>
 
@@ -233,10 +229,10 @@
             <span class="is-sexual" id="routeSexualFill"></span>
             <span class="is-asexual" id="routeAsexualFill"></span>
           </div>
-          <p class="route-status" id="routeStatus">Aún no hay decisiones. Elige una estrategia y justifícala.</p>
+          <p class="route-status" id="routeStatus">Aún no hay escenarios analizados. Elige una ruta y justifícala.</p>
 
           <div class="panel-top route-history-top">
-            <h4>Decisiones tomadas</h4>
+            <h4>Rutas elegidas</h4>
             <span class="pill" id="routeHistoryCount">0 / 6</span>
           </div>
           <ol class="route-history" id="routeHistory">
@@ -250,7 +246,7 @@
         <div class="result-actions">
           <button class="btn btn-primary" id="goA3Btn" type="button">Continuar a la Actividad 3 →</button>
           <button class="btn btn-secondary" id="downloadDecisionBtn" type="button">📥 Descargar informe</button>
-          <button class="btn btn-ghost" id="restartDecisionBtn" type="button">Repetir decisiones</button>
+          <button class="btn btn-ghost" id="restartDecisionBtn" type="button">Repetir actividad</button>
         </div>
       </section>
     </section>
@@ -261,11 +257,11 @@
         <div>
           <p class="eyebrow">Actividad 3 · Disección guiada</p>
           <h2 id="a2Title">¿Por qué existe cada estructura?</h2>
-          <p class="lead">Selecciona una estructura de la fotografía, identifica su función y relaciónala con la fase del ciclo. Debes completar las cuatro estructuras para cerrar la actividad.</p>
+          <p class="lead">Modelo: <em>Ophiocordyceps unilateralis</em>, familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae). Selecciona una estructura de la fotografía, identifica su función y relaciónala con la fase del ciclo. Debes completar las cuatro estructuras para cerrar la actividad.</p>
         </div>
         <div class="chip-row">
           <span class="chip" id="a2ProgressChip">0 / 4 estructuras</span>
-          <span class="chip chip-muted">Sin texto libre: solo observación y decisión</span>
+          <span class="chip chip-muted">Sin texto libre: observación y selección</span>
         </div>
       </div>
 
@@ -315,8 +311,8 @@
               </g>
 
               <g font-size="10" font-family="system-ui, sans-serif">
-                <text x="150" y="200" fill="#fcd34d">1 Estroma</text>
-                <text x="150" y="216" fill="#fef3c7">2 Peritecios</text>
+                <text x="150" y="148" fill="#fcd34d">1 Estroma</text>
+                <text x="150" y="206" fill="#fef3c7">2 Peritecios</text>
                 <text x="252" y="122" fill="#6ee7b7">3 Micelio</text>
                 <text x="252" y="246" fill="#93c5fd">4 Conidios</text>
               </g>
@@ -338,7 +334,7 @@
 
           <div class="empty-state" id="structureEmpty">
             <span class="empty-icon" aria-hidden="true">🔬</span>
-            <p>Elige una estructura para comenzar. Cada ficha tiene dos decisiones: la función y la fase del ciclo.</p>
+            <p>Elige una estructura para comenzar. Cada ficha tiene dos elecciones: la función y la fase del ciclo.</p>
           </div>
 
           <div id="structureWorkspace" hidden>
@@ -372,7 +368,7 @@
             <div id="a2ResultContent"></div>
             <div class="result-actions">
               <button class="btn btn-primary" id="downloadA2Btn" type="button">📥 Descargar informe final</button>
-              <button class="btn btn-ghost" id="backA1Btn" type="button">Volver a las decisiones</button>
+              <button class="btn btn-ghost" id="backA1Btn" type="button">Volver a las rutas</button>
             </div>
           </section>
         </section>
@@ -385,9 +381,9 @@
         <div>
           <p class="eyebrow">Actividad 4 · Consulta</p>
           <h2 id="glossaryTitle">Glosario científico y fuentes</h2>
-          <p class="lead">Treinta términos para leer, comparar y usar en tus justificaciones. Busca una palabra o filtra por categoría.</p>
+          <p class="lead">Glosario del modelo <em>Ophiocordyceps unilateralis</em> (familia Cordycipitaceae; clasificación tradicional; actualmente Ophiocordycipitaceae). Treinta y dos términos para leer, comparar y usar en tus justificaciones. Busca una palabra o filtra por categoría.</p>
         </div>
-        <span class="chip" id="glossaryCount">30 términos</span>
+        <span class="chip" id="glossaryCount">32 términos</span>
       </div>
 
       <div class="glossary-tools">
@@ -430,7 +426,7 @@
   </main>
 
   <footer class="site-footer">
-    <p><strong>Ophiocordyceps unilateralis</strong> · Actividades de biología para grado 8°. Funciona sin internet: HTML, CSS, JavaScript e imagen local.</p>
+    <p><strong>Ophiocordyceps unilateralis</strong> · Familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae) · Actividades de biología para grado 8°. Funciona sin internet: HTML, CSS, JavaScript e imagen local.</p>
   </footer>
 
   <!-- ============================== MODAL DE DATOS ============================== -->
@@ -473,9 +469,9 @@
     </div>
   </div>
 
-  <script src="js/data.js?v=20261027-3"></script>
-  <script src="js/audio.js?v=20261027-3"></script>
-  <script src="js/canvas.js?v=20261027-3"></script>
-  <script src="js/app.js?v=20261027-3"></script>
+  <script src="js/data.js?v=20261027-5"></script>
+  <script src="js/audio.js?v=20261027-5"></script>
+  <script src="js/canvas.js?v=20261027-5"></script>
+  <script src="js/app.js?v=20261027-5"></script>
 </body>
 </html>

@@ -799,6 +799,17 @@ main {
   background: var(--green-bright);
 }
 
+.option.is-chosen {
+  border-color: var(--cyan);
+  background: rgba(34, 211, 238, 0.08);
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.25);
+}
+
+.option.is-chosen .option-letter {
+  color: #062a33;
+  background: var(--cyan);
+}
+
 .option.is-correct {
   border-color: var(--green);
   background: rgba(16, 185, 129, 0.13);
@@ -1046,29 +1057,6 @@ input[type="search"]:focus {
   border-color: var(--green-bright);
 }
 
-.hint-card {
-  padding: 0.7rem 0.8rem;
-  background: rgba(245, 158, 11, 0.07);
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  border-radius: 10px;
-}
-
-.hint-label {
-  display: block;
-  margin-bottom: 0.2rem;
-  color: var(--amber-soft);
-  font-size: 0.66rem;
-  font-weight: 750;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.hint-card p {
-  margin: 0;
-  color: var(--text-soft);
-  font-size: 0.78rem;
-}
-
 /* ------------------------------- Resultados ------------------------------- */
 .result-panel {
   margin-top: 1.1rem;
@@ -1273,9 +1261,9 @@ input[type="search"]:focus {
   box-shadow: 0 5px 18px rgba(0, 0, 0, 0.7);
 }
 
-.marker-1 { top: 12%; left: 46%; background: #dc2626; }
-.marker-2 { top: 28%; left: 55%; background: #d97706; color: #1a1003; }
-.marker-3 { top: 62%; left: 38%; background: #059669; }
+.marker-1 { top: 40%; left: 46%; background: #dc2626; }
+.marker-2 { top: 53%; left: 23%; background: #d97706; color: #1a1003; }
+.marker-3 { top: 62%; left: 53%; background: #059669; }
 .marker-4 { top: 72%; left: 68%; background: #2563eb; }
 
 .marker.is-active {
@@ -1925,8 +1913,7 @@ input[type="search"]:focus {
   .site-footer,
   .modal,
   .btn,
-  .stepper,
-  .hint-card {
+  .stepper {
     display: none !important;
   }
 

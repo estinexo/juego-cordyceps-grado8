@@ -47,7 +47,7 @@
   ];
 
   /* =======================================================================
-     ACTIVIDAD 1 · 13 PREGUNTAS CON FINAL DEFINIDO
+     ACTIVIDAD 1 · 12 PREGUNTAS CON FINAL DEFINIDO
      ======================================================================= */
   const ACTIVITY1 = [
     {
@@ -55,7 +55,7 @@
       topic: 'Micología básica',
       stage: 0,
       question: '¿Qué tipo de organismo es Ophiocordyceps?',
-      scenario: 'En el laboratorio observas que el hongo crece sobre tejido de una hormiga, no tiene clorofila y absorbe nutrientes del ambiente que lo rodea.',
+      scenario: 'En el laboratorio observas que el hongo crece sobre tejido de una hormiga, no tiene clorofila y obtiene nutrientes del tejido del hospedero. Ophiocordyceps unilateralis pertenece a la familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae).',
       options: [
         {
           id: 'A',
@@ -76,8 +76,7 @@
           feedback: 'Incorrecto. Las bacterias son procariotas. Los hongos son eucariotas y se alimentan por absorción, no por fagocitosis.'
         }
       ],
-      explanation: 'Los hongos son eucariotas heterótrofos con pared de quitina. Secretan enzimas, digieren materia orgánica fuera de la célula y luego absorben los nutrientes. Por eso pueden crecer sobre un insecto muerto o vivo.',
-      hint: 'Fíjate en la pared celular y en cómo obtiene la energía.',
+      explanation: 'Los hongos son eucariotas heterótrofos con pared de quitina. Ophiocordyceps unilateralis se clasifica en la familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae). No fotosintetiza: secreta enzimas, digiere tejido del hospedero fuera de sus células y absorbe los nutrientes. Por eso depende de la hormiga y no se alimenta del ambiente que lo rodea.',
       keyIdea: 'Hongo = eucariota + heterótrofo + pared de quitina + nutrición por absorción.'
     },
     {
@@ -107,68 +106,77 @@
         }
       ],
       explanation: 'La germinación convierte una espora en una hifa. El apresorio es una estructura de anclaje y penetración; la combinación de presión y enzimas permite entrar sin necesidad de que la hormiga coma la espora.',
-      hint: 'La cutícula es dura: el hongo necesita adherirse y abrirse paso.',
       keyIdea: 'Germinación → tubo germinativo → apresorio → penetración por presión y enzimas.'
     },
     {
       id: 3,
       topic: 'Estructuras del hongo',
       stage: 2,
-      question: '¿Cuál es la diferencia entre una hifa y un micelio?',
-      scenario: 'Dos imágenes al microscopio: una muestra un filamento tubular; la otra, una red densa de filamentos que recorre el cuerpo del insecto.',
+      question: '¿Cuál es la diferencia biológica entre una hifa y un micelio en este proceso de infección?',
+      scenario: 'Al observar al microscopio el tejido de la hormiga infectada, se distingue una estructura invasiva. Imagina dos vistas: la primera muestra un único tubo microscópico penetrando una fibra muscular; la segunda muestra una extensa red de estos tubos colonizando todo el cuerpo del insecto para absorber sus nutrientes.',
       options: [
         {
           id: 'A',
-          text: 'La hifa es un filamento; el micelio es el conjunto de hifas.',
+          text: 'La hifa es cada filamento tubular individual que invade el tejido, y el micelio es la red vegetativa completa formada por todas las hifas para absorber los nutrientes del insecto.',
           correct: true,
-          feedback: 'Correcto. La hifa es la unidad filamentosa; el micelio es la red formada por muchas hifas. Esa red es la que coloniza el hospedero.'
+          feedback: 'Correcto. La hifa es la unidad filamentosa que invade el tejido; el micelio es la red completa de hifas que coloniza el cuerpo y absorbe nutrientes del hospedero.'
         },
         {
           id: 'B',
-          text: 'La hifa es la red; el micelio es una sola célula reproductiva.',
+          text: 'La hifa es la estructura que absorbe nutrientes de los músculos, mientras que el micelio es la estructura externa que produce las esporas para infectar a otras hormigas.',
           correct: false,
-          feedback: 'Incorrecto. Es al revés: la hifa es el filamento y el micelio es la red. Una espora no es lo mismo que un micelio.'
+          feedback: 'Incorrecto. La hifa no es la estructura externa que produce esporas, y el micelio no es el cuerpo fructífero. El micelio es la red vegetativa de hifas.'
         },
         {
           id: 'C',
-          text: 'Ambos son lo mismo: esporas sexuales del hongo.',
+          text: 'El micelio es un filamento único similar a una raíz, y la hifa es el conjunto de esporas que viajan por la sangre del insecto.',
           correct: false,
-          feedback: 'Incorrecto. Las esporas son células reproductivas; las hifas y el micelio son estructuras de crecimiento y absorción.'
+          feedback: 'Incorrecto. El micelio no es un filamento único ni una raíz; la hifa no es un conjunto de esporas. Esa analogía botánica no corresponde a los hongos.'
+        },
+        {
+          id: 'D',
+          text: 'La hifa es el tejido muscular del hospedero que está siendo destruido, y el micelio es el hongo unicelular que lo está devorando.',
+          correct: false,
+          feedback: 'Incorrecto. La hifa es tejido del hongo, no del hospedero; el micelio no es unicelular. Confunde el tejido del insecto con el del hongo.'
         }
       ],
-      explanation: 'Las hifas crecen por su extremo y pueden tener tabiques llamados septos. Cuando muchas hifas se entrelazan forman el micelio, que aumenta la superficie de absorción y permite colonizar tejidos.',
-      hint: 'Uno es la unidad y el otro es el conjunto.',
-      keyIdea: 'Hifa = filamento. Micelio = red de hifas.'
+      explanation: 'La hifa es cada tubo microscópico del hongo. Al crecer y ramificarse forma el micelio, una red que coloniza tejidos y absorbe nutrientes. En la infección, las hifas invaden músculo y otros tejidos, pero no son el músculo del hospedero.',
+      keyIdea: 'Hifa = filamento individual. Micelio = red de hifas.'
     },
     {
       id: 4,
       topic: 'Genética celular',
       stage: 3,
-      question: '¿Qué diferencia hay entre mitosis y meiosis?',
-      scenario: 'En un conidióforo, una célula se divide y origina dos células genéticamente idénticas. En un peritecio, otra célula sufre meiosis.',
+      question: 'Basándote en la imagen y los procesos celulares, ¿cuál es la diferencia clave entre las esporas producidas en un conidióforo (mitosis) y las producidas en el peritecio (meiosis)?',
+      scenario: 'El hongo Ophiocordyceps tiene dos formas de reproducirse. Puede usar conidióforos donde células haploides (n) se dividen por mitosis para liberar esporas rápidamente. Alternativamente, forma un estroma con peritecios en la cabeza de la hormiga, donde ocurre la meiosis.',
       options: [
         {
           id: 'A',
-          text: 'Mitosis: 2n → 2n, copias idénticas. Meiosis: 2n → n, con recombinación.',
+          text: 'Las esporas del conidióforo son clones exactos del hongo original (n → n), mientras que la meiosis en el peritecio genera ascosporas con variabilidad genética (2n → n), crucial para adaptarse a nuevas defensas de las hormigas.',
           correct: true,
-          feedback: 'Correcto. La mitosis conserva el número de cromosomas y produce clones. La meiosis reduce el número a la mitad y, con la recombinación, genera combinaciones nuevas.'
+          feedback: 'Correcto. La mitosis en el conidióforo produce esporas haploides genéticamente idénticas (n → n). La meiosis en el peritecio reduce 2n a n y, con la recombinación, genera ascosporas variables.'
         },
         {
           id: 'B',
-          text: 'Mitosis reduce los cromosomas a la mitad; meiosis los duplica.',
+          text: 'La mitosis en el conidióforo reduce los cromosomas a la mitad para infectar más rápido, mientras que la meiosis en el peritecio mantiene los cromosomas intactos para formar el estroma.',
           correct: false,
-          feedback: 'Incorrecto. Es al contrario: la meiosis reduce el número de cromosomas. La mitosis mantiene el mismo número.'
+          feedback: 'Incorrecto. La mitosis no reduce los cromosomas a la mitad; mantiene el número. La meiosis es la que reduce y genera variabilidad.'
         },
         {
           id: 'C',
-          text: 'Ambas producen clones idénticos, pero la meiosis es más rápida.',
+          text: 'Ambas divisiones producen clones genéticamente idénticos, pero la mitosis ocurre dentro del cuerpo de la hormiga y la meiosis exclusivamente en el exterior para dispersarse.',
           correct: false,
-          feedback: 'Incorrecto. Solo la mitosis produce clones idénticos. La meiosis genera variabilidad y suele ser un proceso más complejo.'
+          feedback: 'Incorrecto. La meiosis no produce clones idénticos; la recombinación mezcla información. Además, no se puede reducir todo a dónde ocurre.'
+        },
+        {
+          id: 'D',
+          text: 'La mitosis genera esporas diploides (2n) muy resistentes, mientras que la meiosis en el peritecio produce esporas haploides (n) débiles que solo sirven de alimento.',
+          correct: false,
+          feedback: 'Incorrecto. Las esporas asexuales fúngicas no son diploides; la mitosis de una célula haploide produce esporas haploides. La ploidía no determina por sí sola la resistencia.'
         }
       ],
-      explanation: 'Mitosis: una célula madre 2n produce dos células 2n idénticas; se usa para crecimiento y reproducción asexual. Meiosis: una célula 2n produce células n (haploides) con recombinación; se usa para reproducción sexual. En los hongos, la meiosis ocurre en estructuras como los ascos.',
-      hint: 'Cuenta los cromosomas y piensa en la variabilidad.',
-      keyIdea: 'Mitosis = copia idéntica. Meiosis = reducción + recombinación.'
+      explanation: 'Mitosis: una célula n produce dos células n idénticas; es la base de los clones. Meiosis: una célula 2n produce células n con recombinación; genera variabilidad. En Ophiocordyceps, los conidios son la vía asexual y las ascosporas la vía sexual.',
+      keyIdea: 'Conidios = mitosis = clones. Ascosporas = meiosis = variabilidad.'
     },
     {
       id: 5,
@@ -197,7 +205,6 @@
         }
       ],
       explanation: 'Conidio: espora asexual formada en un conidióforo por mitosis. Ascospora: espora sexual formada por meiosis dentro de un asca, que está protegida en un peritecio. Ambas sirven para dispersarse, pero tienen distinto origen y distinta diversidad genética.',
-      hint: 'Una espora se forma por mitosis; la otra, por meiosis.',
       keyIdea: 'Conidios = mitosis = clones. Ascosporas = meiosis = variabilidad.'
     },
     {
@@ -227,7 +234,6 @@
         }
       ],
       explanation: 'La forma se explica por la función: el estroma eleva los peritecios, los peritecios protegen los ascos y los ascos producen ascosporas. La altura facilita que las esporas salgan de la capa de aire quieto del suelo y el viento las disperse.',
-      hint: 'El estroma no produce esporas directamente: sostiene a quien las produce.',
       keyIdea: 'Estroma = soporte y altura. Peritecios = protección y reproducción sexual.'
     },
     {
@@ -257,7 +263,6 @@
         }
       ],
       explanation: 'Ophiocordyceps no convierte a la hormiga en un cadáver andante ni le devora el cerebro: modifica su comportamiento y su locomoción, probablemente mediante compuestos que afectan la musculatura y la señalización nerviosa. Esto se conoce como manipulación conductual.',
-      hint: 'Distingue “controlar el cerebro” de “alterar músculos y conducta”.',
       keyIdea: 'Manipulación conductual ≠ destrucción del cerebro. El hongo rodea músculos y altera la locomoción.'
     },
     {
@@ -287,7 +292,6 @@
         }
       ],
       explanation: 'La “mordida de la muerte” ocurre en un microambiente específico: unos 25 cm sobre el suelo, con alta humedad y temperatura adecuada. Allí el estroma puede crecer y las esporas tienen más probabilidades de ser dispersadas por el viento hacia nuevas hormigas.',
-      hint: 'Piensa en humedad, temperatura y dispersión.',
       keyIdea: 'La conducta manipulada coloca al hongo en el microambiente óptimo para reproducirse.'
     },
     {
@@ -317,7 +321,6 @@
         }
       ],
       explanation: 'La dispersión es un problema físico: una partícula pequeña que cae cerca del suelo queda atrapada en la capa límite. El estroma alto y el disparo activo de ascosporas las sacan de esa zona y el viento las puede llevar a nuevos hospederos.',
-      hint: 'Piensa en el viento y en la capa de aire pegada al suelo.',
       keyIdea: 'Altura + eyección activa + viento = mayor distancia de dispersión.'
     },
     {
@@ -347,7 +350,6 @@
         }
       ],
       explanation: 'La especificidad de hospedero significa que el parásito reconoce y coloniza solo ciertas especies. Esto reduce el riesgo para otros organismos, pero también hace al hongo vulnerable si su hospedero escasea. La coevolución explica las adaptaciones recíprocas entre ambos.',
-      hint: '“Específico” no significa “universal”.',
       keyIdea: 'Especificidad de hospedero + coevolución = adaptaciones recíprocas.'
     },
     {
@@ -377,51 +379,19 @@
         }
       ],
       explanation: 'Un experimento riguroso compara grupos, controla variables y repite las mediciones. Para este caso: grupo infectado vs. no infectado, registro de altura, sustrato y condiciones ambientales, con suficientes individuos para analizar los resultados.',
-      hint: 'Busca la opción con grupo control, repetición y variable medible.',
       keyIdea: 'Grupo control + repetición + variable medible = evidencia confiable.'
-    },
-    {
-      id: 12,
-      topic: 'Ciencia aplicada',
-      stage: 4,
-      question: 'Antes de usar un hongo como biopesticida, ¿qué se debe evaluar?',
-      scenario: 'Una empresa propone asperjar millones de conidios en un cultivo para controlar hormigas plaga.',
-      options: [
-        {
-          id: 'A',
-          text: 'La especificidad de hospedero, los efectos en organismos no objetivo y el riesgo de resistencia.',
-          correct: true,
-          feedback: 'Correcto. Un biopesticida debe pasar por evaluaciones de seguridad ecológica: ¿a qué especies afecta?, ¿qué pasa con polinizadores y otros insectos?, ¿puede generar resistencia?, ¿cómo se dispersa?'
-        },
-        {
-          id: 'B',
-          text: 'Solo la cantidad: más esporas siempre es mejor.',
-          correct: false,
-          feedback: 'Incorrecto. Más cantidad no garantiza más eficacia y puede aumentar los efectos no deseados. La dosis debe basarse en evidencia.'
-        },
-        {
-          id: 'C',
-          text: 'Nada: si es natural, no puede causar daño.',
-          correct: false,
-          feedback: 'Incorrecto. “Natural” no significa “inocuo”. Muchos organismos naturales pueden afectar a especies no objetivo o alterar ecosistemas.'
-        }
-      ],
-      explanation: 'Los biopesticidas son una alternativa prometedora, pero no están exentos de riesgos. Se debe estudiar la especificidad, la persistencia, los efectos en organismos no objetivo, la resistencia evolutiva y las normas ambientales antes de liberarlos a gran escala.',
-      hint: 'Natural no es sinónimo de inofensivo.',
-      keyIdea: 'Biopesticida = evaluación de riesgos + especificidad + regulación.'
     },
     {
       id: 13,
       type: 'open',
       topic: 'Argumentación científica',
       stage: 4,
-      question: '¿Por qué la reproducción sexual puede ser ventajosa aunque produzca menos descendientes?',
-      scenario: 'El hongo puede producir miles de conidios clónicos por mitosis o menos ascosporas por meiosis. En un ambiente cambiante, ¿qué estrategia conviene y por qué?',
+      question: 'Si el clima cambia de repente o las hormigas desarrollan nuevas defensas, ¿por qué le sirve más al hongo tener pocos descendientes diferentes (reproducción sexual) en lugar de miles de clones idénticos?',
+      scenario: 'El hongo puede producir miles de conidios clónicos por mitosis o menos ascosporas por meiosis. El ambiente cambia y las hormigas desarrollan nuevas defensas.',
       minChars: 180,
       requiredKeywords: ['variabilidad', 'recombinación', 'selección natural', 'hospedero', 'ambiente'],
       minKeywords: 2,
-      modelAnswer: 'La meiosis genera variabilidad genética mediante la recombinación. Si el ambiente cambia o las hormigas desarrollan nuevas defensas, algunas ascosporas pueden tener combinaciones ventajosas y la selección natural favorecerá a esos descendientes. Aunque la reproducción sexual produce menos descendientes y cuesta más energía, aumenta la probabilidad de persistir en ambientes cambiantes. La reproducción asexual, en cambio, es rápida y barata para explotar un ambiente estable.',
-      hint: 'Relaciona variabilidad, selección natural y cambio ambiental.',
+      modelAnswer: 'La reproducción sexual mezcla información genética mediante la recombinación durante la meiosis. Así produce descendientes diferentes. Si el clima cambia o las hormigas desarrollan nuevas defensas, algunas de esas combinaciones pueden sobrevivir y dejar más descendientes; la selección natural favorece a las mejor adaptadas. Aunque la vía sexual produce menos descendientes y cuesta más energía, aumenta la probabilidad de que la población del hongo no se extinga cuando el ambiente o el hospedero cambian. La vía asexual, con mitosis y clones, es rápida y útil en ambientes estables, pero no genera esa variedad.',
       keyIdea: 'La variabilidad no garantiza el éxito individual, pero aumenta la probabilidad de que la población sobreviva a un cambio.'
     }
   ];
@@ -431,7 +401,7 @@
      ======================================================================= */
   const DISSECTION = {
     title: 'Disección virtual: ¿por qué existe cada estructura?',
-    intro: 'Observa la fotografía de una hormiga parasitada. Selecciona una estructura, identifica su función y relaciónala con la fase del ciclo que corresponde. Debes completar las cuatro estructuras.',
+    intro: 'Modelo: Ophiocordyceps unilateralis, familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae). Observa la fotografía de una hormiga parasitada. Selecciona una estructura, identifica su función y relaciónala con la fase del ciclo que corresponde. Debes completar las cuatro estructuras.',
     photoCredit: 'Fotografía: Wikimedia Commons, “Complex Ophiocordyceps unilateralis”, CC BY 4.0. Uso educativo.',
     structures: [
       {
@@ -439,10 +409,10 @@
         num: 1,
         name: 'Estroma',
         color: '#ef4444',
-        top: '12%',
+        top: '40%',
         left: '46%',
-        short: 'Tallo fúngico que sale de la cabeza de la hormiga.',
-        desc: 'Es tejido del hongo, no de la hormiga. Crece hacia arriba y sostiene los peritecios, donde se producen las ascosporas.',
+        short: 'Prolongación fúngica que sale de la cabeza de la hormiga.',
+        desc: 'Prolongación oscura y alargada que sale de la cabeza de la hormiga y se eleva sobre la hoja. En su extremo se observan estructuras reproductivas.',
         functionOptions: [
           {
             id: 'a',
@@ -490,10 +460,10 @@
         num: 2,
         name: 'Peritecios',
         color: '#f59e0b',
-        top: '28%',
-        left: '55%',
-        short: 'Estructuras en forma de frasco dentro del estroma.',
-        desc: 'Contienen ascos, células en forma de saco donde ocurre la meiosis y se forman las ascosporas.',
+        top: '53%',
+        left: '23%',
+        short: 'Estructuras pequeñas en el extremo del estroma.',
+        desc: 'Estructuras pequeñas, redondeadas o en forma de frasco, agrupadas en el extremo ensanchado del estroma. A simple vista no se distingue su interior.',
         functionOptions: [
           {
             id: 'a',
@@ -542,9 +512,9 @@
         name: 'Micelio',
         color: '#10b981',
         top: '62%',
-        left: '38%',
-        short: 'Red de hifas dentro del cuerpo de la hormiga.',
-        desc: 'Absorbe nutrientes y forma una red que rodea tejidos, incluidos los músculos. Es la fase de crecimiento vegetativo.',
+        left: '53%',
+        short: 'Red de filamentos dentro del cuerpo de la hormiga.',
+        desc: 'Red de filamentos blanquecinos que se extiende por el interior del cuerpo y alrededor de los tejidos de la hormiga.',
         functionOptions: [
           {
             id: 'a',
@@ -594,8 +564,8 @@
         color: '#3b82f6',
         top: '72%',
         left: '68%',
-        short: 'Esporas asexuales formadas en conidióforos.',
-        desc: 'Se producen por mitosis, se dispersan y pueden germinar en otra hormiga. Generan descendientes genéticamente idénticos.',
+        short: 'Estructuras reproductivas en el extremo de hifas.',
+        desc: 'Estructuras reproductivas pequeñas que se forman en el extremo de hifas especializadas. En la fotografía se observan como puntos claros sobre la hoja.',
         functionOptions: [
           {
             id: 'a',
@@ -642,157 +612,145 @@
   };
 
   /* =======================================================================
-     ACTIVIDAD 2 · DECISIONES REPRODUCTIVAS
-     Seis escenarios. Cada elección suma a una ruta sexual o asexual.
+     ACTIVIDAD 2 · RUTAS REPRODUCTIVAS
+     Seis escenarios. Cada elección suma a una ruta con ascosporas o conidios.
      ======================================================================= */
   const REPRODUCTION_DECISIONS = {
-    title: '¿Sexual o asexual? La ruta del hongo',
-    intro: 'Lee cada escenario, elige la estrategia reproductiva más adecuada y justifícala. Al final, tus decisiones construirán una ruta: sexual, asexual o alternante.',
+    title: 'Dos rutas reproductivas del hongo',
+    intro: 'Ophiocordyceps no elige de forma consciente entre reproducción sexual y asexual: ambas rutas forman parte de su ciclo y dependen de las condiciones del ambiente y del hospedero. Analiza cada escenario, elige una ruta y explica cómo se relaciona con la evidencia. No hay una estrategia mejor en abstracto.',
     minChars: 50,
     scenarios: [
       {
         id: 'estable',
         title: 'Un bosque estable y una colonia conocida',
-        scenario: 'La humedad y la temperatura son estables. Las hormigas de la zona pertenecen a una colonia numerosa y genéticamente parecida; no hay señales de nuevas defensas. El hongo ya está dentro de una hormiga y debe producir esporas para colonizar a sus compañeras.',
+        scenario: 'La humedad y la temperatura son estables. Las hormigas de la zona pertenecen a una colonia numerosa y genéticamente parecida. El hongo ya colonizó a una hormiga y produce estructuras reproductivas.',
         hintWords: ['mitosis', 'clones', 'ambiente estable'],
         options: [
           {
             id: 'A',
             type: 'asexual',
-            text: 'Producir conidios por mitosis: muchos clones rápidos y de bajo costo.',
-            correct: true,
-            feedback: 'En un ambiente estable y con hospederos susceptibles, la vía asexual permite colonizar rápido sin gastar energía en variabilidad.'
+            text: 'Producir conidios por mitosis: muchas copias idénticas en poco tiempo.',
+            feedback: 'La ruta de los conidios produce clones mediante mitosis. Es rápida y de bajo costo, pero no genera nueva variabilidad genética.'
           },
           {
             id: 'B',
             type: 'sexual',
-            text: 'Formar estroma y ascosporas por meiosis: menos descendientes, pero todos distintos.',
-            correct: false,
-            feedback: 'La variabilidad puede ser útil, pero en un ambiente estable y predecible la meiosis tiene un costo mayor y produce menos descendientes.'
+            text: 'Formar estroma y ascosporas por meiosis: menos descendientes, pero diferentes.',
+            feedback: 'La ruta de las ascosporas produce menos descendientes y cuesta más energía, pero la recombinación genera combinaciones nuevas.'
           }
         ],
-        explanation: 'Cuando el ambiente es estable y el hospedero es predecible, la reproducción asexual (mitosis → conidios) suele ser eficiente: rápida, barata y con muchos clones. La sexual no es “mejor” en abstracto; es una apuesta por la variabilidad.'
+        explanation: 'En condiciones estables y con hospederos abundantes, la ruta de los conidios suele ser rápida y eficiente. La ruta de las ascosporas también es posible, pero su ventaja principal —la variabilidad— no es tan decisiva en un ambiente predecible. Ninguna ruta es “mejor” en abstracto.'
       },
       {
         id: 'nueva-colonia',
         title: 'Una colonia nueva con defensas',
-        scenario: 'El hongo llega a una colonia de hormigas que nunca había parasitado. Algunas obreras reconocen y atacan a los clones de la cepa original. El ambiente es húmedo, pero el hospedero es nuevo y variable.',
+        scenario: 'El hongo se encuentra en una colonia de hormigas que no había parasitado. Algunas obreras reconocen y atacan a la cepa original. El ambiente es húmedo, pero el hospedero es nuevo y variable.',
         hintWords: ['meiosis', 'recombinación', 'defensas', 'variabilidad'],
         options: [
           {
             id: 'A',
             type: 'sexual',
             text: 'Producir ascosporas por meiosis: descendientes con combinaciones nuevas.',
-            correct: true,
-            feedback: 'La recombinación genera variabilidad. Si algunas combinaciones superan las defensas de la nueva colonia, la selección natural puede favorecerlas.'
+            feedback: 'La meiosis y la recombinación generan variabilidad. Si algunas combinaciones superan las defensas de la colonia, la selección natural puede favorecerlas.'
           },
           {
             id: 'B',
             type: 'asexual',
             text: 'Producir conidios por mitosis: miles de copias idénticas de la misma cepa.',
-            correct: false,
             feedback: 'Los clones son rápidos, pero si la colonia reconoce esa cepa, todos los descendientes comparten la misma vulnerabilidad.'
           }
         ],
-        explanation: 'Ante un hospedero nuevo o que cambia sus defensas, la reproducción sexual aumenta la probabilidad de que al menos algunos descendientes sobrevivan. No garantiza el éxito, pero amplía el repertorio de combinaciones.'
+        explanation: 'Ante un hospedero nuevo o que cambia sus defensas, la ruta con meiosis amplía el repertorio de combinaciones. No garantiza el éxito, pero aumenta la probabilidad de que alguna variante sobreviva. La ruta de los conidios sigue siendo posible, aunque la uniformidad genética es un riesgo.'
       },
       {
         id: 'sequia',
         title: 'Sequía y hospederos dispersos',
-        scenario: 'Llega una estación seca. Las hormigas son escasas y están separadas por varios metros. El hongo necesita que sus esporas viajen lejos y que alguna variante pueda sobrevivir a las nuevas condiciones.',
-        hintWords: ['meiosis', 'dispersión', 'ambiente cambiante'],
+        scenario: 'Llega una estación seca. Las hormigas son escasas y están separadas por varios metros. Las esporas deben viajar lejos y alguna variante debe resistir las nuevas condiciones.',
+        hintWords: ['dispersión', 'estroma', 'variabilidad'],
         options: [
           {
             id: 'A',
             type: 'sexual',
-            text: 'Formar un estroma alto y disparar ascosporas variables.',
-            correct: true,
-            feedback: 'La altura y la eyección activa ayudan a salir de la capa de aire quieto; la variabilidad ofrece más oportunidades ante un ambiente cambiante.'
+            text: 'Formar un estroma alto y dispersar ascosporas variables.',
+            feedback: 'El estroma eleva los peritecios y la eyección activa ayuda a las ascosporas a salir de la capa de aire quieto. La variabilidad aporta combinaciones para un ambiente cambiante.'
           },
           {
             id: 'B',
             type: 'asexual',
             text: 'Liberar conidios clónicos cerca del suelo.',
-            correct: false,
-            feedback: 'Los conidios pueden ser abundantes, pero quedan cerca del punto de origen y no aportan variabilidad para el nuevo ambiente.'
+            feedback: 'Los conidios pueden dispersarse y germinar, pero no generan nueva variabilidad y suelen quedar más cerca del sustrato.'
           }
         ],
-        explanation: 'La dispersión y la variabilidad se combinan: un estroma alto y las ascosporas pueden alcanzar nuevas zonas, mientras la meiosis genera combinaciones que la selección natural pone a prueba.'
+        explanation: 'La altura del estroma y la eyección activa ayudan a las ascosporas a salir de la capa de aire quieto; la variabilidad aporta combinaciones para un ambiente cambiante. Los conidios también pueden dispersarse, pero no generan esa variabilidad y suelen quedar más cerca del sustrato.'
       },
       {
         id: 'abundancia',
         title: 'Hospederos abundantes y clima estable',
-        scenario: 'En un invernadero hay muchas hormigas susceptibles, alimento abundante y condiciones constantes. El hongo debe multiplicarse con rapidez antes de que la colonia reaccione.',
-        hintWords: ['mitosis', 'conidios', 'colonización rápida'],
+        scenario: 'En un invernadero hay muchas hormigas susceptibles, alimento abundante y condiciones constantes. La colonia aún no ha desarrollado una respuesta fuerte contra el hongo.',
+        hintWords: ['mitosis', 'colonización', 'clones'],
         options: [
           {
             id: 'A',
             type: 'asexual',
             text: 'Producir conidios por mitosis y colonizar rápido.',
-            correct: true,
-            feedback: 'La mitosis produce copias idénticas con rapidez. Con hospederos abundantes y condiciones estables, el costo de la variabilidad no aporta una ventaja inmediata.'
+            feedback: 'Con hospederos abundantes y condiciones estables, la ruta de los conidios puede multiplicarse rápido y a bajo costo.'
           },
           {
             id: 'B',
             type: 'sexual',
-            text: 'Esperar a formar estroma y ascosporas por meiosis.',
-            correct: false,
-            feedback: 'La vía sexual produce menos descendientes y requiere más tiempo; en este escenario la velocidad de los clones es la ventaja principal.'
+            text: 'Formar estroma y ascosporas por meiosis.',
+            feedback: 'La ruta de las ascosporas produce menos descendientes y requiere más tiempo; su ventaja es la variabilidad, que aquí no es el factor principal.'
           }
         ],
-        explanation: 'La reproducción asexual es una estrategia de explotación: funciona bien cuando el ambiente es predecible y los recursos abundantes. No significa que sea superior siempre; significa que aquí reduce costos y acelera la colonización.'
+        explanation: 'Con hospederos abundantes y condiciones estables, la ruta de los conidios puede multiplicarse rápido y a bajo costo. La ruta de las ascosporas produce menos descendientes y requiere más tiempo; su ventaja es la variabilidad, que aquí no es el factor principal.'
       },
       {
         id: 'dispersion',
         title: 'Cruzar hasta nuevas colonias',
-        scenario: 'Una colonia sana se encuentra a dos metros. El hongo necesita que sus esporas superen la capa de aire quieto que rodea el suelo y lleguen a nuevos hospederos.',
-        hintWords: ['estroma', 'ascosporas', 'dispersión', 'viento'],
+        scenario: 'Una colonia sana se encuentra a dos metros. Las esporas deben superar la capa de aire quieto que rodea el suelo y llegar a nuevos hospederos.',
+        hintWords: ['estroma', 'eyección', 'dispersión'],
         options: [
           {
             id: 'A',
             type: 'sexual',
             text: 'Elevar el estroma y expulsar ascosporas activamente.',
-            correct: true,
-            feedback: 'El estroma eleva los peritecios y la eyección activa lanza las ascosporas al aire. Esa combinación aumenta el alcance y la probabilidad de llegar a otra colonia.'
+            feedback: 'El estroma eleva los peritecios y la eyección activa lanza las ascosporas al aire, lo que aumenta el alcance.'
           },
           {
             id: 'B',
             type: 'asexual',
             text: 'Dejar caer conidios al suelo, justo bajo la hormiga.',
-            correct: false,
-            feedback: 'Los conidios pueden infectar en el mismo sitio, pero la caída pasiva no resuelve el problema de cruzar dos metros hasta una colonia nueva.'
+            feedback: 'Los conidios pueden infectar en el mismo sitio, pero la caída pasiva no resuelve por sí sola el cruce a otra colonia.'
           }
         ],
-        explanation: 'La forma se explica por la función: el estroma alto y los peritecios con ascosporas aumentan la dispersión. La reproducción sexual no solo aporta variabilidad; también ocurre en una estructura que favorece viajar más lejos.'
+        explanation: 'El estroma eleva los peritecios y la eyección activa lanza las ascosporas al aire, lo que aumenta el alcance. Los conidios pueden infectar en el mismo sitio, pero la caída pasiva no resuelve por sí sola el cruce a otra colonia.'
       },
       {
         id: 'resistencia',
         title: 'Una cepa que ya no funciona',
-        scenario: 'Después de varios ciclos usando la misma cepa asexual, muchas hormigas de la zona sobreviven a la infección. El hongo necesita encontrar una combinación genética que vuelva a ser eficaz.',
-        hintWords: ['meiosis', 'variabilidad', 'selección natural', 'resistencia'],
+        scenario: 'Después de varios ciclos con la misma cepa asexual, muchas hormigas de la zona sobreviven a la infección. Aparecen variantes del hongo con combinaciones nuevas.',
+        hintWords: ['meiosis', 'recombinación', 'selección natural'],
         options: [
           {
             id: 'A',
             type: 'sexual',
-            text: 'Cambiar a reproducción sexual y generar nuevas combinaciones.',
-            correct: true,
-            feedback: 'La recombinación puede producir variantes que escapan a la defensa actual. La selección natural favorecerá a las que infecten mejor.'
+            text: 'Favorecer la ruta de las ascosporas y generar nuevas combinaciones.',
+            feedback: 'La variabilidad es materia prima de la evolución. Si la defensa del hospedero reconoce la cepa asexual, la ruta de las ascosporas puede generar combinaciones que la selección natural ponga a prueba.'
           },
           {
             id: 'B',
             type: 'asexual',
             text: 'Insistir con la misma cepa de clones, pero en mayor cantidad.',
-            correct: false,
-            feedback: 'Producir más clones no cambia su información genética. Si la defensa reconoce esa cepa, aumentar el número no resuelve el problema.'
+            feedback: 'Producir más clones no cambia su información genética. Si la defensa del hospedero reconoce la cepa, aumentar el número no resuelve el problema.'
           }
         ],
-        explanation: 'La variabilidad es materia prima de la evolución. Cuando una población del hospedero cambia, una estrategia asexual demasiado uniforme puede quedar atrapada; la sexual genera nuevas combinaciones para que la selección natural actúe.'
+        explanation: 'La variabilidad es materia prima de la evolución. Si la defensa del hospedero reconoce la cepa asexual, producir más clones no cambia su información genética. La ruta de las ascosporas puede generar combinaciones que la selección natural ponga a prueba.'
       }
     ]
   };
 
   /* =======================================================================
-     GLOSARIO · 30 TÉRMINOS
+     GLOSARIO · 32 TÉRMINOS
      ======================================================================= */
   const GLOSSARY = [
     { term: 'Asca', tag: 'Reproducción', def: 'Célula en forma de saco donde ocurre la meiosis y se forman las ascosporas. Varios ascos se agrupan dentro de los peritecios.' },
@@ -803,6 +761,7 @@
     { term: 'Co-evolución', tag: 'Ecología', def: 'Cambio recíproco entre especies que interactúan, por ejemplo un parásito y su hospedero, a lo largo de generaciones.' },
     { term: 'Conidio', tag: 'Reproducción', def: 'Espora asexual producida por mitosis en un conidióforo. Permite colonizar rápidamente y generar clones.' },
     { term: 'Conidióforo', tag: 'Estructura', def: 'Hifa especializada que sostiene y libera conidios.' },
+    { term: 'Cordycipitaceae', tag: 'Taxonomía', def: 'Familia de hongos ascomicetos en la que se clasificó tradicionalmente a Ophiocordyceps. La clasificación actual ubica a este género en Ophiocordycipitaceae.' },
     { term: 'Cuerpo fructífero', tag: 'Estructura', def: 'Estructura que produce y protege esporas. En este caso, el estroma con peritecios.' },
     { term: 'Cutícula', tag: 'Infección', def: 'Cubierta externa del insecto, rica en quitina. Es la primera barrera que el hongo debe atravesar.' },
     { term: 'Espora', tag: 'Reproducción', def: 'Célula reproductiva y de dispersión. Puede ser sexual (ascospora) o asexual (conidio), según su origen.' },
@@ -817,6 +776,7 @@
     { term: 'Microambiente', tag: 'Ecología', def: 'Condiciones locales de humedad, temperatura y luz que rodean a un organismo.' },
     { term: 'Mitosis', tag: 'Genética', def: 'División celular que produce dos células genéticamente idénticas. Se usa para crecimiento y reproducción asexual.' },
     { term: 'Mordida de la muerte', tag: 'Comportamiento', def: 'Conducta en la que la hormiga infectada muerde una nervadura y queda fija al sustrato antes de morir. Favorece la reproducción del hongo.' },
+    { term: 'Ophiocordycipitaceae', tag: 'Taxonomía', def: 'Familia actual de Ophiocordyceps unilateralis. Agrupa hongos parásitos de insectos y otros artrópodos.' },
     { term: 'Parasitismo', tag: 'Ecología', def: 'Relación en la que un organismo vive a costa de otro y le causa daño. Puede ser ectoparásito o endoparásito.' },
     { term: 'Peritecio', tag: 'Estructura', def: 'Cuerpo fructífero en forma de frasco que contiene ascos y ascosporas. Es parte de la fase sexual.' },
     { term: 'Quitina', tag: 'Bioquímica', def: 'Polisacárido que forma la pared celular de los hongos y el exoesqueleto de los artrópodos.' },
@@ -864,6 +824,46 @@
     'Ministerio de Educación Nacional de Colombia. (2006). Estándares básicos de competencias en ciencias naturales y ciencias sociales. Bogotá: MEN.',
     'Wikimedia Commons. (s. f.). Complex Ophiocordyceps unilateralis [fotografía]. CC BY 4.0. Uso educativo.'
   ];
+
+  /* -----------------------------------------------------------------------
+     Distribución pedagógica de la opción correcta
+     Las preguntas no deben tener casi todas la respuesta en A. Se reordena
+     cada lista y se renumeran las opciones A, B, C, D sin cambiar su contenido.
+     ----------------------------------------------------------------------- */
+  const CORRECT_POSITION = {
+    1: 1,  // B
+    2: 2,  // C
+    3: 0,  // A
+    4: 3,  // D
+    5: 0,  // A
+    6: 1,  // B
+    7: 2,  // C
+    8: 1,  // B
+    9: 2,  // C
+    10: 0, // A
+    11: 2  // C
+  };
+
+  ACTIVITY1.forEach(function (question) {
+    if (question.type === 'open') return;
+    const target = CORRECT_POSITION[question.id];
+    if (typeof target !== 'number') return;
+    if (target < 0 || target >= question.options.length) return;
+
+    const correct = question.options.find(function (option) {
+      return option.correct;
+    });
+    if (!correct) return;
+
+    const reordered = question.options.filter(function (option) {
+      return !option.correct;
+    });
+    reordered.splice(target, 0, correct);
+    reordered.forEach(function (option, index) {
+      option.id = String.fromCharCode(65 + index);
+    });
+    question.options = reordered;
+  });
 
   window.CORDYCEPS_DATA = {
     STAGES,
