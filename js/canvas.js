@@ -1,6 +1,6 @@
 /* =========================================================================
    VISUALIZADOR DEL CICLO · Canvas 2D
-   Dibuja cinco estadios del ciclo de Ophiocordyceps.
+   Dibuja cinco estadios del ciclo de Cordyceps militaris.
    No usa imágenes externas: todo se genera con formas y texto.
    ========================================================================= */
 (function () {
@@ -19,14 +19,14 @@
 
   function initParticles() {
     particles = [];
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 36; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: 1 + Math.random() * 2.5,
-        speedY: 0.2 + Math.random() * 0.8,
-        speedX: (Math.random() - 0.5) * 0.4,
-        alpha: 0.2 + Math.random() * 0.6
+        size: 1 + Math.random() * 2.2,
+        speedY: 0.15 + Math.random() * 0.65,
+        speedX: (Math.random() - 0.5) * 0.35,
+        alpha: 0.15 + Math.random() * 0.5
       });
     }
   }
@@ -58,7 +58,7 @@
       if (p.x > canvas.width) p.x = 0;
 
       ctx.save();
-      ctx.globalAlpha = p.alpha * 0.4;
+      ctx.globalAlpha = p.alpha * 0.35;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
@@ -66,318 +66,299 @@
     });
   }
 
-  function drawSpore() {
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
+  function soil(y) {
+    ctx.fillStyle = '#1c1917';
+    ctx.fillRect(0, y, canvas.width, canvas.height - y);
+    ctx.fillStyle = '#3f2a1a';
+    ctx.fillRect(0, y, canvas.width, 5);
 
-    ctx.fillStyle = '#1e293b';
-    ctx.fillRect(0, cy + 90, canvas.width, 110);
-    ctx.fillStyle = '#334155';
-    ctx.fillRect(0, cy + 90, canvas.width, 4);
+    ctx.fillStyle = '#57534e';
+    for (let i = 0; i < 22; i++) {
+      const x = (i * 47 + 11) % canvas.width;
+      const yy = y + 18 + (i * 13) % 72;
+      ctx.fillRect(x, yy, 8 + (i % 4) * 5, 2);
+    }
+  }
 
-    ctx.fillStyle = '#64748b';
-    ctx.font = '12px monospace';
-    ctx.fillText('EXOESQUELETO DE LA HORMIGA (QUITINA)', 40, cy + 120);
-
-    const sporeY = cy + 50 + Math.sin(animTime * 2) * 3;
+  function drawPupa(cx, cy, rx, ry, angle, cutaway) {
     ctx.save();
-    ctx.shadowColor = '#10b981';
-    ctx.shadowBlur = 20;
-    ctx.fillStyle = '#065f46';
+    ctx.translate(cx, cy);
+    ctx.rotate(angle || 0);
+
+    ctx.fillStyle = cutaway ? '#3b2418' : '#5b3724';
+    ctx.strokeStyle = '#a16207';
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.ellipse(cx, sporeY, 45, 65, 0.2, 0, Math.PI * 2);
+    ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
     ctx.fill();
+    ctx.stroke();
+
+    ctx.strokeStyle = cutaway ? '#7c2d12' : '#8b5a2b';
+    ctx.lineWidth = 1.5;
+    for (let i = -2; i <= 2; i++) {
+      ctx.beginPath();
+      ctx.ellipse(i * (rx / 3.4), 0, rx * 0.2, ry * 0.94, 0, -Math.PI / 2, Math.PI / 2);
+      ctx.stroke();
+    }
+
+    ctx.fillStyle = '#3f2a1a';
+    ctx.beginPath();
+    ctx.ellipse(-rx * 0.82, 0, rx * 0.2, ry * 0.64, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (cutaway) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(0, 0, rx * 0.9, ry * 0.82, 0, 0, Math.PI * 2);
+      ctx.clip();
+
+      ctx.strokeStyle = '#34d399';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(-rx * 0.7, 0);
+      ctx.bezierCurveTo(-rx * 0.3, -ry * 0.5, rx * 0.1, ry * 0.4, rx * 0.55, -ry * 0.1);
+      ctx.moveTo(-rx * 0.2, -ry * 0.55);
+      ctx.bezierCurveTo(0, -ry * 0.1, rx * 0.3, -ry * 0.3, rx * 0.6, ry * 0.35);
+      ctx.moveTo(-rx * 0.45, ry * 0.45);
+      ctx.bezierCurveTo(-rx * 0.1, ry * 0.2, rx * 0.2, ry * 0.65, rx * 0.7, ry * 0.45);
+      ctx.stroke();
+
+      ctx.fillStyle = '#a7f3d0';
+      for (let i = 0; i < 9; i++) {
+        const a = i * 0.8;
+        ctx.beginPath();
+        ctx.arc(Math.cos(a) * rx * 0.55, Math.sin(a) * ry * 0.58, 2.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
     ctx.restore();
+  }
 
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = '#10b981';
+  function drawStromaShape(x, y, height, lean, dots) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(lean || 0);
+
+    const width = Math.max(10, height * 0.16);
+    const grad = ctx.createLinearGradient(-width, 0, width, 0);
+    grad.addColorStop(0, '#c2410c');
+    grad.addColorStop(0.45, '#f97316');
+    grad.addColorStop(1, '#fdba74');
+
+    ctx.fillStyle = grad;
+    ctx.strokeStyle = '#9a3412';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(-width * 0.55, 0);
+    ctx.bezierCurveTo(-width * 1.25, -height * 0.42, -width * 0.7, -height * 0.82, -width * 0.45, -height);
+    ctx.quadraticCurveTo(0, -height * 1.12, width * 0.45, -height);
+    ctx.bezierCurveTo(width * 0.7, -height * 0.82, width * 1.25, -height * 0.42, width * 0.55, 0);
+    ctx.closePath();
+    ctx.fill();
     ctx.stroke();
 
-    ctx.fillStyle = '#34d399';
+    ctx.fillStyle = 'rgba(255, 237, 213, 0.35)';
     ctx.beginPath();
-    ctx.ellipse(cx - 5, sporeY - 8, 16, 20, 0, 0, Math.PI * 2);
+    ctx.ellipse(-width * 0.22, -height * 0.55, width * 0.18, height * 0.25, 0.15, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = '#fbbf24';
-    ctx.beginPath();
-    ctx.arc(cx + 15, sporeY + 20, 7, 0, Math.PI * 2);
-    ctx.arc(cx - 18, sporeY + 25, 5, 0, Math.PI * 2);
-    ctx.fill();
+    if (dots) {
+      ctx.fillStyle = '#7c2d12';
+      for (let i = 0; i < 14; i++) {
+        const px = Math.sin(i * 2.3) * width * 0.42;
+        const py = -height * (0.48 + (i % 7) * 0.07);
+        ctx.beginPath();
+        ctx.arc(px, py, 1.8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
 
-    ctx.fillStyle = '#e2e8f0';
-    ctx.font = '12px sans-serif';
-    ctx.fillText('Núcleo haploide (ADN fúngico)', cx + 60, sporeY - 10);
-    ctx.strokeStyle = '#64748b';
+    ctx.restore();
+  }
+
+  function label(text, x, y, color, align) {
+    ctx.fillStyle = color || '#cbd5e1';
+    ctx.font = '12px monospace';
+    ctx.textAlign = align || 'left';
+    ctx.fillText(text, x, y);
+    ctx.textAlign = 'left';
+  }
+
+  function drawSporeShape(x, y, r, color) {
+    ctx.save();
+    ctx.shadowColor = color || '#10b981';
+    ctx.shadowBlur = 16;
+    ctx.fillStyle = color || '#065f46';
+    ctx.strokeStyle = '#a7f3d0';
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(cx + 10, sporeY - 8);
-    ctx.lineTo(cx + 55, sporeY - 10);
+    ctx.ellipse(x, y, r * 0.7, r, 0.35, 0, Math.PI * 2);
+    ctx.fill();
     ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawSpore() {
+    const w = canvas.width;
+    const h = canvas.height;
+    const groundY = h - 105;
+
+    soil(groundY);
+    drawPupa(w * 0.62, groundY - 28, 62, 34, 0.04, false);
+
+    const sporeX = w * 0.28 + Math.sin(animTime * 1.4) * 10;
+    const sporeY = h * 0.32 + Math.sin(animTime * 2) * 6;
+    drawSporeShape(sporeX, sporeY, 16, '#10b981');
+
+    ctx.strokeStyle = 'rgba(16, 185, 129, 0.35)';
+    ctx.setLineDash([4, 6]);
+    ctx.beginPath();
+    ctx.moveTo(sporeX + 16, sporeY + 18);
+    ctx.quadraticCurveTo(sporeX + 55, h * 0.5, w * 0.6, groundY - 52);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    label('Ascospora haploide (n)', sporeX + 34, sporeY - 12, '#6ee7b7');
+    label('Pupa de lepidóptero', w * 0.62 - 58, groundY + 34, '#fcd34d');
+    label('SUELO Y HOJARASCA · INICIO DEL CICLO', 20, h - 16, '#78716c');
   }
 
   function drawHypha() {
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
+    const w = canvas.width;
+    const h = canvas.height;
+    const surfaceY = h * 0.58;
 
     ctx.fillStyle = '#1e293b';
-    ctx.fillRect(0, cy + 70, canvas.width, 130);
+    ctx.fillRect(0, surfaceY, w, h - surfaceY);
     ctx.fillStyle = '#334155';
-    ctx.fillRect(0, cy + 70, canvas.width, 6);
+    ctx.fillRect(0, surfaceY, w, 6);
 
-    ctx.fillStyle = '#64748b';
-    ctx.font = '12px monospace';
-    ctx.fillText('CAPA DE QUITINA PERFORADA POR QUITINASAS', 40, cy + 110);
+    label('CUTÍCULA DE LA PUPA (QUITINA)', 24, surfaceY + 24, '#94a3b8');
 
-    const sporeY = cy + 20;
-    ctx.fillStyle = '#065f46';
-    ctx.strokeStyle = '#10b981';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.ellipse(cx - 80, sporeY, 35, 50, 0.4, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
+    const sx = w * 0.34;
+    const sy = h * 0.3;
+    drawSporeShape(sx, sy, 15, '#10b981');
 
-    ctx.beginPath();
-    ctx.moveTo(cx - 55, sporeY + 25);
-    ctx.bezierCurveTo(cx - 20, sporeY + 40, cx - 10, cy + 50, cx, cy + 70);
-    ctx.lineTo(cx + 25, cy + 130);
-    ctx.lineTo(cx + 10, cy + 135);
-    ctx.bezierCurveTo(cx - 15, cy + 80, cx - 35, sporeY + 55, cx - 75, sporeY + 35);
-    ctx.closePath();
-    ctx.fillStyle = '#059669';
-    ctx.fill();
     ctx.strokeStyle = '#34d399';
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(sx, sy + 14);
+    ctx.bezierCurveTo(sx + 10, sy + 54, sx + 52, surfaceY - 28, sx + 56, surfaceY + 2);
     ctx.stroke();
 
-    ctx.strokeStyle = '#064e3b';
-    ctx.lineWidth = 2;
+    ctx.fillStyle = '#f59e0b';
     ctx.beginPath();
-    ctx.moveTo(cx - 40, sporeY + 38);
-    ctx.lineTo(cx - 30, sporeY + 52);
-    ctx.moveTo(cx - 15, cy + 58);
-    ctx.lineTo(cx + 5, cy + 68);
+    ctx.ellipse(sx + 56, surfaceY + 10, 13, 9, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(sx + 62, surfaceY + 16);
+    ctx.bezierCurveTo(sx + 86, surfaceY + 34, sx + 92, surfaceY + 66, sx + 108, surfaceY + 76);
     ctx.stroke();
 
     ctx.save();
-    ctx.globalAlpha = 0.5 + Math.sin(animTime * 4) * 0.2;
-    ctx.fillStyle = '#10b981';
-    ctx.beginPath();
-    ctx.arc(cx + 20, cy + 130, 24, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.globalAlpha = 0.45 + Math.sin(animTime * 4) * 0.2;
+    ctx.fillStyle = '#fbbf24';
+    for (let i = 0; i < 12; i++) {
+      const a = i * 1.7;
+      ctx.beginPath();
+      ctx.arc(sx + 70 + Math.cos(a) * (16 + (i % 4) * 5), surfaceY + 30 + Math.sin(a) * 15, 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
     ctx.restore();
 
-    ctx.fillStyle = '#6ee7b7';
-    ctx.font = '11px sans-serif';
-    ctx.fillText('Enzimas digestivas (quitinasa / proteasa)', cx + 50, cy + 135);
+    label('Tubo germinativo', sx + 20, sy + 66, '#6ee7b7');
+    label('Apresorio + enzimas (quitinasa / proteasa)', sx + 88, surfaceY + 104, '#fcd34d');
+    label('La hifa perfora la cutícula', 24, h - 22, '#78716c');
   }
 
   function drawMycelium() {
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
+    const w = canvas.width;
+    const h = canvas.height;
 
-    ctx.fillStyle = '#111827';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = '#7f1d1d';
-    for (let i = 0; i < 7; i++) {
-      ctx.fillRect(40, 60 + i * 45, canvas.width - 80, 26);
-      ctx.fillStyle = '#991b1b';
-      ctx.fillRect(40, 68 + i * 45, canvas.width - 80, 4);
-      ctx.fillStyle = '#7f1d1d';
-    }
-
-    ctx.fillStyle = '#fca5a5';
-    ctx.font = '11px monospace';
-    ctx.fillText('FIBRAS MUSCULARES DEL HOSPEDERO', 50, 45);
+    drawPupa(w * 0.5, h * 0.48, 125, 74, -0.02, true);
 
     ctx.strokeStyle = '#34d399';
     ctx.lineWidth = 3;
-    ctx.lineCap = 'round';
-
-    function drawBranch(x, y, length, angle, depth) {
-      if (depth <= 0) return;
-      const endX = x + Math.cos(angle) * length;
-      const endY = y + Math.sin(angle) * length;
-
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(endX, endY);
-      ctx.stroke();
-
-      ctx.fillStyle = '#065f46';
-      ctx.beginPath();
-      ctx.arc(endX, endY, 3, 0, Math.PI * 2);
-      ctx.fill();
-
-      const sway = Math.sin(animTime + depth) * 0.1;
-      drawBranch(endX, endY, length * 0.72, angle - 0.45 + sway, depth - 1);
-      drawBranch(endX, endY, length * 0.72, angle + 0.45 + sway, depth - 1);
-    }
-
-    drawBranch(cx, canvas.height - 30, 65, -Math.PI / 2, 5);
-    drawBranch(cx - 140, canvas.height - 30, 55, -Math.PI / 2.3, 4);
-    drawBranch(cx + 140, canvas.height - 30, 55, -Math.PI / 1.8, 4);
-
-    const pulseY = cy + Math.sin(animTime * 3) * 60;
-    ctx.fillStyle = '#fbbf24';
     ctx.beginPath();
-    ctx.arc(cx, pulseY, 5, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = '#fef3c7';
-    ctx.font = '11px sans-serif';
-    ctx.fillText('Señales químicas del hongo', cx + 15, pulseY + 4);
+    ctx.moveTo(w * 0.5 - 118, h * 0.48);
+    ctx.bezierCurveTo(w * 0.36, h * 0.28, w * 0.28, h * 0.62, w * 0.16, h * 0.5);
+    ctx.moveTo(w * 0.5 + 95, h * 0.42);
+    ctx.bezierCurveTo(w * 0.72, h * 0.3, w * 0.82, h * 0.55, w * 0.9, h * 0.4);
+    ctx.moveTo(w * 0.5, h * 0.48 + 62);
+    ctx.bezierCurveTo(w * 0.42, h * 0.74, w * 0.56, h * 0.8, w * 0.62, h * 0.9);
+    ctx.stroke();
+
+    label('Micelio: red de hifas', w * 0.14, h * 0.24, '#6ee7b7');
+    label('Coloniza tejidos y absorbe nutrientes', w * 0.14, h * 0.24 + 19, '#94a3b8');
+    label('INTERIOR DE LA PUPA', 20, h - 18, '#78716c');
   }
 
   function drawStroma() {
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
+    const w = canvas.width;
+    const h = canvas.height;
+    const groundY = h - 78;
 
-    ctx.fillStyle = '#064e3b';
+    soil(groundY);
+    drawPupa(w * 0.54, groundY - 18, 78, 36, 0.02, false);
+
+    drawStromaShape(w * 0.48, groundY - 30, 170, -0.08, true);
+    drawStromaShape(w * 0.6, groundY - 28, 132, 0.12, true);
+
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.moveTo(0, cy - 80);
-    ctx.quadraticCurveTo(cx, cy - 60, canvas.width, cy - 90);
-    ctx.lineTo(canvas.width, cy - 110);
-    ctx.quadraticCurveTo(cx, cy - 80, 0, cy - 120);
-    ctx.closePath();
-    ctx.fill();
-
-    ctx.strokeStyle = '#059669';
-    ctx.lineWidth = 4;
+    ctx.moveTo(w * 0.48 + 12, groundY - 150);
+    ctx.lineTo(w * 0.2, groundY - 178);
     ctx.stroke();
 
-    ctx.fillStyle = '#34d399';
-    ctx.font = '11px monospace';
-    ctx.fillText('ENVÉS DE LA HOJA · MICROAMBIENTE HÚMEDO', 40, cy - 125);
-
-    ctx.fillStyle = '#1c1917';
-    ctx.strokeStyle = '#44403c';
-    ctx.lineWidth = 3;
-
-    const antX = cx - 30;
-    const antY = cy - 40;
     ctx.beginPath();
-    ctx.ellipse(antX, antY, 22, 18, -0.4, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.moveTo(w * 0.6 + 10, groundY - 110);
+    ctx.lineTo(w * 0.94, groundY - 140);
     ctx.stroke();
 
-    ctx.strokeStyle = '#d97706';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(antX - 10, antY - 12);
-    ctx.lineTo(antX - 5, cy - 70);
-    ctx.moveTo(antX + 5, antY - 14);
-    ctx.lineTo(antX + 2, cy - 70);
-    ctx.stroke();
-
-    ctx.fillStyle = '#292524';
-    ctx.beginPath();
-    ctx.ellipse(antX + 35, antY + 20, 20, 14, 0.5, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.ellipse(antX + 85, antY + 45, 34, 22, 0.7, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.strokeStyle = '#44403c';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(antX + 25, antY + 20); ctx.lineTo(antX + 20, antY - 10); ctx.lineTo(antX + 25, cy - 65);
-    ctx.moveTo(antX + 40, antY + 25); ctx.lineTo(antX + 50, antY); ctx.lineTo(antX + 60, cy - 65);
-    ctx.moveTo(antX + 50, antY + 30); ctx.lineTo(antX + 75, antY + 15); ctx.lineTo(antX + 90, cy - 65);
-    ctx.stroke();
-
-    ctx.save();
-    ctx.shadowColor = '#f59e0b';
-    ctx.shadowBlur = 15;
-    ctx.strokeStyle = '#d97706';
-    ctx.lineWidth = 8;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.moveTo(antX, antY - 10);
-    ctx.quadraticCurveTo(antX - 30, antY + 60, antX - 45, antY + 140);
-    ctx.stroke();
-
-    ctx.fillStyle = '#b45309';
-    ctx.beginPath();
-    ctx.ellipse(antX - 42, antY + 110, 16, 26, -0.3, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.fillStyle = '#fef3c7';
-    for (let p = 0; p < 8; p++) {
-      ctx.beginPath();
-      ctx.arc(antX - 45 + (p % 3) * 6, antY + 95 + p * 4, 1.8, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-
-    ctx.fillStyle = '#fcd34d';
-    ctx.font = '12px sans-serif';
-    ctx.fillText('Estroma con peritecios (cuerpo fructífero)', antX - 210, antY + 120);
-    ctx.strokeStyle = '#b45309';
-    ctx.beginPath();
-    ctx.moveTo(antX - 58, antY + 115);
-    ctx.lineTo(antX - 68, antY + 115);
-    ctx.stroke();
+    label('Estroma (cuerpo fructífero)', w * 0.12, groundY - 182, '#fdba74');
+    label('Peritecios (puntos)', w * 0.96, groundY - 146, '#fde68a', 'right');
+    label('La altura ayuda a dispersar las ascosporas', 20, h - 16, '#78716c');
   }
 
   function drawDispersal() {
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
+    const w = canvas.width;
+    const h = canvas.height;
+    const groundY = h - 72;
 
-    ctx.fillStyle = '#064e3b';
-    ctx.fillRect(0, 20, canvas.width, 30);
+    soil(groundY);
 
-    ctx.fillStyle = '#292524';
-    ctx.beginPath();
-    ctx.ellipse(cx - 50, 80, 25, 14, 0.4, 0, Math.PI * 2);
-    ctx.ellipse(cx - 15, 100, 30, 18, 0.6, 0, Math.PI * 2);
-    ctx.fill();
+    drawStromaShape(w * 0.3, groundY - 8, 190, -0.03, true);
+    drawPupa(w * 0.26, groundY - 8, 50, 24, 0.02, false);
 
-    ctx.strokeStyle = '#b45309';
-    ctx.lineWidth = 7;
-    ctx.beginPath();
-    ctx.moveTo(cx - 70, 70);
-    ctx.quadraticCurveTo(cx - 90, 130, cx - 80, 180);
-    ctx.stroke();
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.55)';
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath();
+      ctx.moveTo(w * 0.2, 70 + i * 28);
+      ctx.bezierCurveTo(w * 0.42, 40 + i * 28, w * 0.58, 100 + i * 28, w * 0.86, 58 + i * 28);
+      ctx.stroke();
+    }
 
-    ctx.fillStyle = '#d97706';
-    ctx.beginPath();
-    ctx.ellipse(cx - 80, 165, 18, 28, 0.2, 0, Math.PI * 2);
-    ctx.fill();
-
-    for (let s = 0; s < 50; s++) {
-      const angle = 0.5 + (s * 0.05);
-      const dist = ((animTime * 140 + s * 12) % 260);
-      const sx = cx - 80 + Math.cos(angle) * dist + (s % 5) * 8;
-      const sy = 165 + Math.sin(angle) * dist + dist * 0.6;
-
-      ctx.fillStyle = s % 2 === 0 ? '#10b981' : '#f59e0b';
+    for (let s = 0; s < 36; s++) {
+      const phase = (animTime * 0.55 + s * 0.11) % 1;
+      const sx = w * 0.32 + phase * (w * 0.55) + Math.sin(s * 1.7) * 16;
+      const sy = 160 - phase * 110 + Math.sin(s * 2.1 + animTime) * 18;
+      ctx.fillStyle = s % 3 === 0 ? '#f59e0b' : '#34d399';
       ctx.beginPath();
       ctx.arc(sx, sy, 2 + (s % 3), 0, Math.PI * 2);
       ctx.fill();
     }
 
-    ctx.fillStyle = '#1c1917';
-    ctx.fillRect(0, canvas.height - 40, canvas.width, 40);
-    ctx.fillStyle = '#78716c';
-    ctx.font = '11px monospace';
-    ctx.fillText('SUELO DEL BOSQUE · ZONA DE CONTAGIO', 30, canvas.height - 15);
-
-    ctx.fillStyle = '#44403c';
-    const antWalkX = (animTime * 40) % canvas.width;
-    ctx.fillRect(antWalkX, canvas.height - 30, 12, 6);
-    ctx.fillRect(antWalkX + 14, canvas.height - 28, 8, 4);
-
-    ctx.fillStyle = '#a7f3d0';
-    ctx.font = '13px sans-serif';
-    ctx.fillText('Eyección activa de ascosporas', cx + 10, 180);
-
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '11px sans-serif';
-    ctx.fillText('El viento las transporta a nuevas hormigas', cx + 10, 200);
-
-    /* La variable cy se mantiene para conservar la composición del dibujo. */
-    void cy;
+    drawSporeShape(w * 0.78, h * 0.28, 9, '#f59e0b');
+    label('Eyección activa de ascosporas', w * 0.42, groundY - 46, '#fcd34d');
+    label('El viento las transporta a nuevas pupas', w * 0.42, groundY - 27, '#94a3b8');
+    label('NUEVOS HOSPEDEROS · NUEVO CICLO', 20, h - 16, '#78716c');
   }
 
   function draw() {

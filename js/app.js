@@ -1473,7 +1473,7 @@
         '<div class="result-stat"><span>Elecciones</span><strong>Función + fase</strong></div>' +
         '<div class="result-stat"><span>Informe</span><strong>Listo para descargar</strong></div>' +
       '</div>' +
-      '<p class="result-note">La forma de cada estructura se explica por su función: el estroma eleva, los peritecios protegen la meiosis, el micelio coloniza y absorbe, y los conidios dispersan clones. Puedes repasar cualquier estructura con las tarjetas de arriba.</p>' +
+      '<p class="result-note">La forma de cada estructura se explica por su función: el estroma eleva, los peritecios protegen la meiosis, el micelio coloniza y absorbe, y la pupa es el hospedero que aporta nutrientes. Puedes repasar cualquier estructura con las tarjetas de arriba.</p>' +
       '<ul class="result-list">' + list + '</ul>';
 
     if (!state.a2Celebrated) {
@@ -1539,8 +1539,8 @@
     const thin = '-'.repeat(78);
 
     let text = line + '\n';
-    text += 'INFORME DE LABORATORIO · OPHIOCORDYCEPS UNILATERALIS\n';
-    text += 'Biología · Grado 8° · Familia Cordycipitaceae (clasificación tradicional; Ophiocordycipitaceae actual)\n';
+    text += 'INFORME DE LABORATORIO · CORDYCEPS MILITARIS\n';
+    text += 'Biología · Grado 8° · Familia Cordycipitaceae\n';
     text += line + '\n\n';
     text += pad('NOMBRE COMPLETO', 24) + ': ' + (state.profile ? state.profile.name : 'Sin identificar') + '\n';
     text += pad('CURSO', 24) + ': ' + (state.profile ? state.profile.course : 'Sin curso') + '\n';
@@ -1646,11 +1646,11 @@
     text += '2. Meiosis: reduce el número de cromosomas y genera variabilidad por recombinación;\n';
     text += '   en este hongo ocurre en los ascos dentro de los peritecios (ascosporas).\n';
     text += '3. Estructura y función: el estroma eleva, los peritecios protegen la meiosis, el\n';
-    text += '   micelio coloniza y absorbe, y los conidios dispersan clones.\n';
-    text += '4. Manipulación conductual: el hongo altera la locomoción y la conducta sin destruir\n';
-    text += '   el cerebro; la “mordida de la muerte” fija la hormiga en un microambiente adecuado.\n';
-    text += '5. Ciencia aplicada: un biopesticida requiere evaluación de especificidad, efectos no\n';
-    text += '   objetivo y riesgo de resistencia antes de su liberación.\n';
+    text += '   micelio coloniza y absorbe, y la pupa es el hospedero que aporta nutrientes.\n';
+    text += '4. Modelo biológico: Cordyceps militaris pertenece a la familia Cordycipitaceae y\n';
+    text += '   parasita larvas y pupas de lepidópteros; no manipula la conducta de hormigas.\n';
+    text += '5. Ciencia aplicada: el uso medicinal o comercial de C. militaris requiere identificar\n';
+    text += '   la cepa, controlar el cultivo y evaluar seguridad y eficacia; no reemplaza tratamientos.\n';
     text += '6. Reproducción y ambiente: la vía asexual suele favorecerse en ambientes estables y\n';
     text += '   con hospederos abundantes; la sexual aporta variabilidad y dispersión cuando el\n';
     text += '   ambiente o el hospedero cambian. No hay una estrategia mejor en abstracto.\n\n';
@@ -1690,7 +1690,7 @@
       openProfileModal(false);
       return;
     }
-    const filename = 'Informe_Ophiocordyceps_' + slug(state.profile.name) + '_' + slug(state.profile.course) + '.txt';
+    const filename = 'Informe_Cordyceps_' + slug(state.profile.name) + '_' + slug(state.profile.course) + '.txt';
     downloadText(filename, buildReport());
     window.CordycepsAudio.click();
   }

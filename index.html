@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#071014">
-  <meta name="description" content="Actividades interactivas offline sobre Ophiocordyceps unilateralis: ciclo de vida, rutas reproductivas, manipulación conductual y disección funcional. Biología, grado 8°.">
-  <title>Ophiocordyceps · Ciclo, rutas y disección · Grado 8°</title>
-  <link rel="stylesheet" href="css/styles.css?v=20261027-5">
+  <meta name="description" content="Actividades interactivas offline sobre Cordyceps militaris: ciclo de vida, rutas reproductivas, disección funcional y glosario. Biología, grado 8°.">
+  <title>Cordyceps militaris · Ciclo, rutas y disección · Grado 8°</title>
+  <link rel="stylesheet" href="css/styles.css?v=20261027-6">
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -23,7 +23,7 @@
       </span>
       <div>
         <p class="brand-eyebrow">Biología · Grado 8° · Actividades offline</p>
-        <h1 class="brand-title"><em>Ophiocordyceps unilateralis</em></h1>
+        <h1 class="brand-title"><em>Cordyceps militaris</em></h1>
         <p class="brand-sub">Familia Cordycipitaceae · Ciclo de vida · Rutas reproductivas · Disección funcional</p>
       </div>
     </div>
@@ -68,7 +68,7 @@
     <button class="tab-btn" type="button" data-view="glosario" aria-pressed="false">
       <span class="tab-num">4</span>
       <span class="tab-label">Glosario y fuentes</span>
-      <span class="tab-status" id="tab3Status">32 términos</span>
+      <span class="tab-status" id="tab3Status">33 términos</span>
     </button>
   </nav>
 
@@ -79,7 +79,7 @@
         <div>
           <p class="eyebrow">Actividad 1 · Ruta de 12 preguntas</p>
           <h2 id="a1Title">El ciclo de vida y la reproducción</h2>
-          <p class="lead">Modelo: <em>Ophiocordyceps unilateralis</em>, familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae). Responde una pregunta a la vez, elige una opción y justifica tu elección. Cada respuesta se comprueba al instante y, al terminar la pregunta 12, la actividad se cierra con tu puntaje y un resumen descargable.</p>
+          <p class="lead">Modelo: <em>Cordyceps militaris</em>, familia Cordycipitaceae. Responde una pregunta a la vez, elige una opción y justifica tu elección. Cada respuesta se comprueba al instante y, al terminar la pregunta 12, la actividad se cierra con tu puntaje y un resumen descargable.</p>
         </div>
         <div class="chip-row">
           <span class="chip" id="a1ScoreChip">Aciertos: 0</span>
@@ -137,7 +137,7 @@
             <span class="pill">5 estadios</span>
           </div>
           <div class="canvas-wrap">
-            <canvas id="bioCanvas" width="700" height="400" aria-label="Ilustración animada del ciclo de vida de Ophiocordyceps: espora, hifa, micelio, estroma con peritecios y dispersión."></canvas>
+            <canvas id="bioCanvas" width="700" height="400" aria-label="Ilustración animada del ciclo de vida de Cordyceps militaris: espora, hifa, micelio, estroma con peritecios y dispersión de ascosporas."></canvas>
           </div>
           <p class="canvas-caption" id="canvasCaption"></p>
           <div class="stepper" id="stageStepper" aria-label="Estadios del ciclo"></div>
@@ -163,7 +163,7 @@
         <div>
           <p class="eyebrow">Actividad 2 · Rutas reproductivas</p>
           <h2 id="decTitle">Dos rutas reproductivas del hongo</h2>
-          <p class="lead">Modelo: <em>Ophiocordyceps unilateralis</em>, familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae). El hongo no elige de forma consciente entre reproducción sexual y asexual: ambas rutas forman parte de su ciclo. Lee cada escenario, elige una ruta y justifica cómo se relaciona con la evidencia. No hay una estrategia mejor en abstracto.</p>
+          <p class="lead">Modelo: <em>Cordyceps militaris</em>, familia Cordycipitaceae. El hongo no elige de forma consciente entre reproducción sexual y asexual: ambas rutas forman parte de su ciclo. Lee cada escenario, elige una ruta y justifica cómo se relaciona con la evidencia. No hay una estrategia mejor en abstracto.</p>
         </div>
         <div class="chip-row">
           <span class="chip" id="decisionProgressChip">0 / 6 escenarios</span>
@@ -257,7 +257,7 @@
         <div>
           <p class="eyebrow">Actividad 3 · Disección guiada</p>
           <h2 id="a2Title">¿Por qué existe cada estructura?</h2>
-          <p class="lead">Modelo: <em>Ophiocordyceps unilateralis</em>, familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae). Selecciona una estructura de la fotografía, identifica su función y relaciónala con la fase del ciclo. Debes completar las cuatro estructuras para cerrar la actividad.</p>
+          <p class="lead">Modelo: <em>Cordyceps militaris</em>, familia Cordycipitaceae. Selecciona una estructura de la fotografía, identifica su función y relaciónala con la fase del ciclo. Debes completar las cuatro estructuras para cerrar la actividad.</p>
         </div>
         <div class="chip-row">
           <span class="chip" id="a2ProgressChip">0 / 4 estructuras</span>
@@ -268,54 +268,80 @@
       <div class="a2-grid">
         <section class="panel photo-panel" aria-labelledby="photoTitle">
           <div class="panel-top">
-            <h3 id="photoTitle">Hormiga parasitada</h3>
+            <h3 id="photoTitle">Pupa parasitada</h3>
             <span class="pill">Toca los números</span>
           </div>
           <p class="hint">Selecciona un número sobre la fotografía o una tarjeta de la derecha. El punto elegido se resalta.</p>
 
           <div class="photo-frame" id="photoFrame">
-            <img src="assets/hormiga_parasitada.jpg" alt="Hormiga carpintera parasitada por Ophiocordyceps: el estroma sale de su cabeza y se observan estructuras fúngicas." width="721" height="1280">
+            <img src="assets/cordyceps_militaris.jpg" alt="Pupa de lepidóptero parasitada por Cordyceps militaris: dos estromas naranjas salen de su cuerpo y se observa micelio en la base." width="1200" height="900">
             <button class="marker marker-1" type="button" data-structure="estroma" aria-label="Estructura 1: estroma">1</button>
             <button class="marker marker-2" type="button" data-structure="peritecio" aria-label="Estructura 2: peritecios">2</button>
             <button class="marker marker-3" type="button" data-structure="micelio" aria-label="Estructura 3: micelio">3</button>
-            <button class="marker marker-4" type="button" data-structure="conidio" aria-label="Estructura 4: conidios">4</button>
+            <button class="marker marker-4" type="button" data-structure="pupa" aria-label="Estructura 4: pupa hospedera">4</button>
           </div>
 
           <p class="credit" id="photoCredit"></p>
 
           <details class="schematic">
             <summary>Esquema de apoyo</summary>
-            <svg viewBox="0 0 400 300" role="img" aria-label="Esquema simplificado de la hormiga parasitada: estroma, peritecios, micelio y conidios.">
-              <rect x="0" y="16" width="400" height="22" rx="9" fill="#064e3b"></rect>
-              <text x="14" y="31" fill="#6ee7b7" font-size="10" font-family="system-ui, sans-serif">HOJA</text>
+            <svg viewBox="0 0 400 300" role="img" aria-label="Esquema simplificado de Cordyceps militaris: estroma, peritecios, micelio y pupa hospedera.">
+              <rect x="0" y="245" width="400" height="55" fill="#2a1d12"></rect>
+              <rect x="0" y="245" width="400" height="4" fill="#3f2a1a"></rect>
+              <text x="14" y="284" fill="#a8a29e" font-size="9" font-family="system-ui, sans-serif">SUELO Y HOJARASCA</text>
 
-              <ellipse cx="168" cy="96" rx="24" ry="16" fill="#292524" stroke="#57534e"></ellipse>
-              <ellipse cx="206" cy="118" rx="20" ry="13" fill="#292524"></ellipse>
-              <ellipse cx="248" cy="140" rx="32" ry="20" fill="#292524"></ellipse>
-              <text x="104" y="178" fill="#a8a29e" font-size="10" font-family="system-ui, sans-serif">hormiga (hospedero)</text>
+              <!-- Pupa hospedera -->
+              <ellipse cx="250" cy="230" rx="56" ry="26" fill="#5b3724" stroke="#a16207" stroke-width="2"></ellipse>
+              <path d="M214 230 Q250 214 286 230" fill="none" stroke="#8b5a2b" stroke-width="1.5"></path>
+              <path d="M206 230 Q250 242 294 230" fill="none" stroke="#8b5a2b" stroke-width="1.5"></path>
+              <path d="M230 210 Q250 220 270 210" fill="none" stroke="#8b5a2b" stroke-width="1.5"></path>
+              <ellipse cx="204" cy="230" rx="10" ry="15" fill="#3f2a1a"></ellipse>
 
-              <path d="M168 82 Q146 138 140 212" stroke="#d97706" stroke-width="8" fill="none" stroke-linecap="round"></path>
-              <ellipse cx="138" cy="190" rx="15" ry="25" fill="#b45309"></ellipse>
-              <g fill="#fef3c7">
-                <circle cx="132" cy="176" r="2.2"></circle>
-                <circle cx="141" cy="184" r="2.2"></circle>
-                <circle cx="134" cy="194" r="2.2"></circle>
+              <!-- Micelio -->
+              <g stroke="#34d399" stroke-width="2" fill="none" stroke-linecap="round">
+                <path d="M230 240 Q210 252 190 258"></path>
+                <path d="M240 244 Q235 262 225 270"></path>
+                <path d="M270 242 Q290 250 305 244"></path>
+                <path d="M282 238 Q305 232 318 238"></path>
+                <path d="M215 225 Q200 216 188 218"></path>
               </g>
 
-              <path d="M206 118 Q226 132 244 144" stroke="#34d399" stroke-width="2.5" fill="none" stroke-dasharray="5 3"></path>
+              <!-- Estromas -->
+              <path d="M238 216 Q214 160 190 86" stroke="#9a3412" stroke-width="18" fill="none" stroke-linecap="round"></path>
+              <path d="M238 216 Q214 160 190 86" stroke="#f97316" stroke-width="13" fill="none" stroke-linecap="round"></path>
+              <ellipse cx="188" cy="78" rx="12" ry="20" fill="#f97316" stroke="#9a3412" stroke-width="2" transform="rotate(-18 188 78)"></ellipse>
 
-              <g fill="#93c5fd">
-                <circle cx="292" cy="218" r="2.2"></circle>
-                <circle cx="305" cy="210" r="2.2"></circle>
-                <circle cx="312" cy="226" r="2.2"></circle>
+              <path d="M258 214 Q272 160 288 105" stroke="#9a3412" stroke-width="16" fill="none" stroke-linecap="round"></path>
+              <path d="M258 214 Q272 160 288 105" stroke="#fb923c" stroke-width="11" fill="none" stroke-linecap="round"></path>
+              <ellipse cx="290" cy="97" rx="11" ry="19" fill="#fb923c" stroke="#9a3412" stroke-width="2" transform="rotate(10 290 97)"></ellipse>
+
+              <!-- Peritecios -->
+              <g fill="#fef3c7">
+                <circle cx="182" cy="70" r="2"></circle>
+                <circle cx="191" cy="76" r="2"></circle>
+                <circle cx="184" cy="85" r="2"></circle>
+                <circle cx="195" cy="66" r="2"></circle>
+                <circle cx="286" cy="90" r="2"></circle>
+                <circle cx="294" cy="96" r="2"></circle>
+                <circle cx="289" cy="105" r="2"></circle>
+                <circle cx="297" cy="84" r="2"></circle>
+              </g>
+
+              <!-- Líneas guía y etiquetas -->
+              <g stroke="#64748b" stroke-width="1" stroke-dasharray="3 3">
+                <line x1="78" y1="58" x2="190" y2="120"></line>
+                <line x1="78" y1="86" x2="183" y2="80"></line>
+                <line x1="310" y1="190" x2="310" y2="226"></line>
+                <line x1="310" y1="268" x2="278" y2="242"></line>
               </g>
 
               <g font-size="10" font-family="system-ui, sans-serif">
-                <text x="150" y="148" fill="#fcd34d">1 Estroma</text>
-                <text x="150" y="206" fill="#fef3c7">2 Peritecios</text>
-                <text x="252" y="122" fill="#6ee7b7">3 Micelio</text>
-                <text x="252" y="246" fill="#93c5fd">4 Conidios</text>
+                <text x="16" y="54" fill="#fdba74">1 Estroma</text>
+                <text x="16" y="82" fill="#fde68a">2 Peritecios</text>
+                <text x="300" y="186" fill="#6ee7b7">3 Micelio</text>
+                <text x="292" y="272" fill="#93c5fd">4 Pupa hospedera</text>
               </g>
+              <text x="232" y="270" fill="#a8a29e" font-size="9" font-family="system-ui, sans-serif">pupa</text>
             </svg>
           </details>
         </section>
@@ -381,9 +407,9 @@
         <div>
           <p class="eyebrow">Actividad 4 · Consulta</p>
           <h2 id="glossaryTitle">Glosario científico y fuentes</h2>
-          <p class="lead">Glosario del modelo <em>Ophiocordyceps unilateralis</em> (familia Cordycipitaceae; clasificación tradicional; actualmente Ophiocordycipitaceae). Treinta y dos términos para leer, comparar y usar en tus justificaciones. Busca una palabra o filtra por categoría.</p>
+          <p class="lead">Glosario del modelo <em>Cordyceps militaris</em> (familia Cordycipitaceae). Treinta y tres términos para leer, comparar y usar en tus justificaciones. Busca una palabra o filtra por categoría.</p>
         </div>
-        <span class="chip" id="glossaryCount">32 términos</span>
+        <span class="chip" id="glossaryCount">33 términos</span>
       </div>
 
       <div class="glossary-tools">
@@ -426,7 +452,7 @@
   </main>
 
   <footer class="site-footer">
-    <p><strong>Ophiocordyceps unilateralis</strong> · Familia Cordycipitaceae (clasificación tradicional; actualmente Ophiocordycipitaceae) · Actividades de biología para grado 8°. Funciona sin internet: HTML, CSS, JavaScript e imagen local.</p>
+    <p><strong>Cordyceps militaris</strong> · Familia Cordycipitaceae · Actividades de biología para grado 8°. Funciona sin internet: HTML, CSS, JavaScript e imagen local.</p>
   </footer>
 
   <!-- ============================== MODAL DE DATOS ============================== -->
@@ -469,9 +495,9 @@
     </div>
   </div>
 
-  <script src="js/data.js?v=20261027-5"></script>
-  <script src="js/audio.js?v=20261027-5"></script>
-  <script src="js/canvas.js?v=20261027-5"></script>
-  <script src="js/app.js?v=20261027-5"></script>
+  <script src="js/data.js?v=20261027-6"></script>
+  <script src="js/audio.js?v=20261027-6"></script>
+  <script src="js/canvas.js?v=20261027-6"></script>
+  <script src="js/app.js?v=20261027-6"></script>
 </body>
 </html>

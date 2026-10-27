@@ -1,6 +1,6 @@
-# Ophiocordyceps unilateralis · Actividades de Biología (Grado 8°)
+# Cordyceps militaris · Actividades de Biología (Grado 8°)
 
-Versión modular y offline de la actividad sobre el ciclo de vida, las rutas reproductivas, la manipulación conductual del hospedero y la disección funcional de *Ophiocordyceps unilateralis* (familia Cordycipitaceae, clasificación tradicional; actualmente Ophiocordycipitaceae).
+Versión modular y offline de la actividad sobre el ciclo de vida, las rutas reproductivas, la disección funcional y el glosario de *Cordyceps militaris* (familia Cordycipitaceae). El modelo parasita larvas y pupas de lepidópteros; no es el hongo que manipula la conducta de las hormigas.
 
 ## Versión en línea
 
@@ -30,11 +30,11 @@ Si ves una versión anterior del juego, recarga la página con `Ctrl + F5` (o `C
 |---|---|
 | `index.html` | Estructura de la página: datos del estudiante, actividades y glosario. |
 | `css/styles.css` | Diseño responsive, modo oscuro, impresión y accesibilidad visual. |
-| `js/data.js` | 12 preguntas, 6 escenarios de rutas reproductivas, disección guiada, 32 términos del glosario, mitos y fuentes. |
+| `js/data.js` | 12 preguntas, 6 escenarios de rutas reproductivas, disección guiada, 33 términos del glosario, mitos y fuentes. |
 | `js/app.js` | Lógica de respuestas, justificaciones, ruta reproductiva, puntajes, informe y navegación. |
 | `js/canvas.js` | Animación de las cinco etapas del ciclo. |
 | `js/audio.js` | Sonidos de retroalimentación generados con Web Audio. |
-| `assets/hormiga_parasitada.jpg` | Fotografía real de una hormiga parasitada (CC BY 4.0). |
+| `assets/cordyceps_militaris.jpg` | Fotografía de *Cordyceps militaris* sobre una pupa parasitada (CC BY 3.0). |
 
 ## Actividades
 
@@ -43,8 +43,8 @@ Si ves una versión anterior del juego, recarga la página con `Ctrl + F5` (o `C
 - Cada pregunta de selección múltiple exige una justificación escrita antes de comprobar la respuesta.
 - Retroalimentación inmediata, puntaje en vivo, barra de progreso y contador de justificaciones.
 - Al responder la pregunta 12 se cierra la actividad con un resultado final, revisión de respuestas e informe descargable.
-- Se retiró la pregunta 12 anterior (biopesticidas) y se mejoraron los contextos de hifa/micelio y mitosis/meiosis.
 - Las opciones correctas se distribuyen entre A, B, C y D para evitar que casi todas estén en A.
+- El contenido diferencia a *C. militaris* (pupas de lepidópteros) del caso de *Ophiocordyceps unilateralis* (hormigas), que pertenece a otra familia.
 
 ### Actividad 2 · Rutas reproductivas
 - Seis escenarios ecológicos para analizar dos rutas: conidios por mitosis y ascosporas por meiosis.
@@ -54,15 +54,15 @@ Si ves una versión anterior del juego, recarga la página con `Ctrl + F5` (o `C
 - El panel lateral muestra el conteo en vivo y el historial de rutas elegidas.
 
 ### Actividad 3 · Disección funcional
-- Fotografía real con cuatro estructuras marcadas: estroma, peritecios, micelio y conidios.
-- Se corrigió la ubicación de los marcadores 1 y 2 para que coincidan con el estroma y los peritecios.
-- Los textos descriptivos ya no revelan la función ni la fase antes de responder.
-- Cada estructura exige dos elecciones: función y fase del ciclo.
+- Fotografía real con cuatro estructuras marcadas: estroma, peritecios, micelio y pupa hospedera.
+- Los marcadores coinciden con las estructuras visibles en la fotografía.
+- Los textos descriptivos no revelan la función ni la fase antes de responder.
+- Cada estructura exige dos elecciones: función y relación con el ciclo.
 - Retroalimentación específica ante errores y cierre al completar las cuatro estructuras.
 
 ### Actividad 4 · Glosario y fuentes
-- 32 términos con buscador y filtros por categoría, incluidas las familias Cordycipitaceae y Ophiocordycipitaceae.
-- Marco científico, comparación entre mitos y realidad, y ocho fuentes de consulta.
+- 33 términos con buscador y filtros por categoría, incluida la familia Cordycipitaceae.
+- Marco científico, comparación entre mitos y realidad, y siete fuentes de consulta.
 
 ## Datos e informe
 
@@ -79,8 +79,8 @@ El botón **Reiniciar** borra las respuestas de las actividades, pero conserva e
 
 - No hay cuentas, publicidad, analítica ni peticiones a internet.
 - No se envían datos a ningún servidor.
-- La fotografía es de Wikimedia Commons y se usa con fines educativos bajo licencia CC BY 4.0.
+- La fotografía es de Wikimedia Commons y se usa con fines educativos bajo licencia CC BY 3.0.
 
 ## Créditos
 
-Actividad educativa de Biología para grado 8°. El fenómeno se aborda como **manipulación conductual del hospedero**, con lenguaje científico y sin reducir la explicación a metáforas.
+Actividad educativa de Biología para grado 8°. El modelo es *Cordyceps militaris*, un hongo ascomiceto de la familia Cordycipitaceae que parasita pupas de lepidópteros. El juego aclara de forma explícita que la manipulación conductual de hormigas corresponde a *Ophiocordyceps unilateralis* (Ophiocordycipitaceae), no a este modelo.

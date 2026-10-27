@@ -1,5 +1,5 @@
 /* =========================================================================
-   Ophiocordyceps · Hoja de estilos principal
+   Cordyceps militaris · Hoja de estilos principal
    Diseño oscuro, responsive y sin dependencias externas.
    ========================================================================= */
 
@@ -1261,10 +1261,10 @@ input[type="search"]:focus {
   box-shadow: 0 5px 18px rgba(0, 0, 0, 0.7);
 }
 
-.marker-1 { top: 40%; left: 46%; background: #dc2626; }
-.marker-2 { top: 53%; left: 23%; background: #d97706; color: #1a1003; }
-.marker-3 { top: 62%; left: 53%; background: #059669; }
-.marker-4 { top: 72%; left: 68%; background: #2563eb; }
+.marker-1 { top: 30.6%; left: 26.3%; background: #f97316; color: #1a1003; }
+.marker-2 { top: 11.1%; left: 16.3%; background: #facc15; color: #1a1003; }
+.marker-3 { top: 69.4%; left: 39.6%; background: #10b981; }
+.marker-4 { top: 66.7%; left: 77.1%; background: #3b82f6; }
 
 .marker.is-active {
   transform: translate(-50%, -50%) scale(1.14);
