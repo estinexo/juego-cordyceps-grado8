@@ -161,7 +161,7 @@
     els.profileTitle = $('#profileTitle');
     els.profileChip = $('#profileChip');
     els.profileDisplayName = $('#profileDisplayName');
-    els.profileDisplayMeta = $('#profileDisplayMeta');
+    els.profileDisplayMeta = $('#profileDisplayMeta') || $('#profileDisplayId');
     els.elapsedTime = $('#elapsedTime');
     els.soundBtn = $('#soundBtn');
     els.downloadBtn = $('#downloadBtn');
@@ -273,10 +273,10 @@
       const raw = window.localStorage.getItem(PROFILE_KEY);
       if (!raw) return;
       const parsed = JSON.parse(raw);
-      if (parsed && typeof parsed.name === 'string') {
+      if (parsed && typeof parsed.name === 'string' && parsed.name.trim()) {
         state.profile = {
           name: parsed.name.trim(),
-          course: (parsed.course || '8°').trim()
+          course: String(parsed.course || '8°').trim()
         };
         // Elimina el número de identificación de perfiles guardados con versiones anteriores.
         if (Object.prototype.hasOwnProperty.call(parsed, 'id')) {
@@ -297,6 +297,8 @@
   }
 
   function updateProfileUI() {
+    if (!els.profileDisplayName || !els.profileDisplayMeta) return;
+
     if (!state.profile) {
       els.profileDisplayName.textContent = 'Sin identificar';
       els.profileDisplayMeta.textContent = 'Escribe tu nombre y curso';
@@ -340,35 +342,35 @@
 
   function handleProfileSubmit(event) {
     event.preventDefault();
-    const name = els.profileName.value.trim().replace(/\s+/g, ' ');
-    const course = els.profileCourse.value.trim() || '8°';
+    const nameInput = els.profileName;
+    const courseInput = els.profileCourse;
+    const name = nameInput ? nameInput.value.trim().replace(/\s+/g, ' ') : '';
+    const course = courseInput ? (courseInput.value.trim() || '8°') : '8°';
+    const hasLetter = /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(name);
 
-    let error = '';
-    if (name.length < 4 || !/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(name)) {
-      error = 'Escribe tu nombre completo (mínimo 4 caracteres y al menos una letra).';
-    } else if (course.length < 1) {
-      error = 'Escribe el curso (por ejemplo, 8°B).';
-    }
-
-    if (error) {
-      els.profileError.textContent = error;
+    if (!name || !hasLetter) {
+      els.profileError.textContent = 'Escribe tu nombre (debe incluir al menos una letra).';
       els.profileError.hidden = false;
-      (name.length < 4 ? els.profileName : els.profileCourse).focus();
+      if (nameInput) nameInput.focus();
       return;
     }
 
     state.profile = { name: name, course: course };
     saveProfile();
-    updateProfileUI();
+    els.profileError.hidden = true;
+    els.profileError.textContent = '';
     els.profileModal.hidden = true;
     document.body.classList.remove('modal-open');
+    updateProfileUI();
 
     if (!state.timerId) {
       startTimer();
     }
 
-    window.CordycepsAudio.correct();
-    els.profileChip.focus();
+    if (window.CordycepsAudio && typeof window.CordycepsAudio.correct === 'function') {
+      window.CordycepsAudio.correct();
+    }
+    if (els.profileChip) els.profileChip.focus();
   }
 
   function trapModalFocus(event) {

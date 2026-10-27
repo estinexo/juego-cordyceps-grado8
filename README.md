@@ -22,6 +22,8 @@ python3 -m http.server 8000
 
 Luego visita `http://localhost:8000`.
 
+Si ves una versión anterior del juego, recarga la página con `Ctrl + F5` (o `Cmd + Shift + R` en Mac). Al modificar los estilos o los scripts, cambia el valor de `?v=` en `index.html` para que los navegadores descarguen la versión nueva.
+
 ## Contenido
 
 | Archivo | Función |
