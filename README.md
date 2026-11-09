@@ -1,6 +1,6 @@
 # Cordyceps militaris · Actividades de Biología (Grado 8°)
 
-Versión modular y offline de la actividad sobre el ciclo de vida, las rutas reproductivas, la disección funcional y el glosario de *Cordyceps militaris* (familia Cordycipitaceae). El modelo parasita larvas y pupas de lepidópteros; no es el hongo que manipula la conducta de las hormigas.
+Versión modular y offline de la actividad sobre el ciclo de vida, las rutas reproductivas, la anatomía funcional y el glosario de *Cordyceps militaris* (familia Cordycipitaceae). El modelo parasita larvas y pupas de lepidópteros; no es el hongo que manipula la conducta de las hormigas.
 
 ## Versión en línea
 
@@ -30,7 +30,7 @@ Si ves una versión anterior del juego, recarga la página con `Ctrl + F5` (o `C
 |---|---|
 | `index.html` | Estructura de la página: datos del estudiante, actividades y glosario. |
 | `css/styles.css` | Diseño responsive, modo oscuro, impresión y accesibilidad visual. |
-| `js/data.js` | 12 preguntas, 6 escenarios de rutas reproductivas, disección guiada, 33 términos del glosario, mitos y fuentes. |
+| `js/data.js` | 8 preguntas, 4 escenarios de rutas reproductivas, observación guiada, 36 términos del glosario, mitos y fuentes. |
 | `js/app.js` | Lógica de respuestas, justificaciones, ruta reproductiva, puntajes, informe y navegación. |
 | `js/entrega.js` | Envío opcional del informe a una hoja de cálculo (Google Sheets) y cola de reintento sin conexión. |
 | `js/canvas.js` | Animación de las cinco etapas del ciclo. |
@@ -41,30 +41,35 @@ Si ves una versión anterior del juego, recarga la página con `Ctrl + F5` (o `C
 ## Actividades
 
 ### Actividad 1 · Ciclo y genética
-- 12 preguntas con final definido: 11 de selección múltiple y 1 de argumentación abierta.
+- 8 preguntas con final definido: 7 de selección múltiple y 1 de argumentación abierta.
 - Cada pregunta de selección múltiple exige una justificación escrita antes de comprobar la respuesta.
 - Retroalimentación inmediata, puntaje en vivo, barra de progreso y contador de justificaciones.
-- Al responder la pregunta 12 se cierra la actividad con un resultado final, revisión de respuestas e informe descargable.
+- Al responder la última pregunta se cierra la actividad con un resultado final, revisión de respuestas e informe descargable.
 - Las opciones correctas se distribuyen entre A, B, C y D para evitar que casi todas estén en A.
 - El contenido diferencia a *C. militaris* (pupas de lepidópteros) del caso de *Ophiocordyceps unilateralis* (hormigas), que pertenece a otra familia.
+- La fase sexual se presenta completa: plasmogamia (n+n) → cariogamia (2n) → meiosis → ascosporas n, con cepas compatibles.
+- La pregunta abierta se registra para revisión docente y no se suma al puntaje de selección múltiple.
 
 ### Actividad 2 · Rutas reproductivas
-- Seis escenarios ecológicos para analizar dos rutas: conidios por mitosis y ascosporas por meiosis.
+- Cuatro escenarios ecológicos para analizar dos rutas: conidios por mitosis y ascosporas por meiosis.
 - Las opciones no muestran las etiquetas “sexual” o “asexual”: el estudiante debe inferir la ruta a partir de los procesos y las estructuras.
 - Cada elección exige una justificación con conceptos científicos y recibe retroalimentación descriptiva.
-- No se califica una ruta como la “mejor”: ambas forman parte del ciclo y dependen de las condiciones.
-- El panel lateral muestra el conteo en vivo y el historial de rutas elegidas.
+- No se califica una ruta como la “mejor”: ambas forman parte del ciclo y pueden ocurrir en ambientes estables o cambiantes.
+- Se diferencia la ventaja reproductiva (variabilidad o rapidez) de los mecanismos de dispersión (altura del estroma, eyección, viento, agua).
+- El panel lateral muestra el conteo en vivo y el historial de rutas registradas.
 
-### Actividad 3 · Disección funcional
-- Fotografía real con cuatro estructuras marcadas: estroma, peritecios, micelio y pupa hospedera.
+### Actividad 3 · Anatomía funcional
+- Fotografía real con tres estructuras marcadas: estroma, peritecios y micelio.
+- Ampliación con cuatro esquemas: estroma → peritecios → ascos → ascosporas.
 - Los marcadores coinciden con las estructuras visibles en la fotografía.
 - Los textos descriptivos no revelan la función ni la fase antes de responder.
 - Cada estructura exige dos elecciones: función y relación con el ciclo.
-- Retroalimentación específica ante errores y cierre al completar las cuatro estructuras.
+- Material demostrativo: se usan fotografía, esquemas y placas preparadas; no se colectan especímenes.
+- Retroalimentación específica ante errores y cierre al completar las tres estructuras.
 
 ### Actividad 4 · Glosario y fuentes
-- 33 términos con buscador y filtros por categoría, incluida la familia Cordycipitaceae.
-- Marco científico, comparación entre mitos y realidad, y siete fuentes de consulta.
+- 36 términos con buscador y filtros por categoría, incluida la familia Cordycipitaceae.
+- Marco científico, comparación entre mitos y realidad, y nueve fuentes de consulta.
 
 ## Datos e informe
 

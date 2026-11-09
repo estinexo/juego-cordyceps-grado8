@@ -293,7 +293,7 @@
     ctx.bezierCurveTo(w * 0.42, h * 0.74, w * 0.56, h * 0.8, w * 0.62, h * 0.9);
     ctx.stroke();
 
-    label('Micelio: red de hifas', w * 0.14, h * 0.24, '#6ee7b7');
+    label('Micelio: red de hifas haploides (n)', w * 0.14, h * 0.24, '#6ee7b7');
     label('Coloniza tejidos y absorbe nutrientes', w * 0.14, h * 0.24 + 19, '#cbd5e1');
     label('INTERIOR DE LA PUPA', 20, h - 18, '#78716c');
   }
@@ -323,6 +323,7 @@
 
     label('Estroma (cuerpo fructífero)', w * 0.12, groundY - 182, '#fdba74');
     label('Peritecios (puntos)', w * 0.96, groundY - 146, '#fde68a', 'right');
+    label('En los ascos: cariogamia (2n) → meiosis → ascosporas n', 20, h - 32, '#6ee7b7');
     label('La altura ayuda a dispersar las ascosporas', 20, h - 16, '#a8a29e');
   }
 

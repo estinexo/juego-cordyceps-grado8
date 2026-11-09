@@ -120,8 +120,12 @@
   }
 
   function correctCount() {
-    return Object.keys(state.answers).reduce(function (count, key) {
-      return count + (state.answers[key].correct ? 1 : 0);
+    /* La pregunta abierta no se suma al puntaje de selección múltiple:
+       se registra para la revisión del docente. */
+    return D.ACTIVITY1.reduce(function (count, question) {
+      if (question.type === 'open') return count;
+      const answer = state.answers[question.id];
+      return count + (answer && answer.correct ? 1 : 0);
     }, 0);
   }
 
@@ -750,7 +754,8 @@
     }
 
     state.answers[question.id] = {
-      correct: true,
+      correct: null,
+      registered: true,
       optionId: null,
       text: text
     };
@@ -833,14 +838,14 @@
     els.reviewBtn.textContent = 'Revisar mis respuestas';
 
     const correct = correctCount();
-    const percent = Math.round(correct / TOTAL_A1 * 100);
+    const percent = Math.round(correct / TOTAL_MC * 100);
     const openQuestion = D.ACTIVITY1.find(function (question) {
       return question.type === 'open';
     });
     const openAnswered = !!(openQuestion && state.answers[openQuestion.id]);
     let message = 'Revisa el glosario y vuelve a intentarlo: cada error es una oportunidad para ajustar una idea.';
     if (percent >= 85) {
-      message = 'Dominio sólido: distingues mitosis, meiosis, estructuras y consecuencias ecológicas.';
+      message = 'Dominio sólido: distingues mitosis, meiosis, ciclo sexual, estructuras y consecuencias ecológicas.';
     } else if (percent >= 70) {
       message = 'Buen trabajo: comprendes las ideas centrales y puedes mejorar algunos detalles.';
     } else if (percent >= 50) {
@@ -850,16 +855,16 @@
     els.resultContent.innerHTML =
       '<div class="result-hero">' +
         '<span class="result-badge" aria-hidden="true">✓</span>' +
-        '<div><h3>Actividad 1 finalizada</h3><p>Ya no hay más preguntas: la ruta de ' + TOTAL_A1 + ' preguntas está completa.</p></div>' +
-        '<div class="result-score"><strong>' + correct + ' / ' + TOTAL_A1 + '</strong><span>' + percent + '% de aciertos</span></div>' +
+        '<div><h3>Actividad 1 finalizada</h3><p>Completaste la ruta de ' + TOTAL_A1 + ' preguntas: ' + TOTAL_MC + ' de selección múltiple y 1 de argumentación abierta.</p></div>' +
+        '<div class="result-score"><strong>' + correct + ' / ' + TOTAL_MC + '</strong><span>' + percent + '% en selección múltiple</span></div>' +
       '</div>' +
       '<div class="result-grid">' +
-        '<div class="result-stat"><span>Aciertos</span><strong>' + correct + ' de ' + TOTAL_A1 + '</strong></div>' +
+        '<div class="result-stat"><span>Aciertos (selección múltiple)</span><strong>' + correct + ' de ' + TOTAL_MC + '</strong></div>' +
         '<div class="result-stat"><span>Preguntas respondidas</span><strong>' + answeredCount() + ' de ' + TOTAL_A1 + '</strong></div>' +
         '<div class="result-stat"><span>Justificaciones</span><strong>' + justifiedCount() + ' de ' + TOTAL_MC + '</strong></div>' +
-        '<div class="result-stat"><span>Pregunta abierta</span><strong>' + (openAnswered ? 'Cumplida' : 'Pendiente') + '</strong></div>' +
+        '<div class="result-stat"><span>Argumentación abierta</span><strong>' + (openAnswered ? 'Registrada' : 'Pendiente') + '</strong></div>' +
       '</div>' +
-      '<p class="result-note">' + escapeHtml(message) + ' Las justificaciones y la pregunta abierta quedan en el informe para la revisión del docente.</p>';
+      '<p class="result-note">' + escapeHtml(message) + ' La pregunta abierta no se suma al puntaje de selección múltiple: queda en el informe para la revisión del docente.</p>';
 
     els.activity1Result.scrollIntoView({ behavior: 'smooth', block: 'start' });
     window.CordycepsAudio.complete();
@@ -877,7 +882,10 @@
       let statusClass = 'is-wrong';
       let statusText = 'Sin responder';
 
-      if (answer && answer.correct) {
+      if (question.type === 'open') {
+        statusClass = 'is-open';
+        statusText = answer ? 'Registrada' : 'Sin responder';
+      } else if (answer && answer.correct) {
         statusClass = 'is-correct';
         statusText = 'Correcta';
       } else if (answer) {
@@ -944,8 +952,8 @@
   function routeLabel(route) {
     if (route === 'sexual') return 'Ruta con ascosporas';
     if (route === 'asexual') return 'Ruta con conidios';
-    if (route === 'mixta') return 'Ruta alternante';
-    return 'Ruta en construcción';
+    if (route === 'mixta') return 'Ambas rutas';
+    return 'Rutas analizadas';
   }
 
   function updateDecisionProgress() {
@@ -958,8 +966,8 @@
     els.decisionProgress.setAttribute('aria-valuenow', String(answered));
     els.decisionProgress.setAttribute('aria-valuemax', String(TOTAL_DEC));
     els.decisionPathChip.textContent = route.total
-      ? routeLabel(route.route)
-      : 'Ruta en construcción';
+      ? 'Rutas analizadas: ' + route.total + ' / ' + TOTAL_DEC
+      : 'Rutas analizadas';
 
     if (state.decisionFinished) {
       els.tabDecisionStatus.textContent = 'Completada';
@@ -986,10 +994,10 @@
     els.routeHistoryCount.textContent = answered + ' / ' + TOTAL_DEC;
 
     if (!answered) {
-      els.routeStatus.textContent = 'Aún no hay escenarios analizados. Elige una ruta y justifícala.';
+      els.routeStatus.textContent = 'Aún no hay escenarios analizados. Registra una ruta y justifícala.';
     } else if (state.decisionFinished) {
-      els.routeStatus.textContent = 'Ruta registrada: ' + routeLabel(currentRoute.route).toLowerCase() +
-        ' (' + currentRoute.asexual + ' conidios · ' + currentRoute.sexual + ' ascosporas).';
+      els.routeStatus.textContent = 'Análisis registrado: ' + currentRoute.total + ' de ' + TOTAL_DEC +
+        ' escenarios (' + currentRoute.asexual + ' conidios · ' + currentRoute.sexual + ' ascosporas). No hay una ruta ganadora.';
     } else if (currentRoute.sexual === currentRoute.asexual) {
       els.routeStatus.textContent = 'Conteo parcial: ' + currentRoute.asexual + ' conidios y ' +
         currentRoute.sexual + ' ascosporas. Aún quedan escenarios.';
@@ -1090,7 +1098,7 @@
     els.confirmDecisionBtn.hidden = !!answer;
     els.nextDecisionBtn.hidden = !answer;
     els.nextDecisionBtn.textContent = state.decisionIndex === TOTAL_DEC - 1
-      ? 'Ver mi ruta reproductiva →'
+      ? 'Ver análisis de rutas →'
       : 'Siguiente escenario →';
 
     updateDecisionJustifyMeta();
@@ -1138,7 +1146,7 @@
     });
     if (!chosen) return;
 
-    setFeedback(els.decisionFeedback, 'info', 'Ruta registrada',
+    setFeedback(els.decisionFeedback, 'info', 'Análisis registrado',
       '<p><strong>Elegiste:</strong> ' + escapeHtml(chosen.text) + '</p>' +
       '<p>' + escapeHtml(chosen.feedback) + '</p>',
       '<div class="feedback-extra"><strong>Tu justificación:</strong> ' + escapeHtml(answer.text) +
@@ -1200,11 +1208,11 @@
     updateDecisionProgress();
 
     const route = getDecisionRoute();
-    let routeMessage = 'Tus respuestas combinaron las dos rutas. En el ciclo del hongo ambas existen y pueden alternarse según las condiciones.';
+    let routeMessage = 'Analizaste las dos rutas. En el ciclo del hongo ambas existen, pueden alternarse y no compiten por ser “la mejor”.';
     if (route.route === 'sexual') {
-      routeMessage = 'Tus respuestas se inclinaron por la ruta de las ascosporas: meiosis, recombinación y más variabilidad, con menor número de descendientes.';
+      routeMessage = 'Analizaste más escenarios desde la ruta de las ascosporas: meiosis, recombinación y variabilidad, con menos descendientes y mayor costo. La reproducción sexual no es siempre superior.';
     } else if (route.route === 'asexual') {
-      routeMessage = 'Tus respuestas se inclinaron por la ruta de los conidios: mitosis, clones y colonización rápida, con menor variabilidad.';
+      routeMessage = 'Analizaste más escenarios desde la ruta de los conidios: mitosis, clones y colonización rápida. La reproducción asexual no es exclusiva de ambientes estables.';
     }
 
     const list = D.REPRODUCTION_DECISIONS.scenarios.map(function (scenario, index) {
@@ -1222,18 +1230,18 @@
     els.decisionResultContent.innerHTML =
       '<div class="result-hero">' +
         '<span class="result-badge" aria-hidden="true">✓</span>' +
-        '<div><h3>Actividad 2 finalizada</h3><p>Ruta registrada: <strong>' +
-          routeLabel(route.route) + '</strong>.</p></div>' +
+        '<div><h3>Actividad 2 finalizada</h3><p>Rutas analizadas: <strong>' +
+          route.total + ' de ' + TOTAL_DEC + '</strong>. No hay una ruta ganadora.</p></div>' +
         '<div class="result-score"><strong>' + route.total + ' / ' + TOTAL_DEC + '</strong><span>' +
           'escenarios analizados</span></div>' +
       '</div>' +
       '<div class="result-grid">' +
-        '<div class="result-stat"><span>Ruta registrada</span><strong>' + routeLabel(route.route) + '</strong></div>' +
         '<div class="result-stat"><span>Conidios (mitosis)</span><strong>' + route.asexual + ' de ' + TOTAL_DEC + '</strong></div>' +
         '<div class="result-stat"><span>Ascosporas (meiosis)</span><strong>' + route.sexual + ' de ' + TOTAL_DEC + '</strong></div>' +
+        '<div class="result-stat"><span>Lectura de conjunto</span><strong>' + routeLabel(route.route) + '</strong></div>' +
       '</div>' +
       '<p class="result-note">' + escapeHtml(routeMessage) +
-        ' Esta actividad no califica una ruta como correcta: busca explicar qué procesos y estructuras caracterizan cada una.</p>' +
+        ' Esta actividad no califica una ruta como correcta ni como la mejor: busca explicar ventajas, costos y diferencias entre reproducción y dispersión.</p>' +
       '<ul class="result-list">' + list + '</ul>';
 
     window.CordycepsAudio.complete();
@@ -1256,7 +1264,7 @@
     window.CordycepsAudio.click();
   }
 
-  /* -------------------------------- Actividad 3 · Disección ------------------- */
+  /* --------------------------- Actividad 3 · Observación ---------------------- */
   function updateA2Progress() {
     const completed = state.a2Completed.size;
     els.a2ProgressChip.textContent = completed + ' / ' + TOTAL_A2 + ' estructuras';
@@ -1480,7 +1488,7 @@
     els.a2ResultContent.innerHTML =
       '<div class="result-hero">' +
         '<span class="result-badge" aria-hidden="true">✓</span>' +
-        '<div><h3>Actividad 3 finalizada</h3><p>Completaste las ' + TOTAL_A2 + ' estructuras de la disección virtual.</p></div>' +
+        '<div><h3>Actividad 3 finalizada</h3><p>Completaste las ' + TOTAL_A2 + ' estructuras de la observación guiada.</p></div>' +
         '<div class="result-score"><strong>' + TOTAL_A2 + ' / ' + TOTAL_A2 + '</strong><span>estructuras</span></div>' +
       '</div>' +
       '<div class="result-grid">' +
@@ -1488,7 +1496,7 @@
         '<div class="result-stat"><span>Elecciones</span><strong>Función + fase</strong></div>' +
         '<div class="result-stat"><span>Informe</span><strong>Listo para descargar</strong></div>' +
       '</div>' +
-      '<p class="result-note">La forma de cada estructura se explica por su función: el estroma eleva, los peritecios protegen la meiosis, el micelio coloniza y absorbe, y la pupa es el hospedero que aporta nutrientes. Puedes repasar cualquier estructura con las tarjetas de arriba.</p>' +
+      '<p class="result-note">La forma de cada estructura se explica por su función: el estroma eleva, los peritecios protegen los ascos donde ocurre la meiosis, y el micelio coloniza y absorbe. La pupa es el hospedero que aporta nutrientes. Puedes repasar cualquier estructura con las tarjetas de arriba.</p>' +
       '<ul class="result-list">' + list + '</ul>';
 
     if (!state.a2Celebrated) {
@@ -1549,7 +1557,7 @@
     });
     const elapsed = formatDuration(Math.floor((Date.now() - state.startedAt) / 1000));
     const correct = correctCount();
-    const percent = Math.round(correct / TOTAL_A1 * 100);
+    const percent = Math.round(correct / TOTAL_MC * 100);
     const line = '='.repeat(78);
     const thin = '-'.repeat(78);
 
@@ -1562,11 +1570,14 @@
     text += pad('FECHA Y HORA', 24) + ': ' + dateText + '\n';
     text += pad('TIEMPO DE SESIÓN', 24) + ': ' + elapsed + '\n';
     const decisionRoute = getDecisionRoute();
+    const openQuestion = D.ACTIVITY1.find(function (question) { return question.type === 'open'; });
+    const openAnswered = !!(openQuestion && state.answers[openQuestion.id]);
     text += pad('ESTADO ACTIVIDAD 1', 24) + ': ' + (state.a1Finished ? 'FINALIZADA' : 'EN PROGRESO') + '\n';
-    text += pad('PUNTAJE ACTIVIDAD 1', 24) + ': ' + correct + ' / ' + TOTAL_A1 + ' (' + percent + '%)\n';
+    text += pad('PUNTAJE ACT. 1 (SELECCIÓN)', 24) + ': ' + correct + ' / ' + TOTAL_MC + ' (' + percent + '%)\n';
+    text += pad('ARGUMENTACIÓN ABIERTA', 24) + ': ' + (openAnswered ? 'REGISTRADA (revisión docente)' : 'PENDIENTE') + '\n';
     text += pad('JUSTIFICACIONES', 24) + ': ' + justifiedCount() + ' / ' + TOTAL_MC + '\n';
     text += pad('ESTADO ACTIVIDAD 2', 24) + ': ' + decisionAnsweredCount() + ' / ' + TOTAL_DEC + ' escenarios\n';
-    text += pad('RUTA REGISTRADA', 24) + ': ' + (decisionRoute.route === 'sin definir' ? 'sin definir' : routeLabel(decisionRoute.route)) + '\n';
+    text += pad('RUTAS ANALIZADAS', 24) + ': ' + (decisionRoute.route === 'sin definir' ? 'sin definir' : routeLabel(decisionRoute.route)) + '\n';
     text += pad('ESTADO ACTIVIDAD 3', 24) + ': ' + state.a2Completed.size + ' / ' + TOTAL_A2 + ' estructuras\n\n';
 
     text += thin + '\n';
@@ -1610,7 +1621,7 @@
     text += thin + '\n';
     text += 'ACTIVIDAD 2 · RUTAS REPRODUCTIVAS\n';
     text += thin + '\n\n';
-    text += 'RUTA REGISTRADA: ' + (decisionRoute.route === 'sin definir'
+    text += 'RUTAS ANALIZADAS: ' + (decisionRoute.route === 'sin definir'
       ? 'SIN DEFINIR (actividad incompleta)'
       : routeLabel(decisionRoute.route).toUpperCase()) + '\n';
     text += 'CONIDIOS (MITOSIS): ' + decisionRoute.asexual + ' / ' + TOTAL_DEC + '\n';
@@ -1624,7 +1635,7 @@
         const chosen = scenario.options.find(function (option) {
           return option.id === answer.optionId;
         });
-        text += 'RUTA ELEGIDA: ' + (chosen ? chosen.text : '') + ' (' + decisionTypeLabel(answer.type) + ')\n';
+        text += 'RUTA REGISTRADA: ' + (chosen ? chosen.text : '') + ' (' + decisionTypeLabel(answer.type) + ')\n';
         text += 'JUSTIFICACIÓN DEL ESTUDIANTE:\n"' + answer.text + '"\n';
         text += 'LECTURA DEL ESCENARIO: ' + scenario.explanation + '\n';
       } else {
@@ -1634,7 +1645,7 @@
     });
 
     text += thin + '\n';
-    text += 'ACTIVIDAD 3 · DISECCIÓN FUNCIONAL\n';
+    text += 'ACTIVIDAD 3 · OBSERVACIÓN FUNCIONAL\n';
     text += thin + '\n\n';
 
     D.DISSECTION.structures.forEach(function (structure) {
@@ -1658,17 +1669,19 @@
     text += thin + '\n';
     text += '1. Mitosis: produce células genéticamente idénticas; sostiene el crecimiento y la\n';
     text += '   reproducción asexual (conidios, gemación).\n';
-    text += '2. Meiosis: reduce el número de cromosomas y genera variabilidad por recombinación;\n';
-    text += '   en este hongo ocurre en los ascos dentro de los peritecios (ascosporas).\n';
-    text += '3. Estructura y función: el estroma eleva, los peritecios protegen la meiosis, el\n';
+    text += '2. Fase sexual: dos cepas compatibles (MAT1-1 y MAT1-2) se fusionan (plasmogamia,\n';
+    text += '   n+n); sus núcleos se unen (cariogamia, 2n) dentro del asco; la meiosis reduce a n\n';
+    text += '   y genera ascosporas con recombinación. El micelio vegetativo es haploide.\n';
+    text += '3. Estructura y función: el estroma eleva, los peritecios protegen los ascos, el\n';
     text += '   micelio coloniza y absorbe, y la pupa es el hospedero que aporta nutrientes.\n';
     text += '4. Modelo biológico: Cordyceps militaris pertenece a la familia Cordycipitaceae y\n';
     text += '   parasita larvas y pupas de lepidópteros; no manipula la conducta de hormigas.\n';
     text += '5. Ciencia aplicada: el uso medicinal o comercial de C. militaris requiere identificar\n';
     text += '   la cepa, controlar el cultivo y evaluar seguridad y eficacia; no reemplaza tratamientos.\n';
-    text += '6. Reproducción y ambiente: la vía asexual suele favorecerse en ambientes estables y\n';
-    text += '   con hospederos abundantes; la sexual aporta variabilidad y dispersión cuando el\n';
-    text += '   ambiente o el hospedero cambian. No hay una estrategia mejor en abstracto.\n\n';
+    text += '6. Reproducción y ambiente: la sexual aporta variabilidad, pero no es siempre mejor;\n';
+    text += '   la asexual es rápida y barata, pero no es exclusiva de ambientes estables. Ambas\n';
+    text += '   pueden ocurrir en condiciones distintas. La dispersión depende de estructuras y\n';
+    text += '   mecanismos (altura del estroma, eyección, viento, agua) y no del tipo de reproducción.\n\n';
 
     text += thin + '\n';
     text += 'FUENTES PRINCIPALES\n';
@@ -1724,11 +1737,11 @@
 
     api.registrar({
       id: state.entregaId || undefined,
-      version: '20261027-8',
+      version: '20261108-4',
       nombre: state.profile ? state.profile.name : '',
       curso: state.profile ? state.profile.course : '',
-      puntaje: correct + '/' + TOTAL_A1,
-      porcentaje: Math.round(correct / TOTAL_A1 * 100),
+      puntaje: correct + '/' + TOTAL_MC,
+      porcentaje: Math.round(correct / TOTAL_MC * 100),
       justificaciones: justifiedCount() + '/' + TOTAL_MC,
       ruta: decisionRoute.route,
       conidios: decisionRoute.asexual,
@@ -1738,7 +1751,7 @@
       respuestas_json: JSON.stringify({
         actividad1: state.answers,
         rutas: state.decisionAnswers,
-        diseccion: state.a2Answers,
+        observacion: state.a2Answers,
         estado: {
           a1Finalizada: state.a1Finished,
           rutasFinalizadas: state.decisionFinished
