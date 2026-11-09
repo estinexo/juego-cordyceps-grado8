@@ -1,13 +1,12 @@
 /* =========================================================================
    ENTREGA · Registro de informes en Google Sheets
    -------------------------------------------------------------------------
-   Cada vez que el estudiante descarga su informe, este módulo envía una
-   copia a una hoja de cálculo (ver apps-script/Codigo.gs y
-   GUIA-BASE-DE-DATOS.md).
+   Cada vez que el estudiante envía su informe, este módulo lo registra
+   directamente en la hoja de cálculo de Google Sheets (ver apps-script/Codigo.gs
+   y GUIA-BASE-DE-DATOS.md) sin descargar archivos en el dispositivo.
 
    Si no hay conexión, el registro queda en una cola dentro del navegador
-   y se reintenta al volver la red o al abrir de nuevo la página. El archivo
-   .txt siempre se descarga: la entrega en línea nunca bloquea la actividad.
+   y se reintenta automáticamente al volver la red o al abrir de nuevo la página.
    ========================================================================= */
 (function () {
   'use strict';
@@ -15,13 +14,12 @@
   /* -----------------------------------------------------------------------
      1. CONFIGURACIÓN
      Pega aquí la URL de la aplicación web de Apps Script. Debe terminar en
-     /exec. Mientras esté vacía, el juego funciona igual y el informe solo
-     se descarga en el computador.
+     /exec.
      ----------------------------------------------------------------------- */
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzAVGgg31hZYtROZBPUflPcnaUnHTmbkzUKf5kszYRykMRLe4dS4ltD1quIboBRwpIi/exec';
 
   var QUEUE_KEY = 'cordyceps_grado8_cola_v1';
-  var TIMEOUT_MS = 12000;
+  var TIMEOUT_MS = 25000;
   var MAX_COLA = 25;
   var MAX_TEXTO = 48000;
 

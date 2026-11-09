@@ -46,6 +46,11 @@ function doPost(e) {
     var sheet = getSheet_();
     var fila = data.id ? filaDeId_(sheet, data.id) : 0;
 
+    var informeTexto = String(data.informe_txt || '');
+    if (informeTexto.charAt(0) === '=') {
+      informeTexto = "'" + informeTexto;
+    }
+
     var valores = [[
       data.id || '',
       new Date(),
@@ -60,7 +65,7 @@ function doPost(e) {
       data.conidios == null ? '' : data.conidios,
       data.ascosporas == null ? '' : data.ascosporas,
       data.respuestas_json || '',
-      data.informe_txt || '',
+      informeTexto,
       data.version || ''
     ]];
 

@@ -49,9 +49,9 @@ Guarda, haz `commit` y `push`. Recuerda subir el número al final de cada `?v=` 
 ## 5. Prueba
 
 1. Abre la página publicada y escribe tu nombre.
-2. Pulsa **📄 Informe**.
-3. Debe aparecer el aviso *"Informe descargado y registrado para el docente"*.
-4. Revisa la hoja: la primera fila de datos aparece en segundos (si no, recarga).
+2. Pulsa **📤 Enviar informe** (o el botón al final de cualquier actividad).
+3. Debe aparecer el aviso *"✅ ¡Informe recibido y registrado correctamente en Google Sheets!"* y el botón indicará el envío exitoso. No se descargará ningún archivo en tu equipo.
+4. Revisa la hoja: en la pestaña inferior **Respuestas**, la fila de datos aparece en segundos (recuerda desplazarte horizontalmente hasta la columna **N** para ver el texto completo del informe).
 
 También puedes abrir la URL `/exec` en el navegador: debe responder
 
@@ -63,22 +63,25 @@ También puedes abrir la URL `/exec` en el navegador: debe responder
 
 ## Qué se guarda
 
-**Una fila por estudiante**, con estas columnas. Si el estudiante descarga el informe varias veces, su fila se actualiza con la última versión (no se duplica):
+**Una fila por estudiante**, en la pestaña **Respuestas**, con estas columnas. Si el estudiante vuelve a enviar el informe, su fila se actualiza automáticamente con la versión más reciente (no se duplica):
 
-| Columna | Contenido |
-|---|---|
-| ID | Identificador de la sesión del estudiante; permite actualizar su fila sin duplicarla |
-| Recibido | Fecha y hora del servidor |
-| Nombre completo, Curso | Datos del estudiante |
-| Puntaje, Porcentaje | Actividad 1 |
-| Justificaciones | Cuántas justificaciones escribió |
-| Ruta reproductiva | `sexual`, `asexual`, `mixta` o `sin definir` |
-| Estructuras | Actividad 3 completadas |
-| Duración | Tiempo de sesión |
-| Conidios, Ascosporas | Conteo de la actividad 2 |
-| Respuestas (JSON) | Todas las respuestas y elecciones, para procesarlas después |
-| Informe (.txt) | El mismo texto que descarga el estudiante |
-| Versión del juego | Para saber qué versión generó el dato |
+| Columna | Nombre | Contenido |
+|---|---|---|
+| A | ID | Identificador de la sesión del estudiante; permite actualizar su fila sin duplicarla |
+| B | Recibido | Fecha y hora del servidor |
+| C, D | Nombre completo, Curso | Datos del estudiante ingresados al inicio |
+| E, F | Puntaje, Porcentaje | Actividad 1 (preguntas de opción múltiple) |
+| G | Justificaciones | Cuántas justificaciones argumentadas escribió |
+| H | Ruta reproductiva | `sexual`, `asexual`, `mixta` o `sin definir` |
+| I | Estructuras | Estructuras de la Actividad 3 completadas |
+| J | Duración | Tiempo total de sesión |
+| K, L | Conidios, Ascosporas | Conteo de la Actividad 2 |
+| M | Respuestas (JSON) | Todas las respuestas y elecciones estructuradas |
+| N | **Informe (.txt)** | **El texto completo del informe de laboratorio** (para lectura rápida o calificación) |
+| O | Versión del juego | Versión que generó el registro |
+
+> [!TIP]
+> Para leer el informe completo de la **columna N**, selecciona la celda y amplíala o léela desde la barra de fórmulas de Google Sheets.
 
 ### Consultas útiles
 
@@ -98,10 +101,9 @@ Exportar: **Archivo → Descargar → CSV** (o Excel).
 
 ## Cómo se comporta sin internet
 
-- El `.txt` **siempre** se descarga; la entrega en línea es un extra.
-- Si no hay red, el informe queda en una cola en el navegador (`localStorage`) y se reenvía solo cuando vuelve la conexión o cuando el estudiante abre otra vez la página.
-- En la cabecera aparece un aviso naranja con los informes pendientes.
-- Si el estudiante nunca vuelve a abrir la página en ese equipo, ese informe solo existe como `.txt`: pídele el archivo.
+- El informe se envía en línea directamente a la hoja de cálculo de Google sin saturar los dispositivos de los estudiantes con descargas de archivos.
+- Si un estudiante no tiene red en ese momento, el informe queda guardado en la cola local del navegador (`localStorage`) y se envía automáticamente apenas el dispositivo recupere la conexión o cuando abra nuevamente la página.
+- En la cabecera superior aparece un aviso con los informes pendientes por enviar.
 
 ## Privacidad
 

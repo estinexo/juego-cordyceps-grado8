@@ -1558,8 +1558,8 @@
     const elapsed = formatDuration(Math.floor((Date.now() - state.startedAt) / 1000));
     const correct = correctCount();
     const percent = Math.round(correct / TOTAL_MC * 100);
-    const line = '='.repeat(78);
-    const thin = '-'.repeat(78);
+    const line = '*'.repeat(78);
+    const thin = '~'.repeat(78);
 
     let text = line + '\n';
     text += 'INFORME DE LABORATORIO · CORDYCEPS MILITARIS\n';
@@ -1713,31 +1713,47 @@
     }, 1000);
   }
 
-  function downloadReport() {
+  function enviarInforme(e) {
     if (!state.profile) {
       openProfileModal(false);
       return;
     }
-    const filename = 'Informe_Cordyceps_' + slug(state.profile.name) + '_' + slug(state.profile.course) + '.txt';
     const report = buildReport();
-    downloadText(filename, report);
     window.CordycepsAudio.click();
-    registrarEntrega(report);
+
+    const triggerBtn = (e && e.currentTarget) ? e.currentTarget : null;
+    const originalText = triggerBtn ? triggerBtn.textContent : '';
+
+    if (triggerBtn) {
+      triggerBtn.disabled = true;
+      triggerBtn.textContent = '⏳ Enviando a Google Sheets...';
+    }
+
+    registrarEntrega(report, triggerBtn, originalText);
   }
 
+  const downloadReport = enviarInforme;
+
   /* --------------------------- Entrega al docente --------------------------- */
-  /* El .txt se descarga siempre. Además, si la base de datos está configurada,
-     se envía una copia para que las respuestas queden registradas. */
-  function registrarEntrega(report) {
+  /* El informe se envía directamente a Google Sheets a través de Apps Script.
+     Ya no se descarga el archivo en el dispositivo para no saturar los equipos
+     de los estudiantes ni requerir recolección manual de archivos. */
+  function registrarEntrega(report, triggerBtn, originalText) {
     const api = window.CordycepsEntrega;
-    if (!api) return;
+    if (!api) {
+      if (triggerBtn) {
+        triggerBtn.disabled = false;
+        triggerBtn.textContent = originalText || '📤 Enviar informe';
+      }
+      return;
+    }
 
     const decisionRoute = getDecisionRoute();
     const correct = correctCount();
 
     api.registrar({
       id: state.entregaId || undefined,
-      version: '20261108-5',
+      version: '20261109-1',
       nombre: state.profile ? state.profile.name : '',
       curso: state.profile ? state.profile.course : '',
       puntaje: correct + '/' + TOTAL_MC,
@@ -1760,13 +1776,32 @@
       informe_txt: report
     }).then(function (resultado) {
       if (resultado.estado === 'enviado') {
-        api.avisar('Informe descargado y registrado para el docente.', 'ok');
+        api.avisar('✅ ¡Informe recibido y registrado correctamente en Google Sheets!', 'ok');
+        if (triggerBtn) {
+          triggerBtn.textContent = '✅ ¡Enviado con éxito!';
+          window.setTimeout(function () {
+            triggerBtn.disabled = false;
+            triggerBtn.textContent = '📤 Enviar informe de nuevo';
+          }, 3500);
+        }
       } else if (resultado.estado === 'en_cola') {
-        api.avisar('Informe descargado. Sin conexión: ' + resultado.pendientes +
-          (resultado.pendientes === 1 ? ' informe queda' : ' informes quedan') +
-          ' en espera y se enviará al reconectar.', 'warn');
+        api.avisar('⚠️ Sin conexión. Tu informe quedó guardado en el navegador y se enviará automáticamente a Google Sheets al recuperar la red.', 'warn');
+        if (triggerBtn) {
+          triggerBtn.disabled = false;
+          triggerBtn.textContent = '🔄 Reintentar envío';
+        }
       } else {
-        api.avisar('Informe descargado. El registro en línea aún no está configurado.', 'info');
+        api.avisar('⚠️ El registro en línea aún no está configurado en js/entrega.js.', 'info');
+        if (triggerBtn) {
+          triggerBtn.disabled = false;
+          triggerBtn.textContent = originalText || '📤 Enviar informe';
+        }
+      }
+    }).catch(function (error) {
+      api.avisar('⚠️ Ocurrió un error al contactar Google Sheets. Tu informe se reintentará automáticamente.', 'warn');
+      if (triggerBtn) {
+        triggerBtn.disabled = false;
+        triggerBtn.textContent = '🔄 Reintentar envío';
       }
     });
   }
@@ -1864,10 +1899,10 @@
       updateDecisionJustifyMeta();
     });
     els.restartDecisionBtn.addEventListener('click', resetDecisionActivity);
-    els.downloadBtn.addEventListener('click', downloadReport);
-    els.downloadResultBtn.addEventListener('click', downloadReport);
-    els.downloadA2Btn.addEventListener('click', downloadReport);
-    els.downloadDecisionBtn.addEventListener('click', downloadReport);
+    els.downloadBtn.addEventListener('click', enviarInforme);
+    els.downloadResultBtn.addEventListener('click', enviarInforme);
+    els.downloadA2Btn.addEventListener('click', enviarInforme);
+    els.downloadDecisionBtn.addEventListener('click', enviarInforme);
 
     els.reviewBtn.addEventListener('click', function () {
       state.reviewOpen = !state.reviewOpen;
