@@ -18,7 +18,7 @@
      /exec. Mientras esté vacía, el juego funciona igual y el informe solo
      se descarga en el computador.
      ----------------------------------------------------------------------- */
-  var ENDPOINT = '';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzAVGgg31hZYtROZBPUflPcnaUnHTmbkzUKf5kszYRykMRLe4dS4ltD1quIboBRwpIi/exec';
 
   var QUEUE_KEY = 'cordyceps_grado8_cola_v1';
   var TIMEOUT_MS = 12000;

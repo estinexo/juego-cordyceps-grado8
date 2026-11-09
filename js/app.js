@@ -1737,7 +1737,7 @@
 
     api.registrar({
       id: state.entregaId || undefined,
-      version: '20261108-4',
+      version: '20261108-5',
       nombre: state.profile ? state.profile.name : '',
       curso: state.profile ? state.profile.course : '',
       puntaje: correct + '/' + TOTAL_MC,
