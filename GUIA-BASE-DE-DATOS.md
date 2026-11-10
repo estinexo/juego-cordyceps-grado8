@@ -20,19 +20,22 @@ Borra el contenido de `Código.gs` y pega el archivo [`apps-script/Codigo.gs`](a
 
 ## 3. Publica la aplicación web
 
-1. Arriba a la derecha: **Implementar → Nueva implementación**.
+1. Arriba a la derecha: **Implementar → Nueva implementación** (solo la primera vez).
 2. Tipo: **Aplicación web**.
 3. Configuración:
    - **Descripción**: `Registro de informes`.
    - **Ejecutar como**: *Yo*.
    - **Quién tiene acceso**: *Cualquier persona*.
      Es necesario para que el navegador del estudiante pueda enviar sin iniciar sesión.
-4. **Implementar** → autoriza los permisos con tu cuenta (aparecerá un aviso de "Google no ha verificado esta aplicación"; es tu propio script: **Configuración avanzada → Ir a… → Permitir**).
+4. **Implementar** → autoriza los permisos con tu cuenta (aparecerá un aviso de "Google no ha verificado esta aplicación"; es tu propio script: **Configuración avanzada → Ir a… → Permitir**). Acepta también los permisos de **Drive y Documentos**: se usan para crear el documento de cada informe.
 5. Copia la **URL de la aplicación web**. Termina en `/exec`, por ejemplo:
 
    ```
    https://script.google.com/macros/s/AKfycb.../exec
    ```
+
+> [!IMPORTANT]
+> Si ya tienes una implementación funcionando, **no crees otra**: ve a **Implementar → Gestionar implementaciones → Editar (lápiz) → Versión: Nueva versión → Implementar**. Así la URL no cambia y el juego sigue enviando al mismo sitio. Crear una implementación nueva genera una URL distinta y habría que actualizarla en `js/entrega.js`.
 
 > La URL no es un secreto peligroso, pero tampoco la publiques: quien la tenga puede agregar filas. No permite leer ni borrar datos.
 
@@ -76,12 +79,20 @@ También puedes abrir la URL `/exec` en el navegador: debe responder
 | I | Estructuras | Estructuras de la Actividad 3 completadas |
 | J | Duración | Tiempo total de sesión |
 | K, L | Conidios, Ascosporas | Conteo de la Actividad 2 |
-| M | Respuestas (JSON) | Todas las respuestas y elecciones estructuradas |
-| N | **Informe (.txt)** | **El texto completo del informe de laboratorio** (para lectura rápida o calificación) |
+| M | Respuestas (JSON) | Todas las respuestas y elecciones estructuradas (se recorta visualmente para no estirar la fila) |
+| N | **Informe** | Enlace **“📄 Ver informe”** al documento de Google Docs con el informe completo |
 | O | Versión del juego | Versión que generó el registro |
 
 > [!TIP]
-> Para leer el informe completo de la **columna N**, selecciona la celda y amplíala o léela desde la barra de fórmulas de Google Sheets.
+> Haz clic en **“📄 Ver informe”** en la columna N y el informe se abre en una pestaña nueva, con formato y listo para leer o imprimir. La fila de la hoja queda en una sola línea.
+
+### Dónde quedan los informes
+
+El texto completo ya no vive dentro de la celda: el script crea un documento de Google Docs por estudiante en la carpeta **`Informes Cordyceps`** de tu Drive. El nombre del documento incluye el nombre del estudiante y la fecha.
+
+- Si el estudiante reenvía su informe, se actualiza el mismo documento (no se crea otro). Escribe tus observaciones en la hoja, no dentro del documento: al reenviar, el contenido se reemplaza.
+- Los documentos son privados: solo tu cuenta puede abrirlos. Si compartes la hoja con otra persona, tendrás que compartir también la carpeta.
+- Si el documento no se puede crear (permisos o cuota), el script guarda el texto completo en la columna N como antes: el informe nunca se pierde.
 
 ### Consultas útiles
 
@@ -111,12 +122,14 @@ Exportar: **Archivo → Descargar → CSV** (o Excel).
 - Al configurarlo, se envían nombre, curso y respuestas a la hoja del docente.
 - Son datos de menores: informa a las familias y, si el colegio lo exige, cambia el campo "Nombre completo" por un código o usa solo nombre y apellido.
 - La hoja es tuya: compártela solo con quien deba verla.
+- Los informes completos quedan como documentos privados en tu Drive (carpeta `Informes Cordyceps`); si compartes la hoja, comparte la carpeta solo con quien califique.
 
 ## Límites y costos
 
-- Google Sheets: gratis hasta 10 millones de celdas por hoja; cada informe ocupa ~2 celdas grandes. Para cientos de estudiantes no hay problema.
-- Apps Script: cuota diaria gratuita de tiempo de ejecución (muy por encima de lo que consume un curso).
-- El texto del informe se recorta a 48 000 caracteres por celda (el límite de Sheets es 50 000).
+- Google Sheets: gratis hasta 10 millones de celdas por hoja; cada informe ocupa una fila. Para cientos de estudiantes no hay problema.
+- Google Drive: cada informe se guarda como un documento (~10 KB). La cuota gratuita de 15 GB es más que suficiente.
+- Apps Script: cuota diaria gratuita de tiempo de ejecución y hasta 250 documentos nuevos por día en cuentas personales (33 informes por curso están muy por debajo).
+- El cliente recorta el informe a 48 000 caracteres antes de enviarlo, por seguridad; un informe normal ronda los 6 000.
 - Si algún día necesitas más (varios colegios, consultas desde una app), migra a Supabase o Firebase; la estructura de `js/entrega.js` ya está separada para cambiar solo el envío.
 
 ## Problemas frecuentes
@@ -132,6 +145,12 @@ Es lo esperado: la segunda descarga actualiza su fila. Si quieres conservar los 
 
 **Sale el aviso naranja de "en espera".**
 No hay conexión o el script está caído. El reintento es automático; también puedes abrir la página con red y esperar unos segundos.
+
+**En la columna N aparece el texto completo en vez del enlace.**
+El script no pudo crear el documento (permisos de Drive o cuota) y usó el respaldo: guardó el texto en la celda. Vuelve a autorizar los permisos del script y confirma que la cuenta tenga espacio en Drive.
+
+**El enlace "Ver informe" no abre el documento.**
+Los documentos son privados de la cuenta que ejecuta el script. Abre el enlace con esa misma cuenta; si compartes la hoja, comparte también la carpeta `Informes Cordyceps`.
 
 **Cambié el código del script y sigue igual.**
 Cada cambio requiere **Implementar → Gestionar implementaciones → Editar → Nueva versión**.
