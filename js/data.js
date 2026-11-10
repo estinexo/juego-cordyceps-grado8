@@ -653,7 +653,8 @@
     'Ortiz-Urquiza, A., & Keyhani, N. O. (2013). Action on the surface: entomopathogenic fungi versus the insect cuticle. Insects, 4(3), 357–374.',
     'Urry, L. A., Cain, M. L., Wasserman, S. A., Minorsky, P. V., & Orr, R. B. (2020). Campbell Biology (12.ª ed.). Pearson. Capítulos de mitosis, meiosis y hongos.',
     'Ministerio de Educación Nacional de Colombia. (2006). Estándares básicos de competencias en ciencias naturales y ciencias sociales. Bogotá: MEN.',
-    'Wikimedia Commons. (2013). Puppen-Kernkeule Cordyceps militaris [fotografía de Holger Krisp]. CC BY 3.0. Uso educativo.'
+    'Wikimedia Commons. (2013). Puppen-Kernkeule Cordyceps militaris [fotografía de Holger Krisp]. CC BY 3.0. Uso educativo.',
+    'Livezey, M. (2018). Cordyceps militaris: peritecios y ascosporas [fotografías macro y de microscopía]. iNaturalist, observación 146029178. CC BY 4.0. https://www.inaturalist.org/observations/146029178 · Licencia: https://creativecommons.org/licenses/by/4.0/'
   ];
 
   /* -----------------------------------------------------------------------
