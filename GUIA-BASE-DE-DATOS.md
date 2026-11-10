@@ -54,13 +54,15 @@ Guarda, haz `commit` y `push`. Recuerda subir el número al final de cada `?v=` 
 1. Abre la página publicada y escribe tu nombre.
 2. Pulsa **📤 Enviar informe** (o el botón al final de cualquier actividad).
 3. Debe aparecer el aviso *"✅ ¡Informe recibido y registrado correctamente en Google Sheets!"* y el botón indicará el envío exitoso. No se descargará ningún archivo en tu equipo.
-4. Revisa la hoja: en la pestaña inferior **Respuestas**, la fila de datos aparece en segundos (recuerda desplazarte horizontalmente hasta la columna **N** para ver el texto completo del informe).
+4. Revisa la hoja: en la pestaña inferior **Respuestas**, la fila de datos aparece en segundos. En la columna **N** debe estar el enlace **“📄 Ver informe”**; al hacer clic se abre el documento completo.
 
 También puedes abrir la URL `/exec` en el navegador: debe responder
 
 ```json
-{"ok":true,"mensaje":"Registro de informes activo. Los datos llegan por POST."}
+{"ok":true,"mensaje":"Registro de informes activo. Los datos llegan por POST.","version":"2026-11-10-docs"}
 ```
+
+Si no aparece `"version":"2026-11-10-docs"`, la implementación publicada todavía tiene el código anterior: vuelve a publicar una **Nueva versión**.
 
 ---
 

@@ -126,12 +126,16 @@ function doPost(e) {
 
 /**
  * Permite probar la dirección desde el navegador: debe responder ok.
+ * El campo "version" sirve para confirmar que la implementación publicada
+ * ya incluye el guardado de informes como documentos de Drive.
  */
 function doGet() {
   return json_({
     ok: true,
     mensaje: 'Registro de informes activo. Los datos llegan por POST.',
-    hoja: SHEET_NAME
+    hoja: SHEET_NAME,
+    version: '2026-11-10-docs',
+    informe: 'documento'
   });
 }
 
