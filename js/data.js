@@ -57,7 +57,7 @@
       topic: 'Micología básica',
       stage: 0,
       question: '¿Qué tipo de organismo es Cordyceps militaris?',
-      scenario: 'En una muestra de suelo encuentras un hongo naranja que crece sobre una pupa de lepidóptero. No tiene clorofila, absorbe nutrientes del hospedero y pertenece a la familia Cordycipitaceae.',
+      scenario: 'En una muestra de suelo encuentras un organismo naranja que crece sobre una pupa de mariposa. No parece ser una planta y hasta pareciera ser que se está alimentando de la mariposa.',
       options: [
         {
           id: 'A',
@@ -67,9 +67,9 @@
         },
         {
           id: 'B',
-          text: 'Un hongo eucariota, heterótrofo, con pared celular de quitina.',
+          text: 'Es un hongo parásito que se está alimentando de la mariposa y la estructura naranja es por donde saca sus esporas.',
           correct: true,
-          feedback: 'Correcto. Es un hongo ascomiceto: eucariota, heterótrofo, con pared de quitina y nutrición por absorción.'
+          feedback: 'Correcto. Es un hongo parásito: se alimenta de la pupa de la mariposa y la estructura naranja es su cuerpo reproductivo, por donde libera las esporas.'
         },
         {
           id: 'C',
@@ -84,7 +84,7 @@
           feedback: 'Incorrecto. El hongo no es un animal: tiene pared de quitina, hifas y esporas, y se alimenta por absorción.'
         }
       ],
-      explanation: 'Cordyceps militaris es un hongo ascomiceto de la familia Cordycipitaceae. Es eucariota, heterótrofo y tiene pared de quitina; secreta enzimas, digiere tejidos y absorbe nutrientes. No fotosintetiza ni es un animal.',
+      explanation: 'Cordyceps militaris es un hongo ascomiceto de la familia Cordycipitaceae. Es eucariota, heterótrofo y tiene pared de quitina; secreta enzimas, digiere tejidos y absorbe nutrientes. La estructura naranja es su cuerpo reproductivo, por donde libera las esporas. No fotosintetiza ni es un animal.',
       keyIdea: 'Hongo = eucariota + heterótrofo + pared de quitina + nutrición por absorción.'
     },
     {
@@ -92,13 +92,13 @@
       topic: 'Estructuras del hongo',
       stage: 2,
       question: '¿Cuál es la diferencia entre una hifa y un micelio?',
-      scenario: 'Al microscopio se ve un tubo delgado que entra en el tejido de la pupa. En otra vista, ese tubo se ramifica y forma una red que ocupa el cuerpo del insecto.',
+      scenario: 'Analizas la muestra y encuentras que hay un conjunto de filamentos entre todo el tejido de la pupa, y cuando aíslas un filamento te das cuenta de que parece un pequeño tubo con una pared celular gruesa.',
       options: [
         {
           id: 'A',
-          text: 'La hifa es cada filamento tubular individual que invade el tejido, y el micelio es la red vegetativa completa formada por todas las hifas para absorber los nutrientes del insecto.',
+          text: 'La hifa es cada filamento que invade el tejido, y el micelio es todo el conjunto de filamentos que están absorbiendo los nutrientes del insecto.',
           correct: true,
-          feedback: 'Correcto. La hifa es la unidad filamentosa que invade el tejido; el micelio es la red completa de hifas que coloniza el cuerpo y absorbe nutrientes del hospedero.'
+          feedback: 'Correcto. La hifa es cada filamento que invade el tejido y el micelio es todo el conjunto de filamentos que absorben los nutrientes del insecto.'
         },
         {
           id: 'B',
@@ -127,112 +127,112 @@
       topic: 'Mitosis y meiosis',
       stage: 3,
       question: '¿Cuál es la diferencia clave entre los conidios (mitosis) y las ascosporas (meiosis)?',
-      scenario: 'Cordyceps militaris puede producir conidios en conidióforos a partir de hifas haploides (n) que se dividen por mitosis. También puede formar estromas con peritecios: allí, dos cepas compatibles se fusionan (plasmogamia, n+n), sus núcleos se unen (cariogamia, 2n) y luego ocurre la meiosis.',
+      scenario: 'El hongo Cordyceps militaris tiene dos formas de reproducirse. Por un lado, puede hacer copias exactas de sí mismo (clonarse) a través de la mitosis (reproducción asexual). Por otro lado, cuando dos hongos compatibles se encuentran, pueden unir sus células y mezclar su ADN; luego de esto, hacen un proceso llamado meiosis para crear esporas con información genética nueva (reproducción sexual).',
       options: [
         {
           id: 'A',
-          text: 'Los conidios se forman por mitosis a partir de hifas n y son clones (n → n); las ascosporas se forman por meiosis en un asco después de la cariogamia (2n → n) y tienen nuevas combinaciones.',
-          correct: true,
-          feedback: 'Correcto. Los conidios son clones haploides producidos por mitosis. Las ascosporas se forman por meiosis dentro del asco, después de que dos núcleos haploides se unen y forman un cigoto 2n.'
+          text: 'La mitosis mezcla el ADN de dos hongos diferentes para crear uno nuevo, mientras que la meiosis solo hace copias exactas del hongo original.',
+          correct: false,
+          feedback: 'Incorrecto. Es al revés: la mitosis hace copias exactas (clones) y la meiosis mezcla la información de dos hongos compatibles.'
         },
         {
           id: 'B',
-          text: 'La mitosis en el conidióforo reduce los cromosomas a la mitad, mientras que la meiosis en el peritecio mantiene los cromosomas intactos para formar el estroma.',
+          text: 'Ambas formas de reproducción crean clones exactamente iguales, solo que una ocurre dentro del insecto y la otra en el exterior.',
           correct: false,
-          feedback: 'Incorrecto. La mitosis no reduce los cromosomas: mantiene el número. La meiosis es la que reduce de 2n a n y genera variabilidad.'
+          feedback: 'Incorrecto. Solo la mitosis produce clones idénticos; la meiosis genera esporas con combinaciones nuevas. El lugar donde ocurre no define el proceso.'
         },
         {
           id: 'C',
-          text: 'Ambas divisiones producen clones genéticamente idénticos, pero la mitosis ocurre dentro de la pupa y la meiosis exclusivamente en el exterior para dispersarse.',
+          text: 'La mitosis crea esporas con el doble de ADN para que sean más fuertes, mientras que la meiosis crea esporas débiles que solo sirven de alimento.',
           correct: false,
-          feedback: 'Incorrecto. La meiosis no produce clones idénticos; la recombinación mezcla información. Además, no se puede reducir todo a dónde ocurre.'
+          feedback: 'Incorrecto. La mitosis no duplica el ADN para hacer esporas más fuertes y la meiosis no produce esporas débiles. La diferencia está en si hay mezcla de ADN o no.'
         },
         {
           id: 'D',
-          text: 'La mitosis genera esporas diploides (2n) muy resistentes, mientras que la meiosis en el peritecio produce esporas haploides (n) débiles que solo sirven de alimento.',
-          correct: false,
-          feedback: 'Incorrecto. El micelio vegetativo es haploide y la mitosis produce células n, no 2n. La ploidía no determina por sí sola la resistencia.'
+          text: 'Las esporas hechas por mitosis son clones exactos de un solo hongo; mientras que las hechas por meiosis tienen una nueva mezcla de ADN porque unen la información de dos hongos compatibles.',
+          correct: true,
+          feedback: 'Correcto. Las esporas de la mitosis son clones exactos de un solo hongo; las de la meiosis mezclan la información de dos hongos compatibles.'
         }
       ],
-      explanation: 'El micelio vegetativo es haploide (n). La mitosis de una célula n produce dos células n idénticas: así se forman los conidios. En la fase sexual, dos cepas compatibles (MAT1-1 y MAT1-2) se fusionan (plasmogamia, n+n); sus núcleos se unen (cariogamia, 2n) dentro del asco y la meiosis reduce 2n a n, generando ascosporas con combinaciones nuevas por recombinación.',
-      keyIdea: 'Conidios: mitosis n → n (clones). Ascosporas: cariogamia 2n → meiosis → n (variabilidad).'
+      explanation: 'La mitosis produce copias exactas (clones) de un solo hongo: así se forman los conidios. La reproducción sexual ocurre cuando dos hongos compatibles unen sus células y mezclan su ADN; después, la meiosis forma esporas con información genética nueva (ascosporas).',
+      keyIdea: 'Mitosis → clones exactos. Meiosis → mezcla de ADN de dos hongos.'
     },
     {
       id: 4,
       topic: 'Ciclo sexual',
       stage: 3,
-      question: '¿Cuál es el orden correcto de la fase sexual de Cordyceps militaris?',
-      scenario: 'Dos cepas compatibles del hongo se encuentran en la pupa. Ocurren varios pasos: fusión de hifas, fusión de núcleos, meiosis y formación de ascosporas.',
+      question: '¿Cuál es el orden lógico de los pasos para que el hongo Cordyceps se reproduzca de forma sexual?',
+      scenario: 'Dos cepas compatibles del hongo se encuentran en la pupa.',
       options: [
         {
           id: 'A',
-          text: 'Hifas n + hifas n → plasmogamia (n+n) → cariogamia (2n) → meiosis → ascosporas n.',
+          text: 'Dos hongos se encuentran → unen sus células → mezclan su ADN → se dividen por meiosis para crear nuevas esporas.',
           correct: true,
-          feedback: 'Correcto. Primero se fusionan las hifas (plasmogamia), luego los núcleos (cariogamia), después ocurre la meiosis y se forman ascosporas haploides.'
+          feedback: 'Correcto. Primero se encuentran y unen sus células, luego mezclan su ADN y finalmente la meiosis forma esporas nuevas.'
         },
         {
           id: 'B',
-          text: 'Hifas 2n → mitosis → conidios 2n → meiosis → ascosporas n.',
+          text: 'Los hongos hacen meiosis → mezclan su ADN → se unen las células → crean esporas clonadas.',
           correct: false,
-          feedback: 'Incorrecto. El micelio vegetativo es haploide (n). Los conidios se producen por mitosis y no son 2n.'
+          feedback: 'Incorrecto. La meiosis ocurre al final, no al principio; además, la reproducción sexual no produce clones.'
         },
         {
           id: 'C',
-          text: 'Ascosporas n → cariogamia (2n) → plasmogamia (n+n) → mitosis → ascosporas 2n.',
+          text: 'Dos hongos se encuentran → hacen mitosis para hacer clones → mezclan su ADN → crean nuevas esporas.',
           correct: false,
-          feedback: 'Incorrecto. El orden está invertido: primero es la plasmogamia y después la cariogamia. La meiosis produce ascosporas n, no 2n.'
+          feedback: 'Incorrecto. La mitosis produce clones y no forma parte de la mezcla de ADN de dos hongos.'
         },
         {
           id: 'D',
-          text: 'Meiosis → cariogamia (2n) → plasmogamia (n+n) → ascosporas 2n.',
+          text: 'Crean nuevas esporas → dos hongos se encuentran → hacen meiosis → unen sus células.',
           correct: false,
-          feedback: 'Incorrecto. La meiosis ocurre después de la cariogamia, no antes. Las ascosporas resultantes son haploides (n).'
+          feedback: 'Incorrecto. El orden está desorganizado: las esporas se forman al final, después de la meiosis.'
         }
       ],
-      explanation: 'La fase sexual requiere dos cepas compatibles. Primero se fusionan las hifas (plasmogamia, n+n), luego los núcleos (cariogamia, 2n) dentro del asco; después la meiosis reduce el número a n y produce ascosporas haploides. La mitosis no reduce cromosomas.',
-      keyIdea: 'Plasmogamia → cariogamia → meiosis → ascosporas n.'
+      explanation: 'En la reproducción sexual, dos hongos compatibles se encuentran y unen sus células (plasmogamia); luego sus núcleos se fusionan y mezclan su ADN (cariogamia); por último, la meiosis forma esporas con información genética nueva.',
+      keyIdea: 'Encontrarse → unir células → mezclar ADN → meiosis → esporas nuevas.'
     },
     {
       id: 5,
       topic: 'Anatomía funcional',
       stage: 3,
-      question: '¿Qué relación hay entre el estroma, los peritecios, los ascos y las ascosporas?',
-      scenario: 'Del cuerpo de la pupa emerge un estroma naranja. En su superficie hay puntos diminutos (peritecios). Al ampliarlos, se ven sacos alargados (ascos) con esporas en su interior.',
+      question: '¿Cómo están organizadas las partes del tallo naranja, de la más grande a la más pequeña, hasta llegar a las esporas?',
+      scenario: 'Del cuerpo de la pupa emerge un tallo naranja. Su superficie tiene puntos diminutos (peritecios) y, al ampliarlos, se ven sacos alargados (ascos) con esporas en su interior.',
       options: [
         {
           id: 'A',
-          text: 'El estroma sostiene y eleva los peritecios; cada peritecio contiene ascos, y dentro de cada asco la meiosis forma ascosporas.',
-          correct: true,
-          feedback: 'Correcto. El estroma es la estructura de soporte y altura; los peritecios protegen los ascos donde ocurre la meiosis y se forman las ascosporas.'
+          text: 'El tallo naranja (estroma) fabrica las esporas directamente en su superficie, sin necesitar de otras estructuras pequeñas.',
+          correct: false,
+          feedback: 'Incorrecto. El estroma no fabrica las esporas directamente: las esporas se forman dentro de los ascos, en los peritecios.'
         },
         {
           id: 'B',
-          text: 'El estroma produce directamente las ascosporas y los peritecios son la pupa.',
+          text: 'Los saquitos (ascos) son la parte más grande y externa del hongo, y sostienen al tallo naranja (estroma).',
           correct: false,
-          feedback: 'Incorrecto. El estroma sostiene y eleva los peritecios; las ascosporas se producen dentro de los ascos, en los peritecios. La pupa es el hospedero.'
+          feedback: 'Incorrecto. Los tamaños están invertidos: el estroma es la parte grande y los ascos están dentro de los peritecios.'
         },
         {
           id: 'C',
-          text: 'Los peritecios sostienen el estroma y el estroma produce conidios por mitosis.',
-          correct: false,
-          feedback: 'Incorrecto. La relación es la contraria: el estroma sostiene los peritecios. Además, los conidios se producen en conidióforos, no en el estroma.'
+          text: 'El tallo naranja (estroma) está cubierto de pequeños puntos (peritecios). Adentro de esos puntos hay saquitos (ascos) donde finalmente se forman las esporas por meiosis.',
+          correct: true,
+          feedback: 'Correcto. El orden es estroma → peritecios → ascos → esporas formadas por meiosis.'
         },
         {
           id: 'D',
-          text: 'Los ascos son la parte externa del estroma y las ascosporas se forman por mitosis en la superficie.',
+          text: 'Las esporas son la parte externa del hongo y se forman por mitosis para proteger al tallo naranja (estroma).',
           correct: false,
-          feedback: 'Incorrecto. Los ascos están dentro de los peritecios y las ascosporas se forman por meiosis, no por mitosis en la superficie.'
+          feedback: 'Incorrecto. Las esporas no son la parte externa ni se forman por mitosis: se forman por meiosis dentro de los ascos.'
         }
       ],
-      explanation: 'El estroma es la estructura de soporte y altura. Los peritecios son cavidades en forma de frasco sobre el estroma; contienen ascos. Dentro de cada asco, después de la cariogamia, la meiosis produce ascosporas haploides. La altura del estroma ayuda a que las esporas salgan de la capa de aire quieto.',
-      keyIdea: 'Estroma → peritecios → ascos → ascosporas.'
+      explanation: 'De mayor a menor: el estroma es el tallo naranja; su superficie tiene puntos llamados peritecios; dentro de cada peritecio hay saquitos llamados ascos; y dentro de los ascos se forman las esporas por meiosis.',
+      keyIdea: 'Estroma → peritecios → ascos → esporas.'
     },
     {
       id: 6,
       topic: 'Ecología del hongo',
       stage: 2,
       question: '¿Qué hospedero parasita Cordyceps militaris y qué relación tiene con él?',
-      scenario: 'En una salida de campo se encuentran cuerpos fructíferos naranjas que salen de pupas enterradas en la hojarasca. No se observan hormigas parasitadas.',
+      scenario: 'En una salida de campo encuentras estructuras naranjas que emergen del suelo, entre la hojarasca. No ves hormigas parasitadas y no sabes qué organismo está infectado bajo tierra.',
       options: [
         {
           id: 'A',
@@ -266,36 +266,36 @@
       id: 7,
       topic: 'Dispersión',
       stage: 4,
-      question: '¿Qué afirmación separa correctamente la dispersión de la reproducción?',
-      scenario: 'Un estroma alto libera ascosporas; en otro lugar, un conidióforo libera conidios. Ambos tipos de esporas pueden viajar y colonizar nuevos hospederos.',
+      question: '¿Por qué esto es una ventaja de dispersión (viaje) y NO una ventaja de reproducción (genética)?',
+      scenario: 'El tallo del hongo (estroma) crece hacia arriba para expulsar las esporas y que el viento se las lleve más lejos.',
       options: [
         {
           id: 'A',
-          text: 'La altura del estroma y la eyección activa de ascosporas aumentan la distancia de dispersión; esto es una ventaja de dispersión, no una prueba de que la reproducción sexual sea mejor.',
+          text: 'Porque la altura ayuda a que el viento lleve las esporas más lejos, pero no interfiere en cómo se mezcla el ADN dentro de ellas.',
           correct: true,
-          feedback: 'Correcto. La altura y la eyección activa son mecanismos de dispersión. No indican que la ruta sexual sea superior: solo aumentan el alcance de las ascosporas.'
+          feedback: 'Correcto. La altura mejora el alcance de las esporas (dispersión), pero no cambia cómo se forma su ADN (reproducción).'
         },
         {
           id: 'B',
-          text: 'Solo las ascosporas se dispersan; los conidios nunca salen del cuerpo del hongo.',
+          text: 'Porque las esporas que vuelan más alto cambian su ADN con el aire y se vuelven clones.',
           correct: false,
-          feedback: 'Incorrecto. Los conidios también se dispersan por viento, agua o animales. La dispersión no es exclusiva de las ascosporas.'
+          feedback: 'Incorrecto. El aire no cambia el ADN de las esporas ni las convierte en clones.'
         },
         {
           id: 'C',
-          text: 'La dispersión es una ventaja exclusiva de la reproducción sexual; la asexual no dispersa.',
+          text: 'Porque el tallo alto obliga al hongo a detener su reproducción sexual y empezar a clonarse.',
           correct: false,
-          feedback: 'Incorrecto. La reproducción asexual también produce esporas que se dispersan. Dispersión y tipo de reproducción son procesos diferentes.'
+          feedback: 'Incorrecto. La altura no obliga al hongo a cambiar de ruta reproductiva: son procesos independientes.'
         },
         {
           id: 'D',
-          text: 'La reproducción sexual siempre dispersa más lejos porque sus esporas son más grandes.',
+          text: 'Porque solo los hongos que tienen tallos altos pueden reproducirse; los demás no producen esporas.',
           correct: false,
-          feedback: 'Incorrecto. El tamaño no garantiza mayor dispersión y las ascosporas no son necesariamente más grandes. El alcance depende del mecanismo y del ambiente.'
+          feedback: 'Incorrecto. Los hongos con tallos bajos también producen esporas; la altura solo influye en la distancia que pueden viajar.'
         }
       ],
-      explanation: 'La dispersión depende de estructuras y mecanismos: altura del estroma, eyección activa, viento, agua o animales. Las ascosporas y los conidios pueden dispersarse; no es correcto equiparar dispersión con reproducción sexual. La reproducción sexual se relaciona con la variabilidad; la asexual, con la producción rápida de clones. Son ventajas diferentes y no excluyentes.',
-      keyIdea: 'Dispersión ≠ tipo de reproducción. Ambos tipos de esporas pueden dispersarse.'
+      explanation: 'La dispersión se refiere a cómo viajan las esporas; la reproducción, a cómo se forma su información genética. Un estroma alto ayuda a que el viento lleve las esporas más lejos, pero no cambia si se formaron por mitosis o por meiosis.',
+      keyIdea: 'Altura = dispersión. No cambia el ADN ni el tipo de reproducción.'
     },
     {
       id: 8,
@@ -491,7 +491,7 @@
       {
         id: 'estable',
         title: 'Pupas abundantes y clima estable',
-        scenario: 'En un bosque húmedo y fresco hay muchas pupas de lepidópteros. El clima es estable y el hongo ya colonizó una pupa. En ese mismo lugar pueden aparecer conidios y también estromas con ascosporas.',
+        scenario: 'En un bosque húmedo y fresco hay muchas pupas de mariposas o polillas. El clima es estable y el hongo ya colonizó una pupa. En ese mismo lugar pueden aparecer estructuras de reproducción asexual (conidios) y también estructuras de reproducción sexual (estromas) con esporas.',
         hintWords: [],
         options: [
           {
